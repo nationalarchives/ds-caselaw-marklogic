@@ -595,9 +595,14 @@
 
 <xsl:template match="tr" mode="remove-first-column">
 	<tr>
-		<xsl:copy-of select="@*" />
-		<xsl:apply-templates select="*[position() gt 1]" />
+		<xsl:apply-templates select="*[position() gt 1]" mode="remove-first-column" />
 	</tr>
+</xsl:template>
+
+<xsl:template match="th | td" mode="remove-first-column">
+	<xsl:element name="{ local-name() }">
+		<xsl:apply-templates />
+	</xsl:element>
 </xsl:template>
 
 
