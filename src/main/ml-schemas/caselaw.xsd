@@ -22,7 +22,7 @@
 		<xs:element ref="cite" minOccurs="0"/>
 		<xs:element ref="parser"/>
 		<xs:element ref="hash"/>
-		<xs:element ref="tna-enrichment-engine"/>
+		<xs:element ref="tna-enrichment-engine" minOccurs="0"/>
 	</xs:all>
 	<xs:attributeGroup ref="akn:source"/>
 </xs:complexType>
