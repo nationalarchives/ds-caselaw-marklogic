@@ -114,6 +114,7 @@
 	<xs:attribute ref="court" />
 	<xs:attribute ref="year" />
 	<xs:attribute ref="neutral" />
+	<xs:attribute ref="origin" use="optional" />
 </xs:attributeGroup>
 
 <xs:attribute name="type">
@@ -142,6 +143,16 @@
 <xs:attribute name="year" type="xs:gYear" />
 
 <xs:attribute name="neutral" type="xs:string" />
+
+<xs:attribute name="origin" type="xs:string">
+  <xs:annotation>
+    <xs:documentation>
+      <type>Attribute</type>
+      <name>origin</name>
+      <comment>The source of the annotation. Likely values are `TNA` (enrichment engine), `vCite` (vCite) and `manual`, but any are possible</comment>
+    </xs:documentation>
+  </xs:annotation>
+</xs:attribute>
 
 
 <!-- types -->
