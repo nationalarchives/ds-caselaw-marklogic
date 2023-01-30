@@ -582,7 +582,12 @@
 
 <xsl:function name="uk:cell-is-empty" as="xs:boolean">
 	<xsl:param name="cell" as="element()" />
-	<xsl:sequence select="empty($cell/@colspan) and empty($cell/@rowspan) and not(normalize-space(string($cell)))" />
+	<xsl:sequence select="uk:cell-span-is-effectively-one($cell/@colspan) and uk:cell-span-is-effectively-one($cell/@rowspan) and not(normalize-space(string($cell)))" />
+</xsl:function>
+
+<xsl:function name="uk:cell-span-is-effectively-one" as="xs:boolean">
+	<xsl:param name="attr" as="attribute()?" />
+	<xsl:sequence select="empty($attr) or string($attr) = '' or string($attr) = '1'" />
 </xsl:function>
 
 <xsl:template match="table" mode="remove-first-column">
