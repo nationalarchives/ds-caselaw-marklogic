@@ -397,11 +397,11 @@
 </xsl:template>
 
 <!-- all of the inline properties the parser produces -->
-<xsl:variable name="inline-properties" as="xs:string+" select="('font-family', 'font-size', 'font-weight', 'font-style', 'font-variant', 'color', 'background-color', 'text-transform', 'text-decoration-line', 'text-decoration-style')" />
+<xsl:variable name="inline-properties" as="xs:string+" select="('font-family', 'font-size', 'font-weight', 'font-style', 'font-variant', 'color', 'background-color', 'text-transform', 'text-decoration-line', 'text-decoration-style', 'vertical-align')" />
 
 <xsl:function name="uk:get-combined-inline-styles" as="xs:string*">
 	<xsl:param name="e" as="element()" />
-	<xsl:variable name="from-class-attr" as="xs:string*">
+	<xsl:variable name="from-class-attr" as="xs:string*"><!-- inline formatting implied by the @class -->
 		<xsl:if test="exists($e/@class)">
 			<xsl:variable name="regex" as="xs:string" select="concat('\.', $e/@class, ' \{([^\}]+)')" />
 			<xsl:analyze-string select="$global-styles" regex="{ $regex }">
@@ -417,7 +417,7 @@
 			</xsl:analyze-string>
 		</xsl:if>
 	</xsl:variable>
-	<xsl:variable name="from-style-attr" as="xs:string*">
+	<xsl:variable name="from-style-attr" as="xs:string*"><!-- inline formatting specified in @style -->
 		<xsl:for-each select="tokenize($e/@style, ';')">
 			<xsl:variable name="prop" as="xs:string" select="normalize-space(substring-before(., ':'))" />
 			<xsl:if test="$prop = $inline-properties">
@@ -426,27 +426,37 @@
 			</xsl:if>
 		</xsl:for-each>
 	</xsl:variable>
-	<xsl:variable name="style-properties" as="xs:string*">
-		<xsl:for-each select="$from-style-attr">
-			<xsl:sequence select="substring-before(., ':')" />
+	<xsl:variable name="combined" as="xs:string*"><!-- combined, @style trumps @class -->
+		<xsl:variable name="style-properties" as="xs:string*">
+			<xsl:for-each select="$from-style-attr">
+				<xsl:sequence select="substring-before(., ':')" />
+			</xsl:for-each>
+		</xsl:variable>
+		<xsl:for-each select="$from-class-attr">
+			<xsl:variable name="prop" as="xs:string" select="substring-before(., ':')" />
+			<xsl:if test="not($prop = $style-properties)">
+				<xsl:sequence select="." />
+			</xsl:if>
 		</xsl:for-each>
+		<xsl:sequence select="$from-style-attr" />
 	</xsl:variable>
-	<xsl:for-each select="$from-class-attr">
-		<xsl:variable name="prop" as="xs:string" select="substring-before(., ':')" />
-		<xsl:if test="not($prop = $style-properties)">
-			<xsl:sequence select="." />
-		</xsl:if>
+	<!-- remove font, font-size and text-transform -->
+	<xsl:for-each select="$combined">
+		<xsl:choose>
+			<xsl:when test="starts-with(., 'font-family:') and not(contains(., 'Symbol') or contains(., 'Wingdings'))" /> <!-- remove font, except Symbol or Wingdings -->
+			<xsl:when test="starts-with(., 'font-size:')" /> <!-- remove font-size -->
+			<xsl:when test="starts-with(., 'text-transform:')" /> <!-- remove text-transform -->
+			<xsl:otherwise>
+				<xsl:sequence select="." />
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:for-each>
-	<xsl:sequence select="$from-style-attr" />
 </xsl:function>
 
 <xsl:template name="inline">
 	<xsl:param name="name" as="xs:string" select="'span'" />
 	<xsl:param name="styles" as="xs:string*" select="uk:get-combined-inline-styles(.)" />
 	<xsl:param name="is-uppercase" as="xs:boolean" select="false()" tunnel="yes" />
-	<xsl:variable name="styles" as="xs:string*" select="$styles[not(starts-with(., 'font-size:'))]" />
-	<xsl:variable name="styles" as="xs:string*" select="$styles[not(starts-with(., 'font-family:')) or contains(., 'Symbol') or contains(., 'Wingdings')]" />
-	<xsl:variable name="styles" as="xs:string*" select="$styles[not(starts-with(., 'text-transform:'))]" />
 	<xsl:choose>
 		<xsl:when test="exists($styles[starts-with(., 'font-weight:') and not(starts-with(., 'font-weight:normal'))])">
 			<b>
@@ -486,6 +496,22 @@
 					<xsl:with-param name="styles" select="$styles[not(starts-with(., 'text-decoration-'))]" />
 				</xsl:call-template>
 			</u>
+		</xsl:when>
+		<xsl:when test="exists($styles[. = 'vertical-align:super'])">
+			<sup>
+				<xsl:call-template name="inline">
+					<xsl:with-param name="name" select="$name" />
+					<xsl:with-param name="styles" select="$styles[not(starts-with(., 'vertical-align:'))]" />
+				</xsl:call-template>
+			</sup>
+		</xsl:when>
+		<xsl:when test="exists($styles[. = 'vertical-align:sub'])">
+			<sub>
+				<xsl:call-template name="inline">
+					<xsl:with-param name="name" select="$name" />
+					<xsl:with-param name="styles" select="$styles[not(starts-with(., 'vertical-align:'))]" />
+				</xsl:call-template>
+			</sub>
 		</xsl:when>
 		<xsl:when test="exists($styles)">
 			<xsl:element name="{ $name }">
