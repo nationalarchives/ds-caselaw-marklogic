@@ -397,7 +397,7 @@
 </xsl:template>
 
 <!-- all of the inline properties the parser produces -->
-<xsl:variable name="inline-properties" as="xs:string+" select="('font-family', 'font-size', 'font-weight', 'font-style', 'font-variant', 'color', 'background-color', 'text-transform', 'text-decoration-line', 'text-decoration-style')" />
+<xsl:variable name="inline-properties" as="xs:string+" select="('font-family', 'font-size', 'font-weight', 'font-style', 'font-variant', 'color', 'background-color', 'text-transform', 'text-decoration-line', 'text-decoration-style', 'vertical-align')" />
 
 <xsl:function name="uk:get-combined-inline-styles" as="xs:string*">
 	<xsl:param name="e" as="element()" />
@@ -496,6 +496,22 @@
 					<xsl:with-param name="styles" select="$styles[not(starts-with(., 'text-decoration-'))]" />
 				</xsl:call-template>
 			</u>
+		</xsl:when>
+		<xsl:when test="exists($styles[. = 'vertical-align:super'])">
+			<sup>
+				<xsl:call-template name="inline">
+					<xsl:with-param name="name" select="$name" />
+					<xsl:with-param name="styles" select="$styles[not(starts-with(., 'vertical-align:'))]" />
+				</xsl:call-template>
+			</sup>
+		</xsl:when>
+		<xsl:when test="exists($styles[. = 'vertical-align:sub'])">
+			<sub>
+				<xsl:call-template name="inline">
+					<xsl:with-param name="name" select="$name" />
+					<xsl:with-param name="styles" select="$styles[not(starts-with(., 'vertical-align:'))]" />
+				</xsl:call-template>
+			</sub>
 		</xsl:when>
 		<xsl:when test="exists($styles)">
 			<xsl:element name="{ $name }">
