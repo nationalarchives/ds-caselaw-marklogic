@@ -193,6 +193,7 @@
 			</xsl:choose>
 		</xsl:attribute>
 		<xsl:call-template name="inline">
+			<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 			<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 		</xsl:call-template>
 	</p>
@@ -228,6 +229,7 @@
 		<xsl:text> </xsl:text>
 		<span>
 			<xsl:call-template name="inline">
+				<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 				<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 			</xsl:call-template>
 		</span>
@@ -245,6 +247,7 @@
 			</xsl:if>
 		</xsl:if>
 		<xsl:call-template name="inline">
+			<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 			<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 		</xsl:call-template>
 	</p>
@@ -283,6 +286,7 @@
 		<xsl:when test="empty(preceding-sibling::*) and exists(child::img)">
 			<div class="judgment-header__logo">
 				<xsl:apply-templates>
+					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
 					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
@@ -290,6 +294,7 @@
 		<xsl:when test="exists(child::neutralCitation)">
 			<div class="judgment-header__neutral-citation">
 				<xsl:apply-templates>
+					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
 					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
@@ -297,6 +302,7 @@
 		<xsl:when test="exists(child::docketNumber)">
 			<div class="judgment-header__case-number">
 				<xsl:apply-templates>
+					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
 					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
@@ -304,6 +310,7 @@
 		<xsl:when test="exists(child::courtType)">
 			<div class="judgment-header__court">
 				<xsl:apply-templates>
+					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
 					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
@@ -311,6 +318,7 @@
 		<xsl:when test="exists(child::docDate)">
 			<div class="judgment-header__date">
 				<xsl:apply-templates>
+					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
 					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
@@ -318,6 +326,7 @@
 		<xsl:when test="matches(normalize-space(.), '^- -( -)+$')">
 			<div class="judgment-header__line-separator" aria-hidden="true">
 				<xsl:apply-templates>
+					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
 					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
@@ -331,6 +340,7 @@
 							<xsl:sequence select="concat('judgment-header__pr-', $alignment)" />
 						</xsl:attribute>
 						<xsl:call-template name="inline">
+							<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 							<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 						</xsl:call-template>
 					</p>
@@ -346,6 +356,7 @@
 <xsl:template match="p">
 	<p>
 		<xsl:call-template name="inline">
+			<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 			<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 		</xsl:call-template>
 	</p>
@@ -358,6 +369,7 @@
 			<blockquote>
 				<p>
 					<xsl:call-template name="inline">
+						<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 						<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 					</xsl:call-template>
 				</p>
@@ -369,6 +381,7 @@
 <xsl:template match="block">
 	<p>
 		<xsl:call-template name="inline">
+			<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 			<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 		</xsl:call-template>
 	</p>
@@ -446,6 +459,7 @@
 			<xsl:when test="starts-with(., 'font-family:') and not(contains(., 'Symbol') or contains(., 'Wingdings'))" /> <!-- remove font, except Symbol or Wingdings -->
 			<xsl:when test="starts-with(., 'font-size:')" /> <!-- remove font-size -->
 			<xsl:when test="starts-with(., 'text-transform:')" /> <!-- remove text-transform -->
+			<xsl:when test="starts-with(., 'text-decoration')" /> <!-- remove text-decoration-..., handled by $has-underline -->
 			<xsl:otherwise>
 				<xsl:sequence select="." />
 			</xsl:otherwise>
@@ -456,6 +470,7 @@
 <xsl:template name="inline">
 	<xsl:param name="name" as="xs:string" select="'span'" />
 	<xsl:param name="styles" as="xs:string*" select="uk:get-combined-inline-styles(.)" />
+	<xsl:param name="has-underline" as="xs:string*" select="()" tunnel="yes" />
 	<xsl:param name="is-uppercase" as="xs:boolean" select="false()" tunnel="yes" />
 	<xsl:choose>
 		<xsl:when test="exists($styles[starts-with(., 'font-weight:') and not(starts-with(., 'font-weight:normal'))])">
@@ -484,7 +499,7 @@
 				</xsl:call-template>
 			</i>
 		</xsl:when>
-		<xsl:when test="exists($styles[starts-with(., 'text-decoration-line:') and not(starts-with(., 'text-decoration-line:none'))])">
+		<!-- <xsl:when test="exists($styles[starts-with(., 'text-decoration-line:') and not(starts-with(., 'text-decoration-line:none'))])">
 			<u>
 				<xsl:if test="exists($styles[starts-with(., 'text-decoration-line:') and not(starts-with(., 'text-decoration-line:underline'))])">
 					<xsl:attribute name="style">
@@ -496,7 +511,7 @@
 					<xsl:with-param name="styles" select="$styles[not(starts-with(., 'text-decoration-'))]" />
 				</xsl:call-template>
 			</u>
-		</xsl:when>
+		</xsl:when> -->
 		<xsl:when test="exists($styles[. = 'vertical-align:super'])">
 			<sup>
 				<xsl:call-template name="inline">
@@ -519,18 +534,21 @@
 					<xsl:value-of select="string-join($styles, ';')" />
 				</xsl:attribute>
 				<xsl:apply-templates>
+					<xsl:with-param name="has-underline" select="uk:has-underline(., $has-underline)" tunnel="yes" />
 					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $is-uppercase)" tunnel="yes" />
 				</xsl:apply-templates>
 			</xsl:element>
 		</xsl:when>
 		<xsl:when test="$name = 'span'">
 			<xsl:apply-templates>
+				<xsl:with-param name="has-underline" select="uk:has-underline(., $has-underline)" tunnel="yes" />
 				<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $is-uppercase)" tunnel="yes" />
 			</xsl:apply-templates>
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:element name="{ $name }">
 				<xsl:apply-templates>
+					<xsl:with-param name="has-underline" select="uk:has-underline(., $has-underline)" tunnel="yes" />
 					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $is-uppercase)" tunnel="yes" />
 				</xsl:apply-templates>
 			</xsl:element>
@@ -665,6 +683,7 @@
 <xsl:template match="tocItem">
 	<p>
 		<xsl:call-template name="inline">
+			<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 			<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 		</xsl:call-template>
 	</p>
@@ -735,6 +754,7 @@
 		</sup>
 		<xsl:text> </xsl:text>
 		<xsl:call-template name="inline">
+			<xsl:with-param name="has-underline" select="uk:has-underline(.)" tunnel="yes" />
 			<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
 		</xsl:call-template>
 	</p>
@@ -776,9 +796,118 @@
 	</xsl:choose>
 </xsl:function>
 
+<!-- the following two functions return a sequence of 0, 1 or 2 values:
+	the first is for the text-decoration-line property,
+	the second is for the text-decoration-style property -->
+
+<xsl:function name="uk:has-underline" as="xs:string*">
+	<xsl:param name="p" as="element()" />
+	<xsl:sequence select="uk:has-underline($p, ())" />
+</xsl:function>
+
+<xsl:function name="uk:has-underline" as="xs:string*">
+	<xsl:param name="e" as="element()" />
+	<xsl:param name="default" as="xs:string*" />
+	<xsl:variable name="decor-line" as="xs:string?">
+		<xsl:variable name="from-style-attribute" as="xs:string?">
+			<xsl:if test="exists($e/@style)">
+				<xsl:analyze-string select="$e/@style" regex="text-decoration-line: *([a-z \-]+)">
+					<xsl:matching-substring>
+						<xsl:sequence select="regex-group(1)"/>
+					</xsl:matching-substring>
+				</xsl:analyze-string>
+			</xsl:if>
+		</xsl:variable>
+		<xsl:variable name="from-class-attribute" as="xs:string?">
+			<xsl:if test="exists($e/@class)">
+				<xsl:analyze-string select="$global-styles" regex="{ concat('\.', $e/@class, ' \{[^\}]*text-decoration-line: *([a-z \-]+)') }">
+					<xsl:matching-substring>
+						<xsl:sequence select="regex-group(1)"/>
+					</xsl:matching-substring>
+				</xsl:analyze-string>
+			</xsl:if>
+		</xsl:variable>
+		<xsl:choose>
+			<xsl:when test="exists($from-style-attribute)">
+				<xsl:sequence select="$from-style-attribute" />
+			</xsl:when>
+			<xsl:when test="exists($from-class-attribute)">
+				<xsl:sequence select="$from-class-attribute" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$default[1]" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="decor-style" as="xs:string?">
+		<xsl:variable name="from-style-attribute" as="xs:string?">
+			<xsl:if test="exists($e/@style)">
+				<xsl:analyze-string select="$e/@style" regex="text-decoration-style: *([a-z \-]+)">
+					<xsl:matching-substring>
+							<xsl:sequence select="regex-group(1)"/>
+						</xsl:matching-substring>
+				</xsl:analyze-string>
+			</xsl:if>
+		</xsl:variable>
+		<xsl:variable name="from-class-attribute" as="xs:string?">
+			<xsl:if test="exists($e/@class)">
+				<xsl:analyze-string select="$global-styles" regex="{ concat('\.', $e/@class, ' \{[^\}]*text-decoration-style: *([a-z \-]+)') }">
+					<xsl:matching-substring>
+						<xsl:sequence select="regex-group(1)"/>
+					</xsl:matching-substring>
+				</xsl:analyze-string>
+			</xsl:if>
+		</xsl:variable>
+		<xsl:choose>
+			<xsl:when test="exists($from-style-attribute)">
+				<xsl:sequence select="$from-style-attribute" />
+			</xsl:when>
+			<xsl:when test="exists($from-class-attribute)">
+				<xsl:sequence select="$from-class-attribute" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="$default[2]" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+
+	<xsl:sequence select="$decor-line" />
+	<xsl:if test="exists($decor-line)">
+		<xsl:sequence select="$decor-style" />
+	</xsl:if>
+</xsl:function>
+
 <xsl:template match="text()">
+	<xsl:param name="has-underline" as="xs:string*" select="()" tunnel="yes" />
 	<xsl:param name="is-uppercase" as="xs:boolean" select="false()" tunnel="yes" />
 	<xsl:choose>
+		<xsl:when test="exists($has-underline) and $has-underline[1] = 'none'">
+			<xsl:next-match>
+				<xsl:with-param name="has-underline" select="()" tunnel="yes" />
+			</xsl:next-match>
+		</xsl:when>
+		<xsl:when test="exists($has-underline)">
+			<xsl:variable name="decor-line" as="xs:string" select="$has-underline[1]" />
+			<xsl:variable name="decor-style" as="xs:string?" select="$has-underline[2]" />
+			<xsl:variable name="styles" as="xs:string*">
+				<xsl:if test="$decor-line != 'underline'">
+					<xsl:sequence select="concat('text-decoration-line:', $decor-line)" />
+				</xsl:if>
+				<xsl:if test="exists($decor-style) and $decor-style != 'solid'">
+					<xsl:sequence select="concat('text-decoration-style:', $decor-style)" />
+				</xsl:if>
+			</xsl:variable>
+			<u>
+				<xsl:if test="exists($styles)">
+					<xsl:attribute name="style">
+						<xsl:sequence select="string-join($styles, ';')" />
+					</xsl:attribute>
+				</xsl:if>
+				<xsl:next-match>
+					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
+				</xsl:next-match>
+			</u>
+		</xsl:when>
 		<xsl:when test="$is-uppercase">
 			<xsl:value-of select="upper-case(.)" />
 		</xsl:when>
