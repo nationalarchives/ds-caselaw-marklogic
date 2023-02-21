@@ -246,30 +246,58 @@
 
 <xsl:variable name="global-styles" as="xs:string" select="normalize-space(string(/akomaNtoso/judgment/meta/presentation))" />
 
+<xsl:function name="uk:get-style-property" as="xs:string?">
+	<xsl:param name="e" as="element()" />
+	<xsl:param name="prop" as="xs:string" />
+	<xsl:if test="exists($e/@style)">
+		<xsl:analyze-string select="$e/@style" regex="{ concat($prop, ' *: *([^;]+)') }">
+			<xsl:matching-substring>
+				<xsl:sequence select="regex-group(1)"/>
+			</xsl:matching-substring>
+		</xsl:analyze-string>
+	</xsl:if>
+</xsl:function>
+
+<xsl:function name="uk:get-class-property" as="xs:string?">
+	<xsl:param name="e" as="element()" />
+	<xsl:param name="prop" as="xs:string" />
+	<xsl:if test="exists($e/@class)">
+		<xsl:analyze-string select="$global-styles" regex="{ concat('\.', $e/@class, ' \{[^\}]*', $prop, ' *: *([^;\}]+)') }">
+			<xsl:matching-substring>
+				<xsl:sequence select="regex-group(1)"/>
+			</xsl:matching-substring>
+		</xsl:analyze-string>
+	</xsl:if>
+</xsl:function>
+
+<xsl:function name="uk:get-style-or-class-property" as="xs:string?">
+	<xsl:param name="e" as="element()" />
+	<xsl:param name="prop" as="xs:string" />
+	<xsl:sequence select="uk:get-style-or-class-property($e, $prop, ())" />
+</xsl:function>
+
+<xsl:function name="uk:get-style-or-class-property" as="xs:string?">
+	<xsl:param name="e" as="element()" />
+	<xsl:param name="prop" as="xs:string" />
+	<xsl:param name="default" as="xs:string?" />
+	<xsl:variable name="from-style-attribute" as="xs:string?" select="uk:get-style-property($e, $prop)" />
+	<xsl:variable name="from-class-attribute" as="xs:string?" select="uk:get-class-property($e, $prop)" />
+	<xsl:choose>
+		<xsl:when test="exists($from-style-attribute)">
+			<xsl:sequence select="$from-style-attribute" />
+		</xsl:when>
+		<xsl:when test="exists($from-class-attribute)">
+			<xsl:sequence select="$from-class-attribute" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:sequence select="$default" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:function>
+
 <xsl:function name="uk:extract-alignment" as="xs:string?">
 	<xsl:param name="p" as="element()" />
-	<xsl:variable name="from-style-attr" as="xs:string?">
-		<xsl:if test="exists($p/@style)">
-			<xsl:analyze-string select="$p/@style" regex="text-align: *([a-z]+)">
-				<xsl:matching-substring>
-					<xsl:sequence select="regex-group(1)"/>
-				</xsl:matching-substring>
-			</xsl:analyze-string>
-		</xsl:if>
-	</xsl:variable>
-	<xsl:choose>
-		<xsl:when test="exists($from-style-attr)">
-			<xsl:sequence select="$from-style-attr" />
-		</xsl:when>
-		<xsl:when test="exists($p/@class)">
-			<xsl:variable name="regex" as="xs:string" select="concat('\.', $p/@class, ' \{[^\}]*text-align: ?([a-z]+)')" />
-			<xsl:analyze-string select="$global-styles" regex="{ $regex }">
-				<xsl:matching-substring>
-					<xsl:sequence select="regex-group(1)"/>
-				</xsl:matching-substring>
-			</xsl:analyze-string>
-		</xsl:when>
-	</xsl:choose>
+	<xsl:sequence select="uk:get-style-or-class-property($p, 'text-align')" />
 </xsl:function>
 
 <xsl:template match="header//p[not(parent::blockContainer)]">
@@ -735,14 +763,10 @@
 <xsl:function name="uk:is-uppercase" as="xs:boolean">
 	<xsl:param name="e" as="element()" />
 	<xsl:param name="default" as="xs:boolean" />
-	<xsl:variable name="class-regex-1" as="xs:string" select="concat('\.', $e/@class, ' \{[^\}]*text-transform:')" />
-	<xsl:variable name="class-regex-2" as="xs:string" select="concat($class-regex-1, ' ?uppercase')" />
+	<xsl:variable name="text-transform" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-transform')" />
 	<xsl:choose>
-		<xsl:when test="exists($e/@style) and contains($e/@style, 'text-transform:')">
-			<xsl:sequence select="matches($e/@style, 'text-transform: *uppercase')" />
-		</xsl:when>
-		<xsl:when test="exists($e/@class) and matches($global-styles, $class-regex-1)">
-			<xsl:sequence select="matches($global-styles, $class-regex-2)"/>
+		<xsl:when test="exists($text-transform)">
+			<xsl:sequence select="$text-transform = 'uppercase'" />
 		</xsl:when>
 		<xsl:otherwise>
 			<xsl:sequence select="$default" />
@@ -762,69 +786,8 @@
 <xsl:function name="uk:has-underline" as="xs:string*">
 	<xsl:param name="e" as="element()" />
 	<xsl:param name="default" as="xs:string*" />
-	<xsl:variable name="decor-line" as="xs:string?">
-		<xsl:variable name="from-style-attribute" as="xs:string?">
-			<xsl:if test="exists($e/@style)">
-				<xsl:analyze-string select="$e/@style" regex="text-decoration-line: *([a-z \-]+)">
-					<xsl:matching-substring>
-						<xsl:sequence select="regex-group(1)"/>
-					</xsl:matching-substring>
-				</xsl:analyze-string>
-			</xsl:if>
-		</xsl:variable>
-		<xsl:variable name="from-class-attribute" as="xs:string?">
-			<xsl:if test="exists($e/@class)">
-				<xsl:analyze-string select="$global-styles" regex="{ concat('\.', $e/@class, ' \{[^\}]*text-decoration-line: *([a-z \-]+)') }">
-					<xsl:matching-substring>
-						<xsl:sequence select="regex-group(1)"/>
-					</xsl:matching-substring>
-				</xsl:analyze-string>
-			</xsl:if>
-		</xsl:variable>
-		<xsl:choose>
-			<xsl:when test="exists($from-style-attribute)">
-				<xsl:sequence select="$from-style-attribute" />
-			</xsl:when>
-			<xsl:when test="exists($from-class-attribute)">
-				<xsl:sequence select="$from-class-attribute" />
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="$default[1]" />
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:variable name="decor-style" as="xs:string?">
-		<xsl:variable name="from-style-attribute" as="xs:string?">
-			<xsl:if test="exists($e/@style)">
-				<xsl:analyze-string select="$e/@style" regex="text-decoration-style: *([a-z \-]+)">
-					<xsl:matching-substring>
-							<xsl:sequence select="regex-group(1)"/>
-						</xsl:matching-substring>
-				</xsl:analyze-string>
-			</xsl:if>
-		</xsl:variable>
-		<xsl:variable name="from-class-attribute" as="xs:string?">
-			<xsl:if test="exists($e/@class)">
-				<xsl:analyze-string select="$global-styles" regex="{ concat('\.', $e/@class, ' \{[^\}]*text-decoration-style: *([a-z \-]+)') }">
-					<xsl:matching-substring>
-						<xsl:sequence select="regex-group(1)"/>
-					</xsl:matching-substring>
-				</xsl:analyze-string>
-			</xsl:if>
-		</xsl:variable>
-		<xsl:choose>
-			<xsl:when test="exists($from-style-attribute)">
-				<xsl:sequence select="$from-style-attribute" />
-			</xsl:when>
-			<xsl:when test="exists($from-class-attribute)">
-				<xsl:sequence select="$from-class-attribute" />
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="$default[2]" />
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-
+	<xsl:variable name="decor-line" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-decoration-line', $default[1])" />
+	<xsl:variable name="decor-style" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-decoration-style', $default[2])" />
 	<xsl:sequence select="$decor-line" />
 	<xsl:if test="exists($decor-line)">
 		<xsl:sequence select="$decor-style" />
