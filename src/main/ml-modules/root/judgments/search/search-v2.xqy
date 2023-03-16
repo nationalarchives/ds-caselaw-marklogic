@@ -147,10 +147,7 @@ else
     <transform-results xmlns="http://marklogic.com/appservices/search" apply="empty-snippet" />
 
 
-let $scope := if (exists(index-of(("updated", "-updated", "received", "-received"), $order))) then
-        'properties'
-    else
-        'documents'
+let $scope := 'documents'
 
 
 let $search-options := <options xmlns="http://marklogic.com/appservices/search">
