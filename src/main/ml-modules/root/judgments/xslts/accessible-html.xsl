@@ -13,7 +13,7 @@
 <xsl:strip-space elements="*" />
 <xsl:preserve-space elements="p block num heading span a courtType date docDate docTitle docketNumber judge lawyer location neutralCitation party role time" />
 
-<xsl:param name="image-base" as="xs:string" select="'https://judgment-images.s3.eu-west-2.amazonaws.com/'" />
+<xsl:param name="image-base" as="xs:string" select="'https://assets.caselaw.nationalarchives.gov.uk/'" />
 
 <xsl:function name="uk:link-is-supported" as="xs:boolean">
 	<xsl:param name="href" as="attribute()?" />
