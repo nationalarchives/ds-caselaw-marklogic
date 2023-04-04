@@ -261,13 +261,55 @@
 <xsl:function name="uk:get-class-property" as="xs:string?">
 	<xsl:param name="e" as="element()" />
 	<xsl:param name="prop" as="xs:string" />
-	<xsl:if test="exists($e/@class)">
-		<xsl:analyze-string select="$global-styles" regex="{ concat('\.', $e/@class, ' \{[^\}]*', $prop, ' *: *([^;\}]+)') }">
-			<xsl:matching-substring>
-				<xsl:sequence select="regex-group(1)"/>
-			</xsl:matching-substring>
-		</xsl:analyze-string>
-	</xsl:if>
+	<xsl:variable name="attachment-styles" as="xs:string?" select="$e/ancestor::attachment/*/meta/presentation/normalize-space()" />
+	<xsl:choose>
+		<xsl:when test="empty($e/@class)" />
+		<xsl:when test="$attachment-styles">
+			<xsl:variable name="selector" as="xs:string" select="concat('\.', $e/@class)" />
+			<xsl:sequence select="uk:get-class-prop-helper($selector, $prop, $attachment-styles)" />
+		</xsl:when>
+		<xsl:when test="$doc-id = 'ewhc/ch/2022/1178'">
+			<xsl:sequence select="uk:get-class-prop-ewhc-ch-2022-1178($e, $prop)" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:variable name="selector" as="xs:string" select="concat('\.', $e/@class)" />
+			<xsl:sequence select="uk:get-class-prop-helper($selector, $prop, $global-styles)" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:function>
+
+<!-- document ewhc/ch/2022/1178 has more than one set of CSS styles in judgment/meta/presentation -->
+<!-- they are qualified either by a 'header' type selector or by an ID selector for the respective <decision> -->
+<xsl:function name="uk:get-class-prop-ewhc-ch-2022-1178" as="xs:string?">
+	<xsl:param name="e" as="element()" />
+	<xsl:param name="prop" as="xs:string" />
+	<xsl:variable name="selector" as="xs:string">
+		<xsl:variable name="header" as="element()?" select="$e/ancestor::header" />
+		<xsl:variable name="decision-id" as="xs:string?" select="$e/ancestor::decision/@eId" />
+		<xsl:choose>
+			<xsl:when test="exists($header)">
+				<xsl:sequence select="concat('header \.', $e/@class, ', #part-a \.', $e/@class)" />
+			</xsl:when>
+			<xsl:when test="exists($decision-id)">
+				<xsl:sequence select="concat('#', $decision-id, ' \.', $e/@class)" />
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:sequence select="concat('\.', $e/@class)" />
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:sequence select="uk:get-class-prop-helper($selector, $prop, $global-styles)" />
+</xsl:function>
+
+<xsl:function name="uk:get-class-prop-helper" as="xs:string?">
+	<xsl:param name="selector" as="xs:string" />
+	<xsl:param name="prop" as="xs:string" />
+	<xsl:param name="css" as="xs:string" />
+	<xsl:analyze-string select="$css" regex="{ concat($selector, ' *\{[^\}]*', $prop, ' *: *([^;\}]+)') }">
+		<xsl:matching-substring>
+			<xsl:sequence select="regex-group(1)"/>
+		</xsl:matching-substring>
+	</xsl:analyze-string>
 </xsl:function>
 
 <xsl:function name="uk:get-style-or-class-property" as="xs:string?">
