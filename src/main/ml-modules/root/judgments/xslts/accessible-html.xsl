@@ -244,7 +244,141 @@
 	</p>
 </xsl:template>
 
-<xsl:variable name="global-styles" as="xs:string" select="normalize-space(string(/akomaNtoso/judgment/meta/presentation))" />
+<!-- CSS classes -->
+
+<!-- returns the ancestor document element containing the CSS style for a given element -->
+<!-- if the element is within an attachment having its own styles, then that attachment, otherwise the main judgment -->
+<xsl:function name="uk:get-class-context" as="element()">
+	<xsl:param name="e" as="element()" />
+	<xsl:variable name="attachment" as="element()?" select="$e/ancestor::attachment/*[exists(meta/presentation)]" />
+	<xsl:sequence select="if (exists($attachment)) then $attachment else root($e)/akomaNtoso/*" />
+</xsl:function>
+
+<!-- a data structure containing all of the CSS properties, divided by selector and property name -->
+<!-- the keys that follow are designed for this structure -->
+<xsl:variable name="all-classes-parsed" as="document-node()">
+	<xsl:document>
+		<uk:classes>
+			<xsl:for-each select="(/akomaNtoso/*, /akomaNtoso/*/attachments/attachment/*)[exists(meta/presentation)]">
+				<xsl:variable name="root-key" select="generate-id(.)" />
+				<uk:classes key="{ $root-key }">
+					<xsl:for-each select="tokenize(string(meta/presentation), '\}')[contains(., '{')]">
+						<xsl:variable name="selector" select="normalize-space(substring-before(., '{'))" />
+						<xsl:variable name="properties" select="normalize-space(substring-after(., '{'))" />
+						<uk:class key="{ $selector }">
+							<xsl:for-each select="tokenize($properties, ';')[contains(., ':')]">
+								<xsl:variable name="property" select="normalize-space(substring-before(., ':'))" />
+								<xsl:variable name="value" select="normalize-space(substring-after(., ':'))" />
+								<uk:property key="{ $property }" value="{ $value }" />
+							</xsl:for-each>
+						</uk:class>
+					</xsl:for-each>
+				</uk:classes>
+			</xsl:for-each>
+		</uk:classes>
+	</xsl:document>
+</xsl:variable>
+
+<xsl:key name="classes" match="uk:class" use="concat(../@key, '|', @key)" />
+
+<xsl:key name="class-properties" match="uk:property/@value" use="concat(../../../@key, '|', ../../@key, '|', ../@key)" />
+
+<!-- class property getters -->
+
+<!-- returns the value of the property for the given selector -->
+<xsl:function name="uk:get-class-property-1" as="xs:string?">
+	<xsl:param name="context" as="element()" />
+	<xsl:param name="selector" as="xs:string" />
+	<xsl:param name="prop" as="xs:string" />
+	<xsl:variable name="key" select="concat(generate-id($context), '|', $selector, '|', $prop)" />
+	<xsl:sequence select="key('class-properties', $key, $all-classes-parsed)/string()" />
+</xsl:function>
+
+<!-- returns a sequence of key/value pairs, each divided by a colon -->
+<xsl:function name="uk:get-inline-class-properties-1" as="xs:string*">
+	<xsl:param name="context" as="element()" />
+	<xsl:param name="selector" as="xs:string" />
+	<xsl:variable name="key" select="concat(generate-id($context), '|', $selector)" />
+	<xsl:for-each select="key('classes', $key, $all-classes-parsed)/uk:property">
+		<xsl:if test="string(@key) = $inline-properties">
+			<xsl:sequence select="concat(@key, ':', @value)" />
+		</xsl:if>
+	</xsl:for-each>
+</xsl:function>
+
+<!-- helper functions to make selectors, depending on context -->
+
+<xsl:function name="uk:make-class-selector" as="xs:string?">
+	<xsl:param name="context" as="element()" />
+	<xsl:param name="e" as="element()" />
+	<xsl:choose>
+		<xsl:when test="empty($e/@class)" />
+		<xsl:when test="$doc-id = 'ewhc/ch/2022/1178'">
+			<xsl:sequence select="uk:make-class-selector-for-ewhc-ch-2022-1178($context, $e)" />
+		</xsl:when>
+		<!-- the selector for main styles is '#judgment .{ClassName}', e.g., '#judgment .ParaLevel1' -->
+		<xsl:when test="$context/self::judgment">
+			<xsl:sequence select="concat('#judgment .', $e/@class)" />
+		</xsl:when>
+		<!-- the selector for attachment styles is '#{type}{num} .{ClassName}', e.g., '#order1 .ParaLevel1' -->
+		<xsl:otherwise>
+			<xsl:variable name="work-uri" as="xs:string" select="$context/meta/identification/FRBRWork/FRBRthis/@value" />
+			<xsl:variable name="uri-components" as="xs:string*" select="tokenize($work-uri, '/')" />
+			<xsl:variable name="last-two" as="xs:string*" select="$uri-components[position() >= last()-1]" />
+			<xsl:variable name="last-two-combined" as="xs:string" select="string-join($last-two, '')" />
+			<xsl:sequence select="concat('#', $last-two-combined, ' .', $e/@class)" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:function>
+
+<!-- [2022] EWHC 1178 (Ch) was generated through a manual process and has some exceptions -->
+<!-- It contains multiple sets of styles -->
+<xsl:function name="uk:make-class-selector-for-ewhc-ch-2022-1178" as="xs:string">
+	<xsl:param name="context" as="element()" />
+	<xsl:param name="e" as="element()" /> <!-- $e/@class exists -->
+	<xsl:variable name="header" as="element()?" select="$e/ancestor::header" />
+	<xsl:variable name="decision-id" as="xs:string?" select="$e/ancestor::decision/@eId" />
+	<xsl:choose>
+		<xsl:when test="$context/self::doc[@name='schedule']">
+			<xsl:sequence select="concat('#schedule .', $e/@class)" />
+		</xsl:when>
+		<xsl:when test="exists($header)">
+			<xsl:sequence select="concat('header .', $e/@class, ', #part-a .', $e/@class)" />
+		</xsl:when>
+		<xsl:when test="exists($decision-id) and $decision-id = 'part-a'"> <!-- same as header -->
+			<xsl:sequence select="concat('header .', $e/@class, ', #part-a .', $e/@class)" />
+		</xsl:when>
+		<xsl:when test="exists($decision-id)">
+			<xsl:sequence select="concat('#', $decision-id, ' .', $e/@class)" />
+		</xsl:when>
+		<xsl:otherwise> <!-- should be impossible -->
+			<xsl:sequence select="concat('.', $e/@class)" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:function>
+
+<!-- main class property getters requiring only an element -->
+
+<xsl:function name="uk:get-class-property" as="xs:string?">
+	<xsl:param name="e" as="element()" />
+	<xsl:param name="prop" as="xs:string" />
+	<xsl:if test="exists($e/@class)">
+		<xsl:variable name="context" as="element()" select="uk:get-class-context($e)" />
+		<xsl:variable name="selector" as="xs:string" select="uk:make-class-selector($context, $e)" />
+		<xsl:sequence select="uk:get-class-property-1($context, $selector, $prop)" />
+	</xsl:if>
+</xsl:function>
+
+<xsl:function name="uk:get-inline-class-properties" as="xs:string*">
+	<xsl:param name="e" as="element()" />
+	<xsl:if test="exists($e/@class)">
+		<xsl:variable name="context" as="element()" select="uk:get-class-context($e)" />
+		<xsl:variable name="selector" as="xs:string" select="uk:make-class-selector($context, $e)" />
+		<xsl:sequence select="uk:get-inline-class-properties-1($context, $selector)" />
+	</xsl:if>
+</xsl:function>
+
+<!-- style property getter -->
 
 <xsl:function name="uk:get-style-property" as="xs:string?">
 	<xsl:param name="e" as="element()" />
@@ -256,60 +390,6 @@
 			</xsl:matching-substring>
 		</xsl:analyze-string>
 	</xsl:if>
-</xsl:function>
-
-<xsl:function name="uk:get-class-property" as="xs:string?">
-	<xsl:param name="e" as="element()" />
-	<xsl:param name="prop" as="xs:string" />
-	<xsl:variable name="attachment-styles" as="xs:string?" select="$e/ancestor::attachment/*/meta/presentation/normalize-space()" />
-	<xsl:choose>
-		<xsl:when test="empty($e/@class)" />
-		<xsl:when test="$attachment-styles">
-			<xsl:variable name="selector" as="xs:string" select="concat('\.', $e/@class)" />
-			<xsl:sequence select="uk:get-class-prop-helper($selector, $prop, $attachment-styles)" />
-		</xsl:when>
-		<xsl:when test="$doc-id = 'ewhc/ch/2022/1178'">
-			<xsl:sequence select="uk:get-class-prop-ewhc-ch-2022-1178($e, $prop)" />
-		</xsl:when>
-		<xsl:otherwise>
-			<xsl:variable name="selector" as="xs:string" select="concat('\.', $e/@class)" />
-			<xsl:sequence select="uk:get-class-prop-helper($selector, $prop, $global-styles)" />
-		</xsl:otherwise>
-	</xsl:choose>
-</xsl:function>
-
-<!-- document ewhc/ch/2022/1178 has more than one set of CSS styles in judgment/meta/presentation -->
-<!-- they are qualified either by a 'header' type selector or by an ID selector for the respective <decision> -->
-<xsl:function name="uk:get-class-prop-ewhc-ch-2022-1178" as="xs:string?">
-	<xsl:param name="e" as="element()" />
-	<xsl:param name="prop" as="xs:string" />
-	<xsl:variable name="selector" as="xs:string">
-		<xsl:variable name="header" as="element()?" select="$e/ancestor::header" />
-		<xsl:variable name="decision-id" as="xs:string?" select="$e/ancestor::decision/@eId" />
-		<xsl:choose>
-			<xsl:when test="exists($header)">
-				<xsl:sequence select="concat('header \.', $e/@class, ', #part-a \.', $e/@class)" />
-			</xsl:when>
-			<xsl:when test="exists($decision-id)">
-				<xsl:sequence select="concat('#', $decision-id, ' \.', $e/@class)" />
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:sequence select="concat('\.', $e/@class)" />
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:variable>
-	<xsl:sequence select="uk:get-class-prop-helper($selector, $prop, $global-styles)" />
-</xsl:function>
-
-<xsl:function name="uk:get-class-prop-helper" as="xs:string?">
-	<xsl:param name="selector" as="xs:string" />
-	<xsl:param name="prop" as="xs:string" />
-	<xsl:param name="css" as="xs:string" />
-	<xsl:analyze-string select="$css" regex="{ concat($selector, ' *\{[^\}]*', $prop, ' *: *([^;\}]+)') }">
-		<xsl:matching-substring>
-			<xsl:sequence select="regex-group(1)"/>
-		</xsl:matching-substring>
-	</xsl:analyze-string>
 </xsl:function>
 
 <xsl:function name="uk:get-style-or-class-property" as="xs:string?">
@@ -463,22 +543,7 @@
 
 <xsl:function name="uk:get-combined-inline-styles" as="xs:string*">
 	<xsl:param name="e" as="element()" />
-	<xsl:variable name="from-class-attr" as="xs:string*"><!-- inline formatting implied by the @class -->
-		<xsl:if test="exists($e/@class)">
-			<xsl:variable name="regex" as="xs:string" select="concat('\.', $e/@class, ' \{([^\}]+)')" />
-			<xsl:analyze-string select="$global-styles" regex="{ $regex }">
-				<xsl:matching-substring>
-					<xsl:for-each select="tokenize(regex-group(1), ';')">
-						<xsl:variable name="prop" as="xs:string" select="normalize-space(substring-before(., ':'))" />
-						<xsl:if test="$prop = $inline-properties">
-							<xsl:variable name="value" as="xs:string" select="normalize-space(substring-after(., ':'))" />
-							<xsl:sequence select="concat($prop, ':', $value)" />
-						</xsl:if>
-					</xsl:for-each>
-				</xsl:matching-substring>
-			</xsl:analyze-string>
-		</xsl:if>
-	</xsl:variable>
+	<xsl:variable name="from-class-attr" select="uk:get-inline-class-properties($e)" /><!-- inline formatting implied by the @class -->
 	<xsl:variable name="from-style-attr" as="xs:string*"><!-- inline formatting specified in @style -->
 		<xsl:for-each select="tokenize($e/@style, ';')">
 			<xsl:variable name="prop" as="xs:string" select="normalize-space(substring-before(., ':'))" />
