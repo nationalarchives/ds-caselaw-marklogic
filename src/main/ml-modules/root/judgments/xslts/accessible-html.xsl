@@ -213,9 +213,10 @@
 </xsl:template>
 
 <xsl:template match="blockContainer/p[1]">
+	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<p>
 		<xsl:if test="exists(ancestor::header)">
-			<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(.)" />
+			<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(., $class-context)" />
 			<xsl:if test="$alignment = ('center', 'right', 'left')">
 				<xsl:attribute name="class">
 					<xsl:sequence select="concat('judgment-header__pr-', $alignment)" />
@@ -231,9 +232,10 @@
 </xsl:template>
 
 <xsl:template match="blockContainer/p[position() gt 1]">
+	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<p>
 		<xsl:if test="exists(ancestor::header)">
-			<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(.)" />
+			<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(., $class-context)" />
 			<xsl:if test="$alignment = ('center', 'right', 'left')">
 				<xsl:attribute name="class">
 					<xsl:sequence select="concat('judgment-header__pr-', $alignment)" />
@@ -246,13 +248,13 @@
 
 <!-- CSS classes -->
 
-<!-- returns the ancestor document element containing the CSS style for a given element -->
-<!-- if the element is within an attachment having its own styles, then that attachment, otherwise the main judgment -->
-<xsl:function name="uk:get-class-context" as="element()">
-	<xsl:param name="e" as="element()" />
-	<xsl:variable name="attachment" as="element()?" select="$e/ancestor::attachment/*[exists(meta/presentation)]" />
-	<xsl:sequence select="if (exists($attachment)) then $attachment else root($e)/akomaNtoso/*" />
-</xsl:function>
+<!-- sets the ancestor document element containing the CSS style for its descendants -->
+<!-- if an attachment has its own styles, then that attachment, otherwise the main judgment -->
+<xsl:template match="akomaNtoso/* | attachment/*[exists(meta/presentation)]">
+	<xsl:next-match>
+		<xsl:with-param name="class-context" select="." tunnel="yes" />
+	</xsl:next-match>
+</xsl:template>
 
 <!-- a data structure containing all of the CSS properties, divided by selector and property name -->
 <!-- the keys that follow are designed for this structure -->
@@ -357,13 +359,13 @@
 	</xsl:choose>
 </xsl:function>
 
-<!-- main class property getters requiring only an element -->
+<!-- main class property getters requiring, a source element and a context element -->
 
 <xsl:function name="uk:get-class-property" as="xs:string?">
 	<xsl:param name="e" as="element()" />
 	<xsl:param name="prop" as="xs:string" />
+	<xsl:param name="context" as="element()" />
 	<xsl:if test="exists($e/@class)">
-		<xsl:variable name="context" as="element()" select="uk:get-class-context($e)" />
 		<xsl:variable name="selector" as="xs:string" select="uk:make-class-selector($context, $e)" />
 		<xsl:sequence select="uk:get-class-property-1($context, $selector, $prop)" />
 	</xsl:if>
@@ -371,8 +373,8 @@
 
 <xsl:function name="uk:get-inline-class-properties" as="xs:string*">
 	<xsl:param name="e" as="element()" />
+	<xsl:param name="context" as="element()" />
 	<xsl:if test="exists($e/@class)">
-		<xsl:variable name="context" as="element()" select="uk:get-class-context($e)" />
 		<xsl:variable name="selector" as="xs:string" select="uk:make-class-selector($context, $e)" />
 		<xsl:sequence select="uk:get-inline-class-properties-1($context, $selector)" />
 	</xsl:if>
@@ -395,15 +397,17 @@
 <xsl:function name="uk:get-style-or-class-property" as="xs:string?">
 	<xsl:param name="e" as="element()" />
 	<xsl:param name="prop" as="xs:string" />
-	<xsl:sequence select="uk:get-style-or-class-property($e, $prop, ())" />
+	<xsl:param name="context" as="element()" />
+	<xsl:sequence select="uk:get-style-or-class-property($e, $prop, (), $context)" />
 </xsl:function>
 
 <xsl:function name="uk:get-style-or-class-property" as="xs:string?">
 	<xsl:param name="e" as="element()" />
 	<xsl:param name="prop" as="xs:string" />
 	<xsl:param name="default" as="xs:string?" />
+	<xsl:param name="context" as="element()" />
 	<xsl:variable name="from-style-attribute" as="xs:string?" select="uk:get-style-property($e, $prop)" />
-	<xsl:variable name="from-class-attribute" as="xs:string?" select="uk:get-class-property($e, $prop)" />
+	<xsl:variable name="from-class-attribute" as="xs:string?" select="uk:get-class-property($e, $prop, $context)" />
 	<xsl:choose>
 		<xsl:when test="exists($from-style-attribute)">
 			<xsl:sequence select="$from-style-attribute" />
@@ -419,16 +423,18 @@
 
 <xsl:function name="uk:extract-alignment" as="xs:string?">
 	<xsl:param name="p" as="element()" />
-	<xsl:sequence select="uk:get-style-or-class-property($p, 'text-align')" />
+	<xsl:param name="context" as="element()" />
+	<xsl:sequence select="uk:get-style-or-class-property($p, 'text-align', $context)" />
 </xsl:function>
 
 <xsl:template match="header//p[not(parent::blockContainer)]">
+	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<xsl:choose>
 		<xsl:when test="empty(preceding-sibling::*) and exists(child::img)">
 			<div class="judgment-header__logo">
 				<xsl:apply-templates>
 					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
-					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
+					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $class-context)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
 		</xsl:when>
@@ -436,7 +442,7 @@
 			<div class="judgment-header__neutral-citation">
 				<xsl:apply-templates>
 					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
-					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
+					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $class-context)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
 		</xsl:when>
@@ -444,7 +450,7 @@
 			<div class="judgment-header__case-number">
 				<xsl:apply-templates>
 					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
-					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
+					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $class-context)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
 		</xsl:when>
@@ -452,7 +458,7 @@
 			<div class="judgment-header__court">
 				<xsl:apply-templates>
 					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
-					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
+					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $class-context)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
 		</xsl:when>
@@ -460,7 +466,7 @@
 			<div class="judgment-header__date">
 				<xsl:apply-templates>
 					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
-					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
+					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $class-context)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
 		</xsl:when>
@@ -468,12 +474,12 @@
 			<div class="judgment-header__line-separator" aria-hidden="true">
 				<xsl:apply-templates>
 					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
-					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(.)" tunnel="yes" />
+					<xsl:with-param name="is-uppercase" select="uk:is-uppercase(., $class-context)" tunnel="yes" />
 				</xsl:apply-templates>
 			</div>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(.)" />
+			<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(., $class-context)" />
 			<xsl:choose>
 				<xsl:when test="$alignment = ('center', 'right', 'left')">
 					<p>
@@ -543,7 +549,8 @@
 
 <xsl:function name="uk:get-combined-inline-styles" as="xs:string*">
 	<xsl:param name="e" as="element()" />
-	<xsl:variable name="from-class-attr" select="uk:get-inline-class-properties($e)" /><!-- inline formatting implied by the @class -->
+	<xsl:param name="context" as="element()" />
+	<xsl:variable name="from-class-attr" select="uk:get-inline-class-properties($e, $context)" /><!-- inline formatting implied by the @class -->
 	<xsl:variable name="from-style-attr" as="xs:string*"><!-- inline formatting specified in @style -->
 		<xsl:for-each select="tokenize($e/@style, ';')">
 			<xsl:variable name="prop" as="xs:string" select="normalize-space(substring-before(., ':'))" />
@@ -584,10 +591,11 @@
 <xsl:template name="inline">
 	<xsl:param name="has-underline" as="xs:string*" select="()" tunnel="yes" />
 	<xsl:param name="is-uppercase" as="xs:boolean" select="false()" tunnel="yes" />
+	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<!-- extract inline styles and recalculate has-underline and is-uppercase -->
-	<xsl:variable name="styles" as="xs:string*" select="uk:get-combined-inline-styles(.)" />
-	<xsl:variable name="has-underline" as="xs:string*" select="uk:has-underline(., $has-underline)" />
-	<xsl:variable name="is-uppercase" as="xs:boolean" select="uk:is-uppercase(., $is-uppercase)" />
+	<xsl:variable name="styles" as="xs:string*" select="uk:get-combined-inline-styles(., $class-context)" />
+	<xsl:variable name="has-underline" as="xs:string*" select="uk:has-underline(., $has-underline, $class-context)" />
+	<xsl:variable name="is-uppercase" as="xs:boolean" select="uk:is-uppercase(., $is-uppercase, $class-context)" />
 	<!-- call recursive template -->
 	<xsl:call-template name="inline-recursive">
 		<xsl:with-param name="styles" select="$styles" />
@@ -864,13 +872,15 @@
 
 <xsl:function name="uk:is-uppercase" as="xs:boolean">
 	<xsl:param name="p" as="element()" />
-	<xsl:sequence select="uk:is-uppercase($p, false())" />
+	<xsl:param name="context" as="element()" />
+	<xsl:sequence select="uk:is-uppercase($p, false(), $context)" />
 </xsl:function>
 
 <xsl:function name="uk:is-uppercase" as="xs:boolean">
 	<xsl:param name="e" as="element()" />
 	<xsl:param name="default" as="xs:boolean" />
-	<xsl:variable name="text-transform" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-transform')" />
+	<xsl:param name="context" as="element()" />
+	<xsl:variable name="text-transform" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-transform', $context)" />
 	<xsl:choose>
 		<xsl:when test="exists($text-transform)">
 			<xsl:sequence select="$text-transform = 'uppercase'" />
@@ -887,14 +897,16 @@
 
 <xsl:function name="uk:has-underline" as="xs:string*">
 	<xsl:param name="p" as="element()" />
-	<xsl:sequence select="uk:has-underline($p, ())" />
+	<xsl:param name="context" as="element()" />
+	<xsl:sequence select="uk:has-underline($p, (), $context)" />
 </xsl:function>
 
 <xsl:function name="uk:has-underline" as="xs:string*">
 	<xsl:param name="e" as="element()" />
 	<xsl:param name="default" as="xs:string*" />
-	<xsl:variable name="decor-line" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-decoration-line', $default[1])" />
-	<xsl:variable name="decor-style" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-decoration-style', $default[2])" />
+	<xsl:param name="context" as="element()" />
+	<xsl:variable name="decor-line" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-decoration-line', $default[1], $context)" />
+	<xsl:variable name="decor-style" as="xs:string?" select="uk:get-style-or-class-property($e, 'text-decoration-style', $default[2], $context)" />
 	<xsl:sequence select="$decor-line" />
 	<xsl:if test="exists($decor-line)">
 		<xsl:sequence select="$decor-style" />
