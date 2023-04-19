@@ -159,7 +159,7 @@
 	<section class="judgment-body__section">
 		<xsl:apply-templates select="@eId" />
 		<span class="judgment-body__number">
-			<xsl:apply-templates select="num/node()" />
+			<xsl:apply-templates select="num" />
 		</span>
 		<div>
 			<xsl:apply-templates select="* except num" />
@@ -176,7 +176,7 @@
 <xsl:template match="subparagraph">
 	<section class="judgment-body__nested-section">
 		<span class="judgment-body__number">
-			<xsl:apply-templates select="num/node()" />
+			<xsl:apply-templates select="num" />
 		</span>
 		<div>
 			<xsl:apply-templates select="* except num" />
