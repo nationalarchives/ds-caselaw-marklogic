@@ -3,3 +3,4 @@
 build
 gradle-*.properties
 !gradle-development.properties
+actual-output.xml

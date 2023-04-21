@@ -155,7 +155,7 @@
 	</section>
 </xsl:template>
 
-<xsl:template match="paragraph">
+<xsl:template name="paragraph-template" match="paragraph">
 	<section class="judgment-body__section">
 		<xsl:apply-templates select="@eId" />
 		<span class="judgment-body__number">
