@@ -23,6 +23,13 @@
     "localname": "last-modified",
     "range-value-positions" : false,
     "invalid-values": "reject"
+  },
+  {
+    "scalar-type" : "dateTime",
+    "namespace-uri": "",
+    "localname": "transfer-received-at",
+    "range-value-positions" : false,
+    "invalid-values": "ignore"
   } ],
   "word-positions": true,
   "maintain-last-modified": true,
