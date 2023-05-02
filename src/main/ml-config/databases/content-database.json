@@ -8,7 +8,7 @@
   } ],
   "range-path-index" : [ {
     "scalar-type" : "date",
-    "path-expression" : "akn:FRBRWork/akn:FRBRdate/@date",
+    "path-expression" : "akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date",
     "range-value-positions" : false,
     "invalid-values": "reject"
   }, {
