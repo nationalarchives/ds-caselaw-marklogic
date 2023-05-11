@@ -68,7 +68,7 @@
 
 <xsl:variable name="doc-id" as="xs:string">
 	<xsl:variable name="work-uri" as="xs:string">
-		<xsl:sequence select="/akomaNtoso/judgment/meta/identification/FRBRWork/FRBRthis/@value" />
+		<xsl:sequence select="/akomaNtoso/*/meta/identification/FRBRWork/FRBRthis/@value" />
 	</xsl:variable>
 	<xsl:variable name="long-form-prefix" as="xs:string" select="'https://caselaw.nationalarchives.gov.uk/id/'" />
 	<xsl:choose>
@@ -95,6 +95,14 @@
 			</xsl:with-param>
 		</xsl:call-template>
 		<xsl:apply-templates select="attachments/attachment/doc[not(@name=('annex','schedule'))]" />
+	</article>
+</xsl:template>
+
+<!-- for press summaries, priority needed to trump attachment template -->
+<xsl:template match="/akomaNtoso/doc" priority="1">
+	<article class="judgment">
+		<xsl:apply-templates />
+		<xsl:call-template name="footnotes" />
 	</article>
 </xsl:template>
 
@@ -250,7 +258,8 @@
 
 <!-- sets the ancestor document element containing the CSS style for its descendants -->
 <!-- if an attachment has its own styles, then that attachment, otherwise the main judgment -->
-<xsl:template match="akomaNtoso/* | attachment/*[exists(meta/presentation)]">
+<!-- priority should be the highest in the transform -->
+<xsl:template match="akomaNtoso/* | attachment/*[exists(meta/presentation)]" priority="2">
 	<xsl:next-match>
 		<xsl:with-param name="class-context" select="." tunnel="yes" />
 	</xsl:next-match>
@@ -497,6 +506,20 @@
 	</xsl:choose>
 </xsl:template>
 
+<!-- body paragraphs in press summaries can be aligned -->
+<xsl:template match="mainBody/p">
+	<xsl:param name="class-context" as="element()" tunnel="yes" />
+	<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(., $class-context)" />
+	<p>
+		<xsl:if test="$alignment = ('center', 'right')">
+			<xsl:attribute name="class">
+				<xsl:sequence select="concat('judgment-header__pr-', $alignment)" />
+			</xsl:attribute>
+		</xsl:if>
+		<xsl:call-template name="inline" />
+	</p>
+</xsl:template>
+
 <xsl:template match="p">
 	<p>
 		<xsl:call-template name="inline" />
@@ -530,6 +553,10 @@
 	<span class="ncn-nowrap">
 		<xsl:call-template name="inline" />
 	</span>
+</xsl:template>
+
+<xsl:template match="docType | docTitle">
+	<xsl:call-template name="inline" />
 </xsl:template>
 
 <xsl:template match="courtType | docketNumber | docDate">
