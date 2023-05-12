@@ -30,6 +30,11 @@ declare variable $only_unpublished as xs:boolean? external;
 declare variable $editor_status as xs:string? external := "";
 declare variable $editor_assigned as xs:string? external := "";
 declare variable $editor_priority as xs:string? external := "";
+declare variable $collections as xs:string? external := "";
+
+let $collection-uris := fn:tokenize($collections, ",")
+let $collection-query := if (empty($collection-uris)) then () else cts:collection-query($collection-uris)
+
 
 let $start as xs:integer := ($page - 1) * $page-size + 1
 
@@ -117,7 +122,7 @@ let $query15 := if (($show_unpublished or $only_unpublished) and $editor_status)
 ) else ()
 
 
-let $queries := ( $query1, $query2, $query4, $query5, $query6, $query7, $query8, $query9, $query10, $query11, $query12, $query13, $query14, $query15, dls:documents-query() )
+let $queries := ( $collection-query, $query1, $query2, $query4, $query5, $query6, $query7, $query8, $query9, $query10, $query11, $query12, $query13, $query14, $query15, dls:documents-query() )
 let $query := cts:and-query($queries)
 
 let $show-snippets as xs:boolean := exists(( $query1, $query2, $query5 ))
