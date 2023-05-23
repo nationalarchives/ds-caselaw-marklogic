@@ -1,0 +1,14 @@
+#!python
+import requests
+
+for url in ["ewhc/qb/2020/594", "ewca/civ/2003/1048", "ewca/civ/2003/1489", "ewca/civ/2003/48" ]:
+  ml_url = f"/{url}.xml"
+  print(url)
+  response = requests.get(f"https://caselaw.nationalarchives.gov.uk/{url}/data.xml")
+  response.raise_for_status()
+  xml = response.content
+  print("got xml")
+
+  response = requests.put(f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}", data=xml)
+  print(response.content)
+  response.raise_for_status()

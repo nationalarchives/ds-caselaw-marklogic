@@ -71,6 +71,13 @@ examples for future data migrations.
 
 ## Local development
 
+Some notes whilst I think about it:
+
+* Ensure that editor and public ui host is set to `host.docker.internal` in `.env`; username is admin/admin
+* You can use `script/create-instance` to set up a local instance of the most recent MarkLogic version --
+  there is a `docker-compose.yaml` but that is currently set to version 10.
+* You can use `script/populate` to download a couple of documents: it doesn't currently import or fake MarkLogic properties
+
 The simplest way to get a set of data in your local instance of Marklogic is to do a [Bulk export](#bulk-export) from
 staging or production, then a [Bulk import](#bulk-import) to your local development environment.
 

@@ -1,0 +1,11 @@
+# create a local marklogic instance
+# Yes, the docker-compose.yaml file would have been a better place for this
+# but I didn't want to edit it in case it is involved in the deployment process
+# even if the environment variables are "admin"
+docker run -d -it -p 8000:8000 -p 8001:8001 -p 8002:8002 -p 8011:8011\
+     -e MARKLOGIC_INIT=true \
+     -e MARKLOGIC_ADMIN_USERNAME=admin \
+     -e MARKLOGIC_ADMIN_PASSWORD=admin \
+     -e MARKLOGIC_WALLET_PASSWORD=admin \
+     -e REALM=admin \
+     marklogicdb/marklogic-db
