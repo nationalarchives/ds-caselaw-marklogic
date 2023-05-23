@@ -22,7 +22,22 @@ purchase, but you need to fill out [a short form](https://hub.docker.com/_/markl
 3. If you're running against anything other than development, copy `gradle-development.properties`
 to `gradle-{environment}.properties` and set the credentials and hostname for your Marklogic server.
 
-A `docker-compose.yml` file for running Marklogic locally is included. Run `docker-compose up` to start it.
+## Deployment
+
+To deploy the configuration, run `gradle mlDeploy -PenvironmentName={environment}`. Deployment is
+idempotent, and will automatically configure databases, roles, triggers and modules. The `development`
+environment will be used by default if you don't specify `-PenvironmentName`.
+
+## Local Setup
+
+A `docker-compose.yml` file for running Marklogic locally is included. Run `docker-compose up -d` to start it; it takes
+about a minute, and will raise various HTTP errors if you visit `localhost:8000` before that point
+
+You'll then need to deploy the configuration (see Deployment, above) and there is a `script/populate` to copy some documents
+from live: it doesn't import or fake properties.
+
+Ensure that `MARKLOGIC_HOST` in `.env` in the editor and public ui is set to `host.docker.internal` in `.env` and that
+the username and password are both `admin` if you want to use them with the local instance.
 
 ## Release versioning
 
@@ -39,13 +54,9 @@ switch back to the main branch (or any branch) by using `git checkout branchname
 
 TODO: Automatically deploy main to staging, and tags to production using CodeBuild.
 
-## Deployment
-
-To deploy the configuration, run `gradle mlDeploy -PenvironmentName={environment}`. Deployment is
-idempotent, and will automatically configure databases, roles, triggers and modules. The `development`
-environment will be used by default if you don't specify `-PenvironmentName`.
-
 ## Bulk import
+
+(This hasn't been used in a long time)
 
 Place the XML files you want to import in the `import` folder of this repo, then run
 `gradle importDocuments`. The documents will be imported, and the URI will be set as the
@@ -68,11 +79,6 @@ examples for future data migrations.
 
 * `gradle manageAllDocuments`: Enables version management for all documents
 * `gradle publishAllDocuments`: Sets the `published` flag for all documents
-
-## Local development
-
-The simplest way to get a set of data in your local instance of Marklogic is to do a [Bulk export](#bulk-export) from
-staging or production, then a [Bulk import](#bulk-import) to your local development environment.
 
 ### Loading data from a backup on S3 (deprecated)
 
