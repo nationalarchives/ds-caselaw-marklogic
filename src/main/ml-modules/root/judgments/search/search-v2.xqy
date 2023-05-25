@@ -3,7 +3,8 @@ xquery version "1.0-ml";
 import module namespace search = "http://marklogic.com/appservices/search" at "/MarkLogic/appservices/search/search.xqy";
 import module namespace helper = "https://caselaw.nationalarchives.gov.uk/helper" at "/judgments/search/helper.xqy";
 import module namespace dls = "http://marklogic.com/xdmp/dls" at "/MarkLogic/dls.xqy";
-
+declare namespace prop = "http://marklogic.com/xdmp/property";
+declare namespace ukakn = "https://caselaw.nationalarchives.gov.uk/akn";
 declare namespace akn = "http://docs.oasis-open.org/legaldocml/ns/akn/3.0";
 declare namespace uk = "https://caselaw.nationalarchives.gov.uk";
 
@@ -31,6 +32,38 @@ declare variable $editor_status as xs:string? external := "";
 declare variable $editor_assigned as xs:string? external := "";
 declare variable $editor_priority as xs:string? external := "";
 declare variable $collections as xs:string? external := "";
+
+declare function local:transform-response($response as element(search:response)) {
+  <search:response>
+  { $response/@* }
+  { for $result in $response/search:result return local:transform-result($result) }
+  { $response/search:metrics }
+  </search:response>
+};
+
+declare function local:transform-result($result as element(search:result)) {
+  let $uri as xs:string := string($result/@uri)
+  let $properties := xdmp:document-properties($uri)
+  let $doc as document-node() := doc($uri)
+  return <search:result>
+    { $result/@* }
+    { $result/search:snippet}
+    <properties>
+    { $properties//prop:last-modified }
+    { $properties//transfer-received-at }
+    </properties>
+    <search:extracted kind="element">
+    { $doc/*/*/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate }
+    { $doc/*/*/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRname }
+    { $doc//ukakn:cite }
+    { $doc//akn:neutralCitation }
+    { $doc//ukakn:court }
+    { $doc//ukakn:hash }
+    { $doc//akn:FRBRManifestation/akn:FRBRdate }
+  </search:extracted>
+
+  </search:result>
+};
 
 let $collection-uris := fn:tokenize($collections, ",")
 let $collection-query := if (empty($collection-uris)) then () else cts:collection-query($collection-uris)
@@ -151,29 +184,16 @@ let $transform-results := if ($show-snippets) then
 else
     <transform-results xmlns="http://marklogic.com/appservices/search" apply="empty-snippet" />
 
-
-let $scope := 'documents'
-
-
-let $search-options := <options xmlns="http://marklogic.com/appservices/search">
-    <fragment-scope>{ $scope }</fragment-scope>
-    <search-option>unfiltered</search-option>
-    { $sort-order }
-    <extract-document-data xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">
-        <extract-path>//akn:FRBRWork/akn:FRBRdate</extract-path>
-        <extract-path>//akn:FRBRWork/akn:FRBRname</extract-path>
-        <extract-path>//uk:cite</extract-path>
-        <extract-path>//akn:neutralCitation</extract-path>
-        <extract-path>//uk:court</extract-path>
-        <extract-path>//uk:hash</extract-path>
-        <extract-path>//akn:FRBRManifestation/akn:FRBRdate</extract-path>
-    </extract-document-data>
-    { $transform-results }
-</options>
+let $search-options :=
+<options xmlns="http://marklogic.com/appservices/search">
+  <fragment-scope>documents</fragment-scope>
+  {$sort-order}
+  {$transform-results}
+  </options>
 
 let $results := search:resolve(element x { $query }/*, $search-options, $start, $page-size)
 let $total as xs:integer := xs:integer($results/@total)
 let $pages as xs:integer := if ($total mod $page-size eq 0) then $total idiv $page-size else $total idiv $page-size + 1
 let $params := $params => map:with('pages', $pages)
 
-return $results
+return local:transform-response($results)
