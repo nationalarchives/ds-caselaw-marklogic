@@ -12,6 +12,11 @@
     "range-value-positions" : false,
     "invalid-values": "reject"
   }, {
+    "scalar-type" : "date",
+    "path-expression" : "akn:FRBRWork/akn:FRBRdate/@date",
+    "range-value-positions" : false,
+    "invalid-values": "reject"
+  }, {
     "scalar-type": "dateTime",
     "path-expression" : "akn:akomaNtoso/akn:judgment/akn:meta/akn:identification/akn:FRBRManifestation/akn:FRBRdate[@name='transform']/@date",
     "range-value-positions" : false,
