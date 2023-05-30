@@ -30,11 +30,6 @@ declare variable $only_unpublished as xs:boolean? external;
 declare variable $editor_status as xs:string? external := "";
 declare variable $editor_assigned as xs:string? external := "";
 declare variable $editor_priority as xs:string? external := "";
-declare variable $collections as xs:string? external := "";
-
-let $collection-uris := fn:tokenize($collections, ",")
-let $collection-query := if (empty($collection-uris)) then () else cts:collection-query($collection-uris)
-
 
 let $start as xs:integer := ($page - 1) * $page-size + 1
 
@@ -75,8 +70,8 @@ let $query4 := if ($court) then cts:or-query(
 
 
 let $query5 := if ($judge) then cts:element-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'judge'), $judge, ('case-insensitive', 'punctuation-insensitive')) else ()
-let $query6 := if (empty($from_date)) then () else cts:path-range-query('akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date', '>=', $from_date)
-let $query7 := if (empty($to_date)) then () else cts:path-range-query('akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date', '<=', $to_date)
+let $query6 := if (empty($from_date)) then () else cts:path-range-query('akn:FRBRWork/akn:FRBRdate/@date', '>=', $from_date)
+let $query7 := if (empty($to_date)) then () else cts:path-range-query('akn:FRBRWork/akn:FRBRdate/@date', '<=', $to_date)
 let $query8 := if ($show_unpublished or $only_unpublished) then () else cts:properties-fragment-query(cts:element-value-query(fn:QName("", "published"), "true"))
 let $query9 := if ($only_unpublished) then cts:properties-fragment-query(cts:not-query(cts:element-value-query(fn:QName("", "published"), "true"))) else ()
 let $query10 := if ($neutral_citation) then
@@ -122,7 +117,7 @@ let $query15 := if (($show_unpublished or $only_unpublished) and $editor_status)
 ) else ()
 
 
-let $queries := ( $collection-query, $query1, $query2, $query4, $query5, $query6, $query7, $query8, $query9, $query10, $query11, $query12, $query13, $query14, $query15, dls:documents-query() )
+let $queries := ( $query1, $query2, $query4, $query5, $query6, $query7, $query8, $query9, $query10, $query11, $query12, $query13, $query14, $query15, dls:documents-query() )
 let $query := cts:and-query($queries)
 
 let $show-snippets as xs:boolean := exists(( $query1, $query2, $query5 ))
@@ -131,20 +126,20 @@ let $show-snippets as xs:boolean := exists(( $query1, $query2, $query5 ))
 let $sort-direction := if (fn:starts-with($order, '-')) then 'descending' else 'ascending'
 let $sort-word := replace($order, '-', '')
 
-    let $sort-order := if ($sort-word = 'date') then
-        <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
-            <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date</path-index>
-        </sort-order>
-    else if ($sort-word = 'updated') then
-        <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}" type="xs:dateTime">
-            <element ns="http://marklogic.com/xdmp/property" name="last-modified" />
-        </sort-order>
-    else if ($sort-word = 'transformation') then
-        <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
-            <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:akomaNtoso/akn:judgment/akn:meta/akn:identification/akn:FRBRManifestation/akn:FRBRdate[@name='transform']/@date</path-index>
-        </sort-order>
-    else
-        ()
+let $sort-order := if ($sort-word = 'date') then
+    <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
+        <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:FRBRWork/akn:FRBRdate/@date</path-index>
+    </sort-order>
+else if ($sort-word = 'updated') then
+     <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}" type="xs:dateTime">
+        <element ns="http://marklogic.com/xdmp/property" name="last-modified" />
+    </sort-order>
+else if ($sort-word = 'transformation') then
+    <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
+        <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:akomaNtoso/akn:judgment/akn:meta/akn:identification/akn:FRBRManifestation/akn:FRBRdate[@name='transform']/@date</path-index>
+    </sort-order>
+else
+    ()
 
 let $transform-results := if ($show-snippets) then
     $helper:transform-results
