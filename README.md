@@ -33,22 +33,7 @@ Deployment is idempotent, and will automatically configure databases, roles, tri
 
 A `docker-compose.yml` file for running Marklogic locally is included. Run `docker-compose up -d` to start it; it takes about a minute, and will raise various HTTP errors if you visit `localhost:8000` before that point.
 
-Note: There is currently a [known issue](https://github.com/marklogic/marklogic-docker/issues/212) with [marklogic-docker](https://github.com/marklogic/marklogic-docker) so instead you might need to run:
-
-```docker run -d \
-   --name marklogic \
-   -p 8000:8000 \
-   -p 8001:8001 \
-   -p 8002:8002 \
-   -p 8011:8011 \
-   -e MARKLOGIC_ADMIN_USERNAME=admin \
-   -e MARKLOGIC_ADMIN_PASSWORD=admin \
-   -e MARKLOGIC_INIT=true \
-   -v $(pwd)/.docker/db/data/:/var/opt/MarkLogic/ \
-   -v $(pwd)/.docker/db/backup:/var/opt/backup \
-   --network caselaw \
-   marklogicdb/marklogic-db:11.0.2-centos-1.0.2
-```
+Note: There is currently a [known issue](https://github.com/marklogic/marklogic-docker/issues/212) with [marklogic-docker](https://github.com/marklogic/marklogic-docker) so instead you might need to run `development_scripts/run_local_docker`
 
 ### 2. Deploy the marklogic configuration
 
@@ -60,13 +45,13 @@ Ensure that `MARKLOGIC_HOST` in `.env` in the editor and public ui is set to `ho
 
 ### 4. (Optional) Populate data in the local database
 
-To get some example documents onto the local database, there is a `development_scripts/populate.py` that copies documents from the live caselaw site (it doesn't import or fake properties) into it.
+To get some example documents onto the local database, there is a `development_scripts/populate.py` that copies documents from the live caselaw site (it doesn't import or fake properties) into it. (Check https://caselaw.nationalarchives.gov.uk/terms-of-use and get in touch if you intend to download many more than these.)
 
 There are also other ways other importing data as detailed further down the readme but haven't been tested for a while.
 
 ## Release versioning
 
-The releases are currently manually tagged. Please do not deploy to production without tagging a release. 
+The releases are currently manually tagged. Please do not deploy to production without tagging a release.
 Currently there is no auto-deployment of releases, but we are using releases & tags to keep track of what has been deployed to
 production.
 
