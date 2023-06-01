@@ -4,18 +4,15 @@ This repository is part of the [Find Case Law](https://caselaw.nationalarchives.
 
 # Marklogic Database Configuration
 
-This folder specifies the configuration of the Marklogic database used by the
-Case Law public access system. It uses the [ml-gradle](https://github.com/marklogic/ml-gradle)
-to manage and maintain a versioned configuration.
+This folder specifies the configuration of the Marklogic database used by the Case Law public access system.
+It uses the [ml-gradle](https://github.com/marklogic/ml-gradle) to manage and maintain a versioned configuration.
 
-For full details of what can be set in the files here, see the
-[ml-gradle documentation](https://github.com/marklogic-community/ml-gradle/wiki).
+For full details of what can be set in the files here, see the [ml-gradle documentation](https://github.com/marklogic-community/ml-gradle/wiki).
 The file layout is explaines in the [project layout documentation](https://github.com/marklogic-community/ml-gradle/wiki/Project-layout).
 
 ## Setup
 
-1. Access to the Marklogic Docker image is restricted to those who have 'purchased' it on Docker Hub. It's actually FREE to
-purchase, but you need to fill out [a short form](https://hub.docker.com/_/marklogic/purchase).
+1. Access to the Marklogic Docker image is restricted to those who have 'purchased' it on Docker Hub. It's actually FREE to purchase, but you need to fill out [a short form](https://hub.docker.com/_/marklogic/purchase).
 
 2. Install `gradle`. On MacOS, you can use `brew install gradle`.
 
@@ -24,25 +21,53 @@ to `gradle-{environment}.properties` and set the credentials and hostname for yo
 
 ## Deployment
 
-To deploy the configuration, run `gradle mlDeploy -PenvironmentName={environment}`. Deployment is
-idempotent, and will automatically configure databases, roles, triggers and modules. The `development`
-environment will be used by default if you don't specify `-PenvironmentName`.
+To deploy a marklogic configuration, run `gradle mlDeploy -PenvironmentName={environment}`.
+
+The `development` environment will be used by default if you don't specify `-PenvironmentName`.
+
+Deployment is idempotent, and will automatically configure databases, roles, triggers and modules.
 
 ## Local Setup
 
-A `docker-compose.yml` file for running Marklogic locally is included. Run `docker-compose up -d` to start it; it takes
-about a minute, and will raise various HTTP errors if you visit `localhost:8000` before that point
+### 1. Run a marklogic docker container
 
-You'll then need to deploy the configuration (see Deployment, above) and there is a `script/populate` to copy some documents
-from live: it doesn't import or fake properties.
+A `docker-compose.yml` file for running Marklogic locally is included. Run `docker-compose up -d` to start it; it takes about a minute, and will raise various HTTP errors if you visit `localhost:8000` before that point.
 
-Ensure that `MARKLOGIC_HOST` in `.env` in the editor and public ui is set to `host.docker.internal` in `.env` and that
-the username and password are both `admin` if you want to use them with the local instance.
+Note: There is currently a [known issue](https://github.com/marklogic/marklogic-docker/issues/212) with [marklogic-docker](https://github.com/marklogic/marklogic-docker) so instead you might need to run:
+
+```docker run -d \
+   --name marklogic \
+   -p 8000:8000 \
+   -p 8001:8001 \
+   -p 8002:8002 \
+   -p 8011:8011 \
+   -e MARKLOGIC_ADMIN_USERNAME=admin \
+   -e MARKLOGIC_ADMIN_PASSWORD=admin \
+   -e MARKLOGIC_INIT=true \
+   -v $(pwd)/.docker/db/data/:/var/opt/MarkLogic/ \
+   -v $(pwd)/.docker/db/backup:/var/opt/backup \
+   --network caselaw \
+   marklogicdb/marklogic-db:11.0.2-centos-1.0.2
+```
+
+### 2. Deploy the marklogic configuration
+
+You'll then need to deploy the configuration (see Deployment, above)
+
+### 3. Make clients point to the local docker container
+
+Ensure that `MARKLOGIC_HOST` in `.env` in the editor and public ui is set to `host.docker.internal` in `.env` and that the username and password are both `admin` if you want to use them with the local instance.
+
+### 4. (Optional) Populate data in the local database
+
+To get some example documents onto the local database, there is a `development_scripts/populate.py` that copies documents from the live caselaw site (it doesn't import or fake properties) into it.
+
+There are also other ways other importing data as detailed further down the readme but haven't been tested for a while.
 
 ## Release versioning
 
-The releases are currently manually tagged. Please do not deploy to production without tagging a release. Currently
-there is no auto-deployment of releases, but we are using releases & tags to keep track of what has been deployed to
+The releases are currently manually tagged. Please do not deploy to production without tagging a release. 
+Currently there is no auto-deployment of releases, but we are using releases & tags to keep track of what has been deployed to
 production.
 
 To create a versioned release, use Github's [release process](https://github.com/nationalarchives/ds-caselaw-marklogic/releases)
