@@ -3,7 +3,7 @@ version: '3.1'
 services:
   marklogic:
     container_name: marklogic
-    image: store/marklogicdb/marklogic-server:10.0-8.1-centos-1.0.0-ea2
+    image: marklogicdb/marklogic-db:11.0.2-centos-1.0.2
     ports:
       - "8000:8000"
       - "8001:8001"
