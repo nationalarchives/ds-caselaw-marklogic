@@ -5,10 +5,9 @@ docker run -d \
    -p 8001:8001 \
    -p 8002:8002 \
    -p 8011:8011 \
+   -p 8012:8012 \
    -e MARKLOGIC_ADMIN_USERNAME=admin \
    -e MARKLOGIC_ADMIN_PASSWORD=admin \
    -e MARKLOGIC_INIT=true \
-   -v $(pwd)/.docker/db/data/:/var/opt/MarkLogic/ \
-   -v $(pwd)/.docker/db/backup:/var/opt/backup \
    --network caselaw \
    marklogicdb/marklogic-db:11.0.2-centos-1.0.2
