@@ -35,6 +35,14 @@ task manageAllDocuments(type: com.marklogic.gradle.task.CorbTask, dependsOn: ['m
   threadCount = 16
 }
 
+task addAllDocumentsToJudgmentsCollection(type: com.marklogic.gradle.task.CorbTask, dependsOn: ['mlLoadModules']) {
+  xccConnectionUri = contentXccUrl
+  xccHttpcompliant = true
+  moduleRoot = "/judgments/corb/"
+  modulePrefix = "add-all-documents-to-judgments-collection"
+  threadCount = 16
+}
+
 task publishAllDocuments(type: com.marklogic.gradle.task.CorbTask, dependsOn: ['mlLoadModules']) {
   xccConnectionUri = contentXccUrl
   xccHttpcompliant = true
