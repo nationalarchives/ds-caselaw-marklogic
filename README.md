@@ -47,6 +47,14 @@ To get some example documents onto the local database, there is a `development_s
 
 There are also other ways other importing data as detailed further down the readme but haven't been tested for a while.
 
+### 5. (Optional) Run unit tests
+
+You can run the unit tests with `gradle mlUnitTest`. This relies on the tests being deployed; use `gradle mlDeploy` in the first instance,
+and make sure that you have `gradle mlWatch -i` running to automatically deploy changes as you make them.
+
+`gradle mlGenerateUnitTestSuite` will create a new stub test suite, and `gradle mlClearModulesDatabase` might be needed if you create
+tests and then later delete them.
+
 ## Release versioning
 
 The releases are currently manually tagged. Please do not deploy to production without tagging a release.
