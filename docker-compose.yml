@@ -10,7 +10,6 @@ services:
       - "8002:8002"
       - "8011:8011"
       - "8012:8012"
-      - "7011:7011"
     environment:
       MARKLOGIC_ADMIN_USERNAME: admin
       MARKLOGIC_ADMIN_PASSWORD: admin
