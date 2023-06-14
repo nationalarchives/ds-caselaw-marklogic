@@ -1,3 +1,4 @@
+#!python3
 """
 This script retrieves XML data from the live TNA caselaw website and updates a local MarkLogic database.
 
@@ -35,4 +36,3 @@ for url in urls:
     )
     response.raise_for_status()
     print("added to local Marklogic db")
-
