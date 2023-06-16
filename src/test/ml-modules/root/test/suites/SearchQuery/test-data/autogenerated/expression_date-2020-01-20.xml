@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">
-  <judgment name="decision">
+  <judgment name="judgment">
     <meta>
       <identification source="#tna">
 	<FRBRWork>
-	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/ewhc/ch/2023/9999"/>
-	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/ewhc/ch/2023/9999"/>
-	  <FRBRdate date="2023-06-05" name="decision"/>
+	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/ewhc/ch/2020/20"/>
+	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/ewhc/ch/2020/20"/>
+	  <FRBRdate date="2020-02-20" name="judgment"/>
 	  <FRBRauthor href="#"/>
 	  <FRBRcountry value="GB-UKM"/>
 	  <FRBRnumber value=""/>
-	  <FRBRname value="Sample v Judgment"/>
+	  <FRBRname value="expression_date-2020-01-20"/>
 	</FRBRWork>
 	<FRBRExpression>
-	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2023/9999"/>
-	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2023/9999"/>
-	  <FRBRdate date="2023-06-05" name="decision"/>
+	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2020/20"/>
+	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2020/20"/>
+	  <FRBRdate date="2020-01-20" name="judgment"/>
 	  <FRBRauthor href="#"/>
 	  <FRBRlanguage language="eng"/>
 	</FRBRExpression>
 	<FRBRManifestation>
-	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2023/9999/data.xml"/>
-	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2023/9999/data.xml"/>
-	  <FRBRdate date="2023-06-05T13:07:36" name="transform"/>
+	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2020/20/data.xml"/>
+	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2020/20/data.xml"/>
+	  <FRBRdate date="2020-02-20T20:20:20" name="transform"/>
 	  <FRBRauthor href="#tna"/>
 	  <FRBRformat value="application/xml"/>
 	</FRBRManifestation>
@@ -37,7 +37,7 @@
       <proprietary source="#">
 	<uk:parser>0.14.8</uk:parser>
 	<uk:hash>376b2d62bc03ad74f3793f7b6175580eb44f9e2771e939732cf48e9000000000</uk:hash>
-	<uk:cite>[2023] EWHC 9999 (Ch)</uk:cite>
+	<uk:cite>[2020] EWHC 20 (Ch)</uk:cite>
 	<uk:court>EWHC-Chancery</uk:court>
       </proprietary>
       <presentation source="#">
@@ -50,7 +50,7 @@
 	 </header>
     <judgmentBody>
       <decision>
-			<p>sample judgment with a unique word: capybara</p>
+			<p>sample judgment with a unique word: default</p>
       </decision>
     </judgmentBody>
   </judgment>
