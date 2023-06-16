@@ -1,0 +1,1 @@
+docker-compose exec marklogic tail /var/opt/MarkLogic/Logs/8012_ErrorLog.txt -f
