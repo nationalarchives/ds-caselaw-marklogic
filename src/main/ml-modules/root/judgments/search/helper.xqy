@@ -9,19 +9,25 @@ declare namespace uk = "https://caselaw.nationalarchives.gov.uk";
 
 declare variable $default-options as xs:string* := ( 'case-insensitive' );
 
-declare private function make-simple-name-query($word as xs:string) as cts:query {
+declare private function make-simple-name-query($word as xs:string, $weight as xs:double) as cts:query {
     let $element as xs:QName := fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'FRBRname')
     let $attribute as xs:QName := fn:QName('', 'value')
     let $options as xs:string* := $default-options
-    let $weight as xs:double := 16.0
     return cts:element-attribute-word-query($element, $attribute, $word, $options, $weight)
 };
 
-declare private function make-simple-cite-query($phrase as xs:string) as cts:query {
+declare private function make-simple-name-query($word as xs:string) as cts:query {
+    make-simple-name-query($word, 16.0)
+};
+
+declare private function make-simple-cite-query($phrase as xs:string, $weight as xs:double) as cts:query {
     let $element as xs:QName := fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'cite')
     let $options as xs:string* := ( 'case-insensitive' )
-    let $weight as xs:double := 32.0
     return cts:element-word-query($element, $phrase, $options, $weight)
+};
+
+declare private function make-simple-cite-query($word as xs:string) as cts:query {
+    make-simple-cite-query($word, 32.0)
 };
 
 declare private function make-simple-party-query($phrase as xs:string) as cts:query {
@@ -161,9 +167,14 @@ declare function make-consignment-number-query($consignment-number as xs:string)
     )
 };
 
-declare function make-q-query($q as xs:string) {
-    let $q := fn:replace($q, '- *v *-', ' v ', 'i')
+declare function normalise-vs($q as xs:string) as xs:string {
+    let $q := fn:replace($q, '(- *| +)vs?( *-| +)', ' v ', 'i')
     let $q := fn:normalize-space($q)
+    return $q
+};
+
+declare function make-q-query($q as xs:string) {
+    let $q := normalise-vs($q)
     return cts:and-query((
         for $phrase at $pos in fn:tokenize($q, '"')
         let $phrase := fn:normalize-space($phrase)
@@ -190,6 +201,14 @@ declare function make-q-query($q as xs:string) {
                             else
                                 make-name-party-or-body-queries($normalized)
     ))
+};
+
+declare function boost-title-and-ncn($title-or-ncn as xs:string, $query as cts:query) as cts:query  {
+    let $title-or-ncn := normalise-vs($title-or-ncn)
+    let $name-query := helper:make-simple-name-query($title-or-ncn, 1024.0)
+    let $ncn-query := helper:make-simple-cite-query($title-or-ncn, 1024.0)
+    let $boosting-query := cts:or-query(($name-query, $ncn-query))
+    return cts:boost-query($query, $boosting-query)
 };
 
 declare function make-party-query($party as xs:string?) as cts:query? {
