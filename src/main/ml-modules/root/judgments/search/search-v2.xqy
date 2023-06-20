@@ -171,7 +171,10 @@ let $search-options := <options xmlns="http://marklogic.com/appservices/search">
     { $transform-results }
 </options>
 
-let $results := search:resolve(element x { $query }/*, $search-options, $start, $page-size)
+
+let $boosted-query := helper:boost-title-and-ncn($q, $query)
+
+let $results := search:resolve(element x { $boosted-query }/*, $search-options, $start, $page-size)
 let $total as xs:integer := xs:integer($results/@total)
 let $pages as xs:integer := if ($total mod $page-size eq 0) then $total idiv $page-size else $total idiv $page-size + 1
 let $params := $params => map:with('pages', $pages)
