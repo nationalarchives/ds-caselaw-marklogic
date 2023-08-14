@@ -108,13 +108,13 @@
 
 <xsl:template match="attachments" />
 
-<xsl:template match="coverPage | header">
+<xsl:template match="coverPage | header | preface">
 	<header class="judgment-header">
 		<xsl:apply-templates />
 	</header>
 </xsl:template>
 
-<xsl:template match="judgmentBody">
+<xsl:template match="judgmentBody | doc[@name='pressSummary']/mainBody" priority="1">
 	<section class="judgment-body">
 		<xsl:apply-templates />
 	</section>
