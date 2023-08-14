@@ -512,19 +512,25 @@
 	</xsl:choose>
 </xsl:template>
 
-<!-- body paragraphs in press summaries can be aligned -->
-<xsl:template match="mainBody/p">
+<!-- alignment of paragraphs in press summary headers -->
+<xsl:template match="preface/p" priority="1">
 	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(., $class-context)" />
-	<p>
-		<xsl:if test="$alignment = ('center', 'right')">
-			<xsl:attribute name="class">
-				<xsl:sequence select="concat('judgment-header__pr-', $alignment)" />
-			</xsl:attribute>
-		</xsl:if>
-		<xsl:call-template name="inline" />
-	</p>
+	<xsl:choose>
+		<xsl:when test="$alignment = ('center', 'right', 'left')">
+			<p>
+				<xsl:attribute name="class">
+					<xsl:sequence select="concat('judgment-header__pr-', $alignment)" />
+				</xsl:attribute>
+				<xsl:call-template name="inline" />
+			</p>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:next-match />
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
+
 
 <xsl:template match="p">
 	<p>
