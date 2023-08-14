@@ -792,11 +792,11 @@
 		<xsl:when test="uk:link-is-supported(@href)">
 			<a>
 				<xsl:apply-templates select="@href" />
-				<xsl:apply-templates />
+				<xsl:call-template name="inline" />
 			</a>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:apply-templates />
+			<xsl:call-template name="inline" />
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
