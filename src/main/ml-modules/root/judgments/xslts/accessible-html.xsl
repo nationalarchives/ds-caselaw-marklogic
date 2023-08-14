@@ -163,6 +163,12 @@
 	</section>
 </xsl:template>
 
+<xsl:template match="level/num">
+	<span style="display:inline-block;min-width:0.5in">
+		<xsl:call-template name="inline" />
+	</span>
+</xsl:template>
+
 <xsl:template match="paragraph">
 	<section class="judgment-body__section">
 		<xsl:apply-templates select="@eId" />
@@ -215,7 +221,7 @@
 </xsl:template>
 
 <xsl:template match="blockContainer/num">
-	<span>
+	<span style="padding-right:1em">
 		<xsl:call-template name="inline" />
 	</span>
 </xsl:template>
