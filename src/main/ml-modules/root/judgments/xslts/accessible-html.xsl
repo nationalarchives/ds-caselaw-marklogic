@@ -436,7 +436,7 @@
 	<xsl:sequence select="uk:get-style-or-class-property($p, 'text-align', $context)" />
 </xsl:function>
 
-<xsl:template match="header//p[not(parent::blockContainer)]">
+<xsl:template match="header//p[not(parent::blockContainer)][not(ancestor::authorialNote)]">
 	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<xsl:choose>
 		<xsl:when test="empty(preceding-sibling::*) and exists(child::img)">
