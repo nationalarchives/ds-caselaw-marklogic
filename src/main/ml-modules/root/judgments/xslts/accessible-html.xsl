@@ -108,13 +108,13 @@
 
 <xsl:template match="attachments" />
 
-<xsl:template match="coverPage | header">
+<xsl:template match="coverPage | header | preface">
 	<header class="judgment-header">
 		<xsl:apply-templates />
 	</header>
 </xsl:template>
 
-<xsl:template match="judgmentBody">
+<xsl:template match="judgmentBody | doc[@name='pressSummary']/mainBody" priority="1">
 	<section class="judgment-body">
 		<xsl:apply-templates />
 	</section>
@@ -161,6 +161,12 @@
 		</xsl:if>
 		<xsl:apply-templates select="* except (num, heading)" />
 	</section>
+</xsl:template>
+
+<xsl:template match="level/num">
+	<span style="display:inline-block;min-width:0.5in">
+		<xsl:call-template name="inline" />
+	</span>
 </xsl:template>
 
 <xsl:template match="paragraph">
@@ -215,7 +221,7 @@
 </xsl:template>
 
 <xsl:template match="blockContainer/num">
-	<span>
+	<span style="padding-right:1em">
 		<xsl:call-template name="inline" />
 	</span>
 </xsl:template>
@@ -436,7 +442,7 @@
 	<xsl:sequence select="uk:get-style-or-class-property($p, 'text-align', $context)" />
 </xsl:function>
 
-<xsl:template match="header//p[not(parent::blockContainer)]">
+<xsl:template match="header//p[not(parent::blockContainer)][not(ancestor::authorialNote)]">
 	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<xsl:choose>
 		<xsl:when test="empty(preceding-sibling::*) and exists(child::img)">
@@ -506,19 +512,25 @@
 	</xsl:choose>
 </xsl:template>
 
-<!-- body paragraphs in press summaries can be aligned -->
-<xsl:template match="mainBody/p">
+<!-- alignment of paragraphs in press summary headers -->
+<xsl:template match="preface/p" priority="1">
 	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<xsl:variable name="alignment" as="xs:string?" select="uk:extract-alignment(., $class-context)" />
-	<p>
-		<xsl:if test="$alignment = ('center', 'right')">
-			<xsl:attribute name="class">
-				<xsl:sequence select="concat('judgment-header__pr-', $alignment)" />
-			</xsl:attribute>
-		</xsl:if>
-		<xsl:call-template name="inline" />
-	</p>
+	<xsl:choose>
+		<xsl:when test="$alignment = ('center', 'right', 'left')">
+			<p>
+				<xsl:attribute name="class">
+					<xsl:sequence select="concat('judgment-header__pr-', $alignment)" />
+				</xsl:attribute>
+				<xsl:call-template name="inline" />
+			</p>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:next-match />
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
+
 
 <xsl:template match="p">
 	<p>
@@ -792,11 +804,11 @@
 		<xsl:when test="uk:link-is-supported(@href)">
 			<a>
 				<xsl:apply-templates select="@href" />
-				<xsl:apply-templates />
+				<xsl:call-template name="inline" />
 			</a>
 		</xsl:when>
 		<xsl:otherwise>
-			<xsl:apply-templates />
+			<xsl:call-template name="inline" />
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
