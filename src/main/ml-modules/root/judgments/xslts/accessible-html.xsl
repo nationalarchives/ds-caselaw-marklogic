@@ -900,10 +900,10 @@
 <!-- math -->
 
 <xsl:template match="math:*">
-	<xsl:copy>
+	<xsl:element name="{ local-name(.) }">
 		<xsl:copy-of select="@*"/>
 		<xsl:apply-templates />
-	</xsl:copy>
+	</xsl:element>
 </xsl:template>
 
 
