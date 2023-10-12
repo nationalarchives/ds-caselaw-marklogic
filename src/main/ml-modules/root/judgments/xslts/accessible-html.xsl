@@ -333,9 +333,13 @@
 		<xsl:when test="$doc-id = 'ewhc/ch/2022/1178'">
 			<xsl:sequence select="uk:make-class-selector-for-ewhc-ch-2022-1178($context, $e)" />
 		</xsl:when>
-		<!-- the selector for main styles is '#judgment .{ClassName}', e.g., '#judgment .ParaLevel1' -->
+		<!-- the selector for main styles in a judgment is '#judgment .{ClassName}', e.g., '#judgment .ParaLevel1' -->
 		<xsl:when test="$context/self::judgment">
 			<xsl:sequence select="concat('#judgment .', $e/@class)" />
+		</xsl:when>
+		<!-- the selector for main styles in a press summary is '#main .{ClassName}', e.g., '#main .ParaLevel1' -->
+		<xsl:when test="$context/self::doc[@name='pressSummary']">
+			<xsl:sequence select="concat('#main .', $e/@class)" />
 		</xsl:when>
 		<!-- the selector for attachment styles is '#{type}{num} .{ClassName}', e.g., '#order1 .ParaLevel1' -->
 		<xsl:otherwise>
