@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <template xmlns="http://marklogic.com/xdmp/tde">
   <context>//akn:FRBRWork</context>
   <collections>
