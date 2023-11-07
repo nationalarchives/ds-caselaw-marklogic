@@ -1,0 +1,12 @@
+{
+  "role-name" : "caselaw-execute-sql",
+  "description" : "Can execute SQL queries against the database over XDMP",
+  "role" : [ ],
+  "privilege": [
+    {
+      "privilege-name": "can-execute-sql",
+      "kind": "execute",
+      "action": "http://marklogic.com/xdmp/privileges/xdmp-sql"
+    }
+  ]
+}
