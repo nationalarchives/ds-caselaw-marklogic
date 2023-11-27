@@ -1,0 +1,36 @@
+name: Run tests
+
+on: push
+
+jobs:
+  linter:
+    name: Code linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.0
+
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.3.0
+        with:
+          poetry-version: 1.7.0
+
+      - name: Install libraries
+        run: poetry install
+
+      - name: Run tests with coverage
+        run: poetry run pytest
