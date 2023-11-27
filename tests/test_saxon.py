@@ -15,12 +15,10 @@ def transform(xml_text, xslt_text):
 
 
 def test_xslt_generates_legislation_links():
-    with Path.open("tests/fixtures/enriched.xml") as f:
-        enriched = f.read()
-
-    with Path.open("src/main/ml-modules/root/judgments/xslts/accessible-html.xsl") as f:
-        xslt = f.read()
-
-        output = transform(enriched, xslt)
-        # assert "http://www.legislation.gov.uk/id/ukpga/2010/15/section/20/3" in output
-        assert "<article" in output
+    enriched = Path("tests/fixtures/enriched.xml").read_text()
+    xslt = Path(
+        "src/main/ml-modules/root/judgments/xslts/accessible-html.xsl",
+    ).read_text()
+    output = transform(enriched, xslt)
+    assert "http://www.legislation.gov.uk/id/ukpga/2010/15/section/20/3" in output
+    assert "<article" in output
