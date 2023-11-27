@@ -6,8 +6,9 @@ authors = ["David McKee <david.mckee@dxw.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.11"
 saxonche = "^12.3.0"
+pytest = "^7.4.3"
 
 
 [build-system]
