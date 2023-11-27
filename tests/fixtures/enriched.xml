@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">
+  <judgment name="judgment">
+    <meta>
+      <identification source="#tna">
+	<FRBRWork>
+	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/eat/2023/104"/>
+	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/eat/2023/104"/>
+	  <FRBRdate date="2023-08-10" name="judgment"/>
+	  <FRBRauthor href="#eat"/>
+	  <FRBRcountry value="GB-UKM"/>
+	  <FRBRnumber value="104"/>
+	  <FRBRname value="Aecom Limited v C Mallon"/>
+	</FRBRWork>
+	<FRBRExpression>
+	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/eat/2023/104"/>
+	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/eat/2023/104"/>
+	  <FRBRdate date="2023-08-10" name="judgment"/>
+	  <FRBRauthor href="#eat"/>
+	  <FRBRlanguage language="eng"/>
+	</FRBRExpression>
+	<FRBRManifestation>
+	  <FRBRthis value="https://caselaw.nationalarchives.gov.uk/eat/2023/104/data.xml"/>
+	  <FRBRuri value="https://caselaw.nationalarchives.gov.uk/eat/2023/104/data.xml"/>
+	  <FRBRdate date="2023-08-14T10:42:16" name="transform"/>
+	  <FRBRdate date="2023-11-23T10:00:18" name="tna-enriched"/>
+	  <FRBRauthor href="#tna"/>
+	  <FRBRformat value="application/xml"/>
+	</FRBRManifestation>
+      </identification>
+      <lifecycle source="#">
+	<eventRef date="2023-08-10" refersTo="#judgment" source="#"/>
+      </lifecycle>
+      <references source="#tna">
+	<TLCOrganization eId="eat" href="https://www.gov.uk/courts-tribunals/employment-appeal-tribunal" showAs="Employment Appeal Tribunal"/>
+	<TLCOrganization eId="tna" href="https://www.nationalarchives.gov.uk/" showAs="The National Archives"/>
+	<TLCEvent eId="judgment" href="#" showAs="judgment"/>
+	<TLCPerson eId="aecom-limited" href="" showAs="AECOM LIMITED"/>
+	<TLCPerson eId="mr-c-mallon" href="" showAs="MR C MALLON"/>
+	<TLCRole eId="appellant" href="" showAs="Appellant"/>
+	<TLCRole eId="respondent" href="" showAs="Respondent"/>
+      </references>
+      <proprietary source="#">
+	<uk:court>EAT</uk:court>
+	<uk:year>2023</uk:year>
+	<uk:number>104</uk:number>
+	<uk:cite>[2023] EAT 104</uk:cite>
+	<uk:parser>0.16.1</uk:parser>
+	<uk:hash>c590af6ac92ab30f5f54102c3c74ecfe4044f6da83841d87cabd26df16d80d76</uk:hash>
+	<uk:tna-enrichment-engine>0.1.0</uk:tna-enrichment-engine>
+      </proprietary>
+      <presentation source="#">
+	<html:style>
+#judgment { font-size: 11pt; font-family: 'Times New Roman'; }
+#judgment .Heading1 { font-weight: bold; text-decoration-line: underline; text-decoration-style: solid; font-size: 12pt; }
+#judgment .Heading2 { font-style: italic; text-decoration-line: underline; text-decoration-style: solid; font-size: 12pt; }
+#judgment .Heading3 { font-style: italic; font-size: 12pt; }
+#judgment .Heading4 { font-style: italic; color: #365F91; }
+#judgment .Heading5 { color: #365F91; }
+#judgment .BodyText { margin-left: 0.35in; font-family: Algerian; font-size: 12pt; }
+#judgment .ListParagraph { font-size: 12pt; }
+#judgment .TableParagraph { }
+#judgment .Header { }
+#judgment .Footer { }
+#judgment .NormalWeb { font-family: 'Times New Roman'; font-size: 12pt; }
+#judgment .legclearfix { font-family: 'Times New Roman'; font-size: 12pt; }
+#judgment .Hyperlink { text-decoration-line: underline; text-decoration-style: solid; color: #0000FF; }
+#judgment .UnresolvedMention { color: #605E5C; background-color: initial; }
+#judgment .HeaderChar { }
+#judgment .FooterChar { }
+#judgment .Heading1Char { font-weight: bold; text-decoration-line: underline; text-decoration-style: solid; font-size: 12pt; }
+#judgment .costarpage { }
+#judgment .ListParagraphChar { font-size: 12pt; }
+#judgment .Heading2Char { font-style: italic; text-decoration-line: underline; text-decoration-style: solid; font-size: 12pt; }
+#judgment .Heading3Char { font-style: italic; font-size: 12pt; }
+#judgment .Heading5Char { color: #365F91; }
+#judgment .legds { }
+#judgment .Heading4Char { font-style: italic; color: #365F91; }
+#judgment .Strong { font-weight: bold; }
+#judgment .legparttitle { }
+#judgment .legpblocktitle { }
+#judgment .legchangedelimiter { }
+#judgment .legsubstitution { }
+#judgment .TableGrid { }
+#judgment .TableGrid td { border: 0.5pt solid; }
+</html:style>
+      </presentation>
+    </meta>
+    <coverPage>
+      <p><span style="font-weight:bold;text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:8pt;color:#000000">Judgment approved by the court for handing down</span><span style="font-family:'Times New Roman';font-size:12pt;color:#000000"> </span><marker name="tab"/><span style="font-family:'Times New Roman';font-size:6pt">AECOM Limited v Mallon</span></p>
+    </coverPage>
+    <header>
+      <p><span style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">Neutral Citation Number: </span><neutralCitation style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">[2023] EAT 104</neutralCitation></p>
+      <p style="text-align:right"><span style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">Case No: </span><docketNumber style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">EA-2022-000629-RN</docketNumber></p>
+      <p><courtType refersTo="#eat" style="font-weight:bold;text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">EMPLOYMENT APPEAL TRIBUNAL</courtType></p>
+      <p style="text-align:right"><span style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">Rolls Building</span></p>
+      <p style="text-align:right"><span style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">Fetter Lane, London, EC4A 1NL</span></p>
+      <p style="text-align:right"><span style="text-decoration-line:underline;text-decoration-style:solid;font-size:12pt;color:#000000">Date: </span><docDate date="2023-08-10" refersTo="#judgment" style="text-decoration-line:underline;text-decoration-style:solid;font-size:12pt;color:#000000">10 August 2023</docDate></p>
+      <p style="text-align:center"><span style="font-weight:bold;font-family:'Times New Roman';font-size:12pt;color:#000000">Before</span><span style="font-family:'Times New Roman';font-size:12pt;color:#000000"> :</span></p>
+      <p style="text-align:center"><span style="font-weight:bold;text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">JUDGE STOUT</span></p>
+      <p style="text-align:center"><span style="font-weight:bold;text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">MISS N SWIFT</span></p>
+      <p style="text-align:center"><span style="font-weight:bold;text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';font-size:12pt;color:#000000">MR H SINGH</span></p>
+      <p style="text-align:center"><span style="font-family:'Times New Roman';font-size:12pt;color:#000000">- - - - - - - - - - - - - - - - - - - - -</span></p>
+      <p style="text-align:center"><span style="font-weight:bold;font-family:'Times New Roman';font-size:12pt;color:#000000">Between :</span></p>
+      <p class="ListParagraph" style="text-align:center"><party as="#appellant" refersTo="#aecom-limited" style="font-weight:bold">AECOM LIMITED</party></p>
+      <p class="ListParagraph" style="text-align:right;margin-left:0.3in"><role refersTo="#appellant" style="font-weight:bold;text-decoration-line:underline;text-decoration-style:solid">Appellant</role></p>
+      <p style="text-align:center"><span style="font-weight:bold;font-size:12pt">- and -</span></p>
+      <p style="text-align:center"><party as="#respondent" refersTo="#mr-c-mallon" style="font-weight:bold;font-size:12pt">MR C MALLON</party></p>
+      <p style="text-align:right"><role refersTo="#respondent" style="font-weight:bold;text-decoration-line:underline;text-decoration-style:solid;font-size:12pt">Respondent</role></p>
+      <p style="text-align:center"><span style="font-family:'Times New Roman';font-size:12pt;color:#000000">- - - - - - - - - - - - - - - - - - - - -</span></p>
+      <p style="text-align:center"><span style="font-family:'Times New Roman';font-size:12pt;color:#000000">- - - - - - - - - - - - - - - - - - - - -</span></p>
+      <p class="NormalWeb" style="text-align:center"><span style="color:#000000">Ms T Barsam (instructed by Reed Smith LLP) for the Appellant</span></p>
+      <p class="NormalWeb" style="text-align:center"><span style="color:#000000">The Respondent in person</span></p>
+      <p class="NormalWeb" style="text-align:center"><span style="color:#000000">Hearing date: 18 July 2023</span></p>
+      <p style="text-align:center"><span style="font-family:'Times New Roman';font-size:12pt;color:#000000">- - - - - - - - - - - - - - - - - - - - -</span></p>
+      <p style="text-align:center"><span style="font-weight:bold;font-family:'Times New Roman';font-size:18pt;color:#000000">JUDGMENT</span></p>
+    </header>
+    <judgmentBody>
+      <decision>
+	<level>
+	  <content>
+	    <p class="Heading1">SUMMARY</p>
+	    <p style="text-align:justify"><span style="font-weight:bold;font-family:'Times New Roman';font-size:12pt;color:#000000">DISABILITY DISCRIMINATION - 12</span></p>
+	    <p style="text-align:justify"><span style="font-family:'Times New Roman';font-size:12pt;color:#000000">The respondent appealed against the liability judgment of the tribunal upholding the claimant’s claim </span><span style="font-family:'Times New Roman';color:#010302">of failure to make reasonable adjustments for his disability (dyspraxia) in connection with his application for a job with the respondent under <ref href="http://www.legislation.gov.uk/id/ukpga/2010/15/section/20" uk:canonical="2010 c. 15 s. 20" uk:origin="TNA" uk:type="legislation">sections 20</ref>, 21 and 39(5) of the <ref href="http://www.legislation.gov.uk/id/ukpga/2010/15" uk:canonical="2010 c. 15" uk:origin="TNA" uk:type="legislation">Equality Act 2010</ref> (<ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">EA 2010</ref>) by allowing him to make an oral application by telephone. The tribunal had in reaching its judgment rejected the respondent’s arguments: (a) the claimant was not under a ‘substantial disadvantage’ because he was not a genuine applicant for employment as he had (among other things), only a short time earlier been dismissed from a similar role in the same team under the same line manager who was responsible for hiring for the new role; and (b) that the respondent had not come under a duty to make reasonable adjustments because the claimant had not explained, despite being asked by email on a number of occasions, what his specific difficulties were with completing the online application.</span></p>
+	    <p style="text-align:justify"><span style="font-weight:bold;font-family:'Times New Roman';color:#010302">Held:-</span></p>
+	    <p style="text-align:justify"><span style="font-family:'Times New Roman';color:#010302">The Tribunal had reached a material perverse finding of fact in the course of deciding that the claimant was a genuine applicant as it had wrongly thought that the new role was in a ‘different team’ to the one the claimant had worked in previously. Otherwise, there were no errors of law in the Tribunal’s conclusion that the respondent ought to have had the requisite knowledge of the claimant’s disadvantage because it ought to have telephoned the claimant to ask for more details of his difficulties when the claimant had failed to respond to the respondent’s email questions. The case was remitted to the same Tribunal to reconsider in the light of the EAT’s judgment.</span></p>
+	    <p style="text-align:justify"><span style="font-weight:bold;font-family:'Times New Roman';font-size:12pt;color:#000000">JUDGE STOUT:</span></p>
+	    <p class="Heading1">Introduction</p>
+	  </content>
+	</level>
+	<paragraph eId="para_1">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">1.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">We will refer to the parties as they were in the proceedings below.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_2">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">2.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">This is an appeal against the reserved judgment of the East London Employment Tribunal (Employment Judge Gardner, Mr J Quinlan and Mr J Webb) (“the Tribunal”) sent to the parties on 5 March 2022 following a hearing on 3 November 2021 and a day of deliberation in chambers on 2 March 2022. By that judgment, the Tribunal upheld the claimant’s claim of failure to make reasonable adjustments for his disability (dyspraxia) in connection with his application for a job with the respondent under <ref href="http://www.legislation.gov.uk/id/ukpga/2010/15/section/20" uk:canonical="2010 c. 15 s. 20" uk:origin="TNA" uk:type="legislation">sections 20</ref>, 21 and 39(5) of the <ref href="http://www.legislation.gov.uk/id/ukpga/2010/15" uk:canonical="2010 c. 15" uk:origin="TNA" uk:type="legislation">Equality Act 2010</ref> (<ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">EA 2010</ref>). The Tribunal went on at a remedy hearing on 18 November 2022 (judgment sent to the parties on 3 January 2023, following a day of deliberation) to award the claimant £2,000 by way of injury to feelings, together with interest of £700.</span></p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading1">Type of hearing and adjustments</p>
+	  </content>
+	</level>
+	<paragraph eId="para_3">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">3.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">This was a remote hearing in which all parties participated by video, save the claimant who joined the hearing ‘audio only’. The claimant has a number of diagnoses, in addition to dyspraxia, but did not require any particular adjustments for this hearing. He made submissions in response to those of the respondent and, as he was representing himself, we assisted him in structuring those submissions and ensured that he addressed all relevant points.</span></p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading1">The grounds of appeal</p>
+	  </content>
+	</level>
+	<paragraph eId="para_4">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">4.</num>
+	  <intro>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The respondent, by notice of appeal received on 30 December 2022, appeals against the tribunal’s judgment on liability on four grounds as follows: –</span></p>
+	  </intro>
+	  <subparagraph>
+	    <num style="font-family:'Times New Roman';font-size:12pt;color:#010302;margin-left:1in;text-indent:-0.25in">a.</num>
+	    <content>
+	      <p class="ListParagraph" style="text-align:justify;margin-left:1in"><span style="font-family:'Times New Roman';color:#010302">ground one – perversity in the Tribunal’s conclusion that the advertised role was in a different team than the one in which the claimant had previously been employed, undermining the Tribunal’s conclusion that the claimant was a genuine applicant for the advertised role;</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-family:'Times New Roman';font-size:12pt;color:#010302;margin-left:1in;text-indent:-0.25in">b.</num>
+	    <content>
+	      <p class="ListParagraph" style="text-align:justify;margin-left:1in"><span style="font-family:'Times New Roman';color:#010302">ground two - that the Tribunal erred by failing to assess the respondent’s knowledge of disadvantage by reference to the substantial disadvantage that the claimant was put to by the specific provision, criterion or practice (PCP);</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-family:'Times New Roman';font-size:12pt;color:#010302;margin-left:1in;text-indent:-0.25in">c.</num>
+	    <content>
+	      <p class="ListParagraph" style="text-align:justify;margin-left:1in"><span style="font-family:'Times New Roman';color:#010302">ground three – the Tribunal erred in law in its approach to the burden placed on an employer to make enquiries into an employee’s disability;</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-family:'Times New Roman';font-size:12pt;color:#010302;margin-left:1in;text-indent:-0.25in">d.</num>
+	    <content>
+	      <p class="ListParagraph" style="text-align:justify;margin-left:1in"><span style="font-family:'Times New Roman';color:#010302">ground four - that it was an error of law to find that it was not reasonable for the claimant to be expected to explain his difficulties by email.</span></p>
+	    </content>
+	  </subparagraph>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading1">The Tribunal’s decision</p>
+	  </content>
+	</level>
+	<paragraph eId="para_5">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">5.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">This claim concerns an application that the claimant made for a job vacancy with the respondent for a consultant role in its research and development (R &amp; D) team of the Fiscal Incentives team in London in August 2018 (“the 2018 role”). </span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_6">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">6.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The Tribunal found that the claimant had previously been employed by the respondent between 10 April and 18 December 2017 in the respondent’s Birmingham office (“the 2017 role”). The claimant had been dismissed from the 2017 role, during an extended probationary period, due to what the respondent regarded as his unsatisfactory performance. The claimant appealed his dismissal and also brought a disability discrimination claim to the Tribunal about that dismissal, which claim was settled without admission of liability. In the course of settling that previous claim, the claimant sought a specific assurance from the respondent that there would be no restriction on him applying for other roles in future – an assurance which was given by the respondent.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_7">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">7.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The tribunal found, at paragraph 12 of its judgment, that the 2018 role was “a similar role” to the 2017 role, “albeit based at the London office rather than the Birmingham office”.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_8">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">8.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The standard process for applying for the 2018 role was by completing a relatively short online application form (described in the judgment at paragraph 14). In order to access the form, candidates had to create a personal profile, which required them to input their email address username and provide a password consisting of eight digits and including a special character.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_9">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">9.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">In a series of emails between the claimant and the respondent’s HR department, beginning on 7 August 2018, the claimant indicated that he wished to apply for the role, attached his CV which included the information that he had dyspraxia and information about how dyspraxia affects people generally, and asked, in bold capitals: </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“</span><span style="text-transform:uppercase;font-family:'Times New Roman';color:#010302">because of my disability</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">”</span><span style="font-family:'Times New Roman';color:#010302"> if he could do </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“</span><span style="text-transform:uppercase;font-family:'Times New Roman';color:#010302">an oral application</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">”</span><span style="font-family:'Times New Roman';color:#010302"> as </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“</span><span style="text-transform:uppercase;font-family:'Times New Roman';color:#010302">a 5 to 10 min phonecall to talk about my experience</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">”</span><span style="font-family:'Times New Roman';color:#010302">. He asked if this could be arranged by email and said that if they emailed him, he would supply a telephone number.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_10">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">10.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Mrs Parker, the respondent’s senior HR manager, replied to the claimant explaining that the application process required him to complete the online application form, but that if he had concerns about filling out the form, he should let them know. Mrs Parker during this correspondence asked the claimant on a number of occasions to inform her which parts of the form he was finding it difficult to complete and explained the claimant may receive assistance in submitting the form if necessary. The correspondence between Mrs Parker and the claimant is detailed in the judgement of the tribunal below and we do not need to set it all out here. Suffice it to say, that the claimant continued to state that he was happy to do the online form over the phone and would prefer to make an oral application, while Mrs Parker repeated that he needed to complete the online form, but that he should let them know if he was struggling with any aspect of the form. The claimant never answered Mrs Parker’s question about what aspect of the form he was struggling with. He never told her that he could not even create a username and password and log on to the online form. Although Mrs Parker and the claimant had (or could have obtained) each other’s telephone numbers, Mrs Parker did not call the claimant and the claimant did not call Mrs Parker. The claimant’s reason for not doing so was fear of being laughed at in light of a previous experience with another employer. Mrs Parker for her part accepted in oral evidence (as the Tribunal records at paragraph 30 of its judgment) that it would have been a sensible step to call the claimant, and that she was influenced in not doing this because of his previous unsuccessful employment with the respondent and the fact that it was not her direct responsibility to be involved in the recruitment process.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_11">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">11.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Mrs Parker was at the time aware, or believed, that the claimant had successfully completed online forms in the past, specifically the candidate information form and a reimbursement form for his relocation expense. She was not aware, as the Tribunal found at paragraph 9, that he had had assistance from his partner with the candidate information form previously. The Tribunal found (at paragraph 42) that the claimant in the course of the correspondence chose not to answer the respondent’s question about which elements of the form he was finding it hard to complete, but instead responded by asserting that ‘as the respondent knew’, he had problems filling in their forms and asking for an oral application as a reasonable adjustment.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_12">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">12.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The Tribunal noted at paragraph 47 that Mrs Parker had accepted in evidence that the respondent would have been able to provide whatever assistance the claimant required in completing the online form including creating a password for him and emailing it to him or sending in the post. However, the respondent’s position, as recorded at paragraph 47 of the judgement was that, </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“essentially it did not know the nature and extent of the claimant’s difficulties at the time, because the claimant was not being clear about the extent of those difficulties”</span><span style="font-family:'Times New Roman';color:#010302">. The claimant’s position, as it was found to be at paragraph 48 of the judgment, was that it was </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“unnecessary for him to provide specific details by email. Had the Respondent phoned him he would have provided the specific details on the phone”</span><span style="font-family:'Times New Roman';color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_13">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">13.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The claimant was not successful in obtaining the 2018 role and another candidate was appointed. In the event, the successful candidate did the role from Birmingham rather than London, but the Tribunal found that the claimant was not aware of that at the time.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_14">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">14.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The claimant made a further application to the respondent for a job role in 2019, for which he asked to be permitted to make an oral application, and was on that occasion permitted. He was not successful for that role either.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_15">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">15.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The Tribunal further found as facts that the claimant has a business selling items on eBay, which requires him to complete necessary online paperwork, and that he has made approximately 60 claims to the employment tribunal involving the completion of online forms. In some of the claims, the claimant’s claims have either been struck out or held to have no realistic prospect of success.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_16">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">16.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The Tribunal identified at paragraph 54 of the judgment the issues to be determined, and at paragraphs 56 to 63, it set out what it considered to be the applicable legal principles. </span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_17">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">17.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">The Tribunal went on at paragraph 64 to identify the provision, criterion or practice (PCP) that the respondent had applied and found that it had two parts: (1) candidates were expected to create an account, by providing a username and password, in order to access the online form; and, (2) that candidates were expected to answer the questions raised by inserting the information and answers on the online application form in the spaces provided.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_18">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">18.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">At paragraph 65, the Tribunal decided that the claimant was put at a disadvantage by those PCPs because, first, it rejected the respondent’s argument that the claimant was not a genuine applicant for the advertised role. In reaching that conclusion, the Tribunal took into account that the claimant had performed a similar role for the respondent in the past, which he had enjoyed and (at paragraph 65(5)) that he </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“was applying to work in a different office, the London office, and therefore in a different team from where he had worked previously when employed by the respondent, namely the Birmingham office. It was therefore potentially a fresh start, despite the circumstances in which previous employment with the respondent had ended”</span><span style="font-family:'Times New Roman';color:#010302">. The Tribunal also took into account (at paragraph 65(6)) that, </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“although other applicants might have chosen not to apply to the same employer where they had previously failed their probationary period, our assessment of the claimant’s character is that he would not have regarded this as an inevitable impediment to succeeding with this application”</span><span style="font-family:'Times New Roman';color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_19">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">19.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">At paragraphs 66 to 67, the Tribunal considered the nature and extent of the substantial disadvantage caused to the claimant by the respondent’s PCP. The Tribunal concluded that because of his </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“particular difficulties in expressing his thoughts in writing in the context of previous difficulties experience with online forms… He was too anxious about the process of completing an online form that he did not embark on the first stage of the process”</span><span style="font-family:'Times New Roman';color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_20">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">20.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">There was no dispute that the respondent was aware of the claimant’s dyspraxia. At paragraphs 68 to 69 the Tribunal posed itself a question about the respondent’s ‘actual knowledge’ of the disadvantage to the claimant as: </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“Did the Respondent know that the Claimant had a disability and was by reason of that disability liable to be at a substantial disadvantage?”</span><span style="font-family:'Times New Roman';color:#010302">. It answered that question at paragraph 69, finding that the respondent (actually) </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“knew that as a result of his dyspraxia, he had difficulty in filling in the online application form”</span><span style="font-family:'Times New Roman';color:#010302">, but did not know more than that because the claimant, </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“had not identified the specific reasons why completing an online application form was a particular difficulty”</span><span style="font-family:'Times New Roman';color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_21">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">21.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">At paragraphs 70-72 the Tribunal asked the same question again, but this time about what is sometimes called ‘constructive knowledge’. The Tribunal found that the respondent ought to have known the claimant was at a substantial disadvantage because if the respondent wanted further clarification of the reasons why he found it difficult to complete the online application form, the respondent should have telephoned him. The Tribunal held: </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“Given [the claimant’s] difficulties with written communication, it was not reasonable to expect [him] to explain these matters in an email”</span><span style="font-family:'Times New Roman';color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading1">The law on the duty to make reasonable adjustments</p>
+	  </content>
+	</level>
+	<paragraph eId="para_22">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.39in;text-indent:-0.39in">22.</num>
+	  <content>
+	    <p style="text-align:justify;margin-left:0.39in"><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">By <ref href="http://www.legislation.gov.uk/id/ukpga/2010/15/section/39/5" uk:canonical="2010 c. 15 s. 39" uk:origin="TNA" uk:type="legislation">s 39(5)</ref> of the <ref href="http://www.legislation.gov.uk/id/ukpga/2010/15" uk:canonical="2010 c. 15" uk:origin="TNA" uk:type="legislation">Equality Act 2010</ref> (<ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">EA 2010</ref>) a duty to make reasonable adjustments applies to an employer.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_23">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.39in;text-indent:-0.39in">23.</num>
+	  <intro>
+	    <p style="text-align:justify;margin-left:0.39in"><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">That duty is set out in <ref href="http://www.legislation.gov.uk/id/ukpga/2010/27/section/20" uk:canonical="2010 c. 27 s. 20" uk:origin="TNA" uk:type="legislation">sections 20</ref> and 21 of the <ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">EA 2010</ref> and Schedule 8. <ref href="http://www.legislation.gov.uk/id/ukpga/2010/27/section/20" uk:canonical="2010 c. 27 s. 20" uk:origin="TNA" uk:type="legislation">Sections 20</ref> and 21 provide, so far as relevant:</span></p>
+	  </intro>
+	  <subparagraph>
+	    <num class="legds" style="font-weight:bold;font-size:10pt;color:#000000">20</num>
+	    <content>
+	      <p style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-weight:bold;font-size:10pt;color:#000000">Duty to make adjustments</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(1)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">Where <ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">this Act</ref> imposes a duty to make reasonable adjustments on a person, this section, sections 21 and 22 and the applicable Schedule apply; and for those purposes, a person on whom the duty is imposed is referred to as A.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(2)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">The duty comprises the following three requirements.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(3)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">The first requirement is a requirement, where a provision, criterion or practice [‘PCP’] of A's puts a disabled person at a substantial disadvantage in relation to a relevant matter in comparison with persons who are not disabled, to take such steps as it is reasonable to have to take to avoid the disadvantage.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">…</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(6)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">Where the first … requirement relates to the provision of information, the steps which it is reasonable for A to have to take include steps for ensuring that in the circumstances concerned the information is provided in an accessible format.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">…</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(8)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">A reference in section 21 or 22 or an applicable Schedule to the first, second or third requirement is to be construed in accordance with this section.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(13)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">The applicable Schedule is [Schedule 8].</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="margin-left:1in"><span class="legds" style="font-weight:bold;font-size:10pt;color:#000000">21 Failure to comply with duty</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(1)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">A failure to comply with the first … requirement is a failure to comply with a duty to make reasonable adjustments.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(2)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">A discriminates against a disabled person if A fails to comply with that duty in relation to that person.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">(3)</num>
+	    <content>
+	      <p class="legclearfix" style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-family:'Times New Roman';font-size:10pt;color:#000000">A provision of an applicable Schedule which imposes a duty to comply with the first … requirement applies only for the purpose of establishing whether A has contravened <ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">this Act</ref> by virtue of sub<ref href="http://www.legislation.gov.uk/id/ukpga/2010/27/section/2" uk:canonical="2010 c. 27 s. 2" uk:origin="TNA" uk:type="legislation">section (2</ref>); a failure to comply is, accordingly, not actionable by virtue of another provision of <ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">this Act</ref> or otherwise.</span></p>
+	    </content>
+	  </subparagraph>
+	</paragraph>
+	<paragraph eId="para_24">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.39in;text-indent:-0.39in">24.</num>
+	  <intro>
+	    <p style="text-align:justify;margin-left:0.39in"><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">Part 3 of Schedule 8 sets out limitations on the duty, as follows at paragraph 20:</span></p>
+	  </intro>
+	  <subparagraph>
+	    <content>
+	      <p style="margin-left:1in"><span class="legds" style="font-weight:bold;font-size:10pt">Part 3 Limitations on the duty</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="margin-left:1in"><span class="legds" style="font-weight:bold;font-size:10pt">Lack of knowledge of disability, etc.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="margin-left:1in"><span class="legds" style="font-size:10pt;color:#000000">20(1)</span><marker name="tab"/><span class="legds" style="font-size:10pt;color:#000000">A is not subject to a duty to make reasonable adjustments if A does not know, and could not reasonably be expected to know—</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-size:10pt;color:#000000">(a)</num>
+	    <content>
+	      <p style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-size:10pt;color:#000000">in the case of an applicant or potential applicant, that an interested disabled person is or may be an applicant for the work in question;</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num class="legds" style="font-size:10pt;color:#000000">(b)</num>
+	    <content>
+	      <p style="margin-left:1in;text-indent:0.5in"><span class="legds" style="font-size:10pt">in any case referred to in Part 2 of this Schedule [which includes disabled applicants for employment]</span><span class="legds" style="font-size:10pt;color:#000000">, that an interested disabled person has a disability and is likely to be placed at the disadvantage referred to in the first … requirement.</span></p>
+	    </content>
+	  </subparagraph>
+	</paragraph>
+	<paragraph eId="para_25">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.39in;text-indent:-0.39in">25.</num>
+	  <content>
+	    <p style="text-align:justify;margin-left:0.39in"><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">An employer is not therefore subject to a duty to make reasonable adjustments if it does not know, and could not reasonably be expected to know, both that the complainant has a disability and that he or she is likely to be placed at the substantial disadvantage. We observe that what is necessary is not that the employer know that the complainant is generally disadvantaged by their disability, but that it knows that they are </span><span style="font-style:italic;font-family:'Times New Roman';font-size:12pt;color:#010302">“likely”</span><span style="font-family:'Times New Roman';font-size:12pt;color:#010302"> to be placed at </span><span style="font-style:italic;font-family:'Times New Roman';font-size:12pt;color:#010302">“the disadvantage referred to in the first … requirement”</span><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">, which is as specified in <ref href="http://www.legislation.gov.uk/id/ukpga/2010/15/section/20/3" uk:canonical="2010 c. 15 s. 20" uk:origin="TNA" uk:type="legislation">s 20(3)</ref></span><span style="font-style:italic;font-family:'Times New Roman';font-size:12pt;color:#010302"> “a substantial disadvantage in relation to a relevant matter”</span><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_26">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.39in;text-indent:-0.39in">26.</num>
+	  <content>
+	    <p style="text-align:justify;margin-left:0.39in"><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">These provisions have been examined in a number of authorities. Ms Barsam for the respondent in this case has referred to the following, which we agree properly capture the legal principles to be applied. Although the earlier authorities concern the equivalent provisions of the predecessor legislation in the <ref href="http://www.legislation.gov.uk/id/ukpga/1995/50" uk:canonical="1995 c. 50" uk:origin="TNA" uk:type="legislation">Disability Discrimination Act 1995</ref> (<ref href="http://www.legislation.gov.uk/id/ukpga/1995/50" uk:canonical="1995 c. 50" uk:origin="TNA" uk:type="legislation">DDA 1995</ref>), there is no significant difference between those provisions and the <ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">EA 2010</ref> on this issue.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_27">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.39in;text-indent:-0.39in">27.</num>
+	  <intro>
+	    <p style="text-align:justify;margin-left:0.39in"><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">In </span><span style="font-style:italic;font-family:'Times New Roman';font-size:12pt;color:#010302">Ridout v T C Group </span><span style="font-family:'Times New Roman';font-size:12pt;color:#010302">[1998] IRLR 628, the claimant had applied for a job and was short-listed for interview. The respondent had been informed that she had photosensitive epilepsy controlled by Epilim. The claimant brought sunglasses to the interview which she wore on a cord round her neck and made comments at the start about the fluorescent lighting in the room that might disadvantage her. Those comments were understood by the respondent to be an explanation for the sunglasses. In the event, Ms Ridout never used the sunglasses or told the employer that she was unwell or felt disadvantaged. Her complaint of failure to make reasonable adjustments was dismissed on the basis that the respondent could not reasonably be expected to know about the requirements of epileptics for particular lighting arrangements, and it was not reasonable for the employers to make any further enquiry on receipt of her application form or in the light of her comments on entering the room. Ms Ridout appealed, and the EAT dismissed her appeal. At [24]-[27] the EAT (Morison P, sitting with Mr J R Crosby and Lord Davies of Coity CBE) held:</span></p>
+	  </intro>
+	  <subparagraph>
+	    <num style="font-size:10pt;color:#3D3D3D;background-color:#FFFFFF">24.</num>
+	    <content>
+	      <p class="ListParagraph" style="margin-left:1in;text-indent:0.5in"><span style="font-size:10pt;color:#3D3D3D;background-color:#FFFFFF">It seems to us that they were entitled on the material before them to conclude that no reasonable employer would be expected to know without being told in terms by the applicant, that the arrangements which he in fact made in this case for the interview procedure might substantial disadvantage was one which had no factual basis and was effectively a perverse conclusion on the facts as found by the Industrial Tribunal.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-size:10pt;color:#3D3D3D">25.</num>
+	    <content>
+	      <p style="margin-left:1in;text-indent:0.5in"><span style="font-size:10pt;color:#3D3D3D">Furthermore, it seems to us that the Industrial Tribunal was best placed to judge whether the disabled person had been placed at a substantial disadvantage in comparison with persons who are not disabled. That is a judgment which has to be made by the fact finding tribunal. We accept what Counsel for the appellant was saying, that Industrial Tribunals should be careful not to impose on disabled people who are seeking employment a duty to "harp on" about their disability so as; so to speak, to excuse themselves at the interview process before the selection is made. One of the purposes of the legislation is to ensure that disabled people have the same opportunities for employment, and in their employment, as others not suffering from such disability. It would be unsatisfactory to expect a disabled person to have to go into a great long detailed explanation as to the effects that their disablement had on them merely to cause the employer to make adjustments which he probably should have made in the first place.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-size:10pt;color:#3D3D3D">26.</num>
+	    <content>
+	      <p style="margin-left:1in;text-indent:0.5in"><span style="font-size:10pt;color:#3D3D3D">On the other hand, a balance must be struck. It is equally undesirable that an employer should be required to ask a number of questions about a person suffering from a disability as to whether he or she feels disadvantaged. There may well be circumstances in which that question would not arise. It would be wrong if, merely to protect themselves from liability, the employers or prospective employers were to ask a number of questions which they would not have asked of somebody who was able-bodied. People must be taken very much on the basis of how they present themselves.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-size:10pt;color:#3D3D3D">27.</num>
+	    <content>
+	      <p style="margin-left:1in;text-indent:0.5in"><span style="font-size:10pt;color:#3D3D3D">It seems to us, in these circumstances, that the question as to whether the prospective employers should have taken any other steps as a result of what was said at the interview depended almost entirely on the perception of both parties as to what was happening at the interview process. If the appellant was simply nervous and explaining that she might have to put on her glasses because the room was likely to cause a problem but that she was quite happy to go on with the interview, that would be one thing. If, on the other, she was saying that the room was causing her a problem and she might have to put on dark glasses, but that she felt disadvantaged as a result of being in that room, that would be another. This was therefore a matter of fact and evidence for the Industrial Tribunal and a judgment for them to make on the basis of the evidence as to precisely what occurred.</span></p>
+	    </content>
+	  </subparagraph>
+	</paragraph>
+	<paragraph eId="para_28">
+	  <num style="font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">28.</num>
+	  <intro>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-style:italic">Secretary of State for Work and Pensions v Alam </span>[2010] ICR 665 concerned a claimant with depression who had been given a disciplinary warning when, as a result of his depression, he lost concentration, lost his temper and left work early when he had been refused permission to do so. The tribunal found that the employer had applied a PCP of requiring employees to get permission before leaving the workplace or be disciplined and that the employer had failed to make reasonable adjustments to help the employee cope with stress and avoid being given a disciplinary penalty. On appeal, the EAT held that the tribunal had wrongly concluded that the employer knew or ought to have known that difficulty in asking for permission was a feature of the claimant’s disability and allowed the appeal and dismissed the claim. The EAT (Lady Smith, sitting with Ms K Bilgan and Mr S Yeboah) cited <span style="font-style:italic">Ridout </span>with approval, and emphasised at [17]-[18] the importance of considering both the questions of what the employer actually knew and what they reasonably ought to have known. At [21], the EAT held as follows, making clear the importance of the employer being aware (actually or constructively) of the particular disadvantage, not just of the disability generally:-</p>
+	  </intro>
+	  <subparagraph>
+	    <num style="font-size:10pt">21.</num>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in;text-indent:0.5in"><span style="font-size:10pt">In this case, question 1 of the two questions set out in our “Relevant law” section falls to be answered in the negative. The employer did not know of the claimant's disability and did not know that it was liable to have any effect on him. The second question then arises. As regards that second question, whilst the employer ought to have known that the claimant was disabled to the extent that he had symptoms of depression comprising difficulty at times in concentrating and with keeping his temper</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">and severe headaches at times, it cannot be said that he ought also to have known that that put him at a substantial disadvantage as compared to a non disabled person in relation to any provision, criterion or practice that was applied by the employer. That is because, even assuming that a provision, criterion or practice as identified by the tribunal at para 23 was applied to the claimant, there was no finding of fact that difficulty in asking for permission was a feature of the claimant's disability. Putting matters at their highest, the employer ought to have known that there could be times when, because of his disability, the claimant might have difficulty in concentrating, difficulty in controlling his temper and severe headaches, none of those features amount to or imply difficulty in asking for permission when it was required. So, the second question also falls to be answered in the negative because, although the employer ought to have known that the claimant had a disability, the nature and extent of which was as</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">set out in the GP letter of 12 September 2008, it could not be concluded that it ought to have known that the disability had the effect to which the tribunal refers. We thus accept Mr Branchflower's submission that the tribunal erred in law in failing to apply the provisions of <ref href="http://www.legislation.gov.uk/id/ukpga/1995/50/section/4" uk:canonical="1995 c. 50 s. 4" uk:origin="TNA" uk:type="legislation">section 4</ref>A(3) of the <ref href="http://www.legislation.gov.uk/id/ukpga/1995/50" uk:canonical="1995 c. 50" uk:origin="TNA" uk:type="legislation">Disability Discrimination Act 1995</ref> correctly.</span></p>
+	    </content>
+	  </subparagraph>
+	</paragraph>
+	<paragraph eId="para_29">
+	  <num style="font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">29.</num>
+	  <intro>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in">That point was also emphasised by the Court of Appeal in <span style="font-style:italic">Newham Sixth Form College v Saunders </span>[2014] EWCA Civ 734 at [12]-[14] <span style="font-style:italic">per </span>Laws LJ:</p>
+	  </intro>
+	  <subparagraph>
+	    <num style="font-size:10pt">12.</num>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in;text-indent:0.5in"><span style="font-size:10pt">The stepped approach commended in Rowan and endorsed in Ashton requires, among </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">other things, that the ET identify the nature and extent of the substantial disadvantage to </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">which the disabled person is placed by reason of the PCP in question. Unless that is </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">done, the ET cannot make proper findings as to whether there has been a failure to </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">make reasonable adjustments. </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-size:10pt">13.</num>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in;text-indent:0.5in"><span style="font-size:10pt">Here the respondents say that the ET failed to undertake any proper analysis of the </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">nature and extent, in particular the extent, of the substantial disadvantage in question;</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">and they made no finding as to the state of the respondent employer's knowledge </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">specifically concerning the nature and extent of the substantial disadvantage. They </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">failed also, it is said, in any event to make a proper assessment of the reasonableness of </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">the proposed adjustment. </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-size:10pt">14.</num>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in;text-indent:0.5in"><span style="font-size:10pt">In my judgment these three aspects of the case -- nature and extent of the disadvantage, </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">the employer's knowledge of it and the reasonableness of the proposed </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">adjustments -- necessarily run together. An employer cannot, as it seems to me, make </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">an objective assessment of the reasonableness of proposed adjustments unless he </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">appreciates the nature and the extent of the substantial disadvantage imposed upon the </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">employee by the PCP. Thus an adjustment to a working practice can only be </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">categorised as reasonable or unreasonable in the light of a clear understanding as to the </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">nature and extent of the disadvantage. Implicit in this is the proposition, perhaps </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">obvious, that an adjustment will only be reasonable if it is, so to speak, tailored to the </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">disadvantage in question; and the extent of the disadvantage is important since an </span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="text-align:justify;margin-left:1in"><span style="font-size:10pt">adjustment which is either excessive or inadequate will not be reasonable.</span></p>
+	    </content>
+	  </subparagraph>
+	</paragraph>
+	<paragraph eId="para_30">
+	  <num style="font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">30.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in">An important theme in the case law on this issue is that consideration of whether an employer reasonably ought to have known whether the claimant was disabled and at the relevant substantial disadvantage requires the employer to make reasonable enquiries of the employee. An employer cannot ‘turn a blind eye’. This is a point made clear in the EHRC Employment Statutory Code of Practice <span style="font-family:'Times New Roman'">2011 (“the Code of Practice”) which states at paragraph 6.19 that an employer must </span><span style="font-style:italic;font-family:'Times New Roman'">“do all they can reasonably be expected to do to find out whether”</span><span style="font-family:'Times New Roman'"> an applicant/employee has a disability and is, or is likely to be, placed at a substantial disadvantage. In </span><span style="font-style:italic;font-family:'Times New Roman'">Ridout </span><span style="font-family:'Times New Roman'">(quoted above at [26]) the EAT recognised that this is not, of course, an unlimited duty – the duty is only to make such enquiries as are reasonable and what is reasonable will depend on all the circumstances.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_31">
+	  <num style="font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">31.</num>
+	  <intro>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in">In <span style="font-style:italic">Donelien v Liberata UK Ltd </span>[2015] EWCA Civ 1449, [2018] IRLR 535, where the claimant was dismissed because of absence relating to a disability of work-related stress, the Tribunal held that the employer could not reasonably have been expected to know that she was disabled given that referrals to occupational health consultants had resulted in advice that she was not disabled and the claimant was not prepared to allow the employer to contact her GP. The Court of Appeal (Underhill LJ) emphasised that the assessment of what the employer knew or ought to know is one of fact for the employment tribunal, with which the appellate courts should be slow to interfere:</p>
+	  </intro>
+	  <subparagraph>
+	    <content>
+	      <p style="margin-left:1in"><span style="font-size:10pt;color:#3D3D3D">36.  I stand back from all of this and revert to the point which I made earlier. It is not for this Court to decide whether it might have found that the Respondent could reasonably have been expected to know in September or October 2009 that the Appellant was suffering from a disability. The question is whether it was open to the ET, on the evidence that it heard, to find that it could not. It will be apparent from what I have said already that the Respondent was presented with a good deal of not very clear information, and getting a good understanding of it was not helped by the Appellant's rather uncooperative and confrontational stance. The EAT also endorsed a submission made by Mr Brown that not all of the Appellant's absences reflected her being truly unable to work: there was an element of unwillingness too, mixed in with her substantive complaints about pay and working conditions. As it observed, the ET had to disentangle what the Appellant could not do from what she would not do. This is not an easy exercise: employers are not doctors, or psychologists.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <content>
+	      <p style="margin-left:1in"><span style="font-size:10pt;color:#3D3D3D">37.  In those circumstances I have no difficulty understanding why the ET came to the conclusion that it did that the Respondent "did all they could reasonably be expected to have done to find out about the nature of the health problem that the Claimant was experiencing". This Court should be very slow, absent any explicit misdirection, to depart from the considered assessment of an experienced employment judge and two lay members, endorsed by the President of the EAT and two lay members. Even if – which I am not saying is the case – I would have reached a different conclusion from the ET I am quite sure that it was entitled to reach the decision which it did.</span></p>
+	    </content>
+	  </subparagraph>
+	</paragraph>
+	<paragraph eId="para_32">
+	  <num style="font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">32.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in">Ms Barsam has also referred us to the more recent authority of <span style="font-style:italic">A Ltd v Z </span><ref href="#" uk:canonical="[2020] ICR 199" uk:isNeutral="false" uk:origin="TNA" uk:type="case" uk:year="2020">[2020] ICR 199</ref>, where the EAT (HHJ Eady QC, as she then was) summarised at [23] the principles applicable to consideration of knowledge for the purposes of a s 15 claim. From those principles, we take the following additional points that are not already covered by the authorities to which we have referred: <span style="font-style:italic">“(6) It is not incumbent upon an employer to make every inquiry where there is little or no basis for doing so … (7) Reasonableness … must entail a balance between the strictures of making inquiries, the likelihood of such inquiries yielding results and the dignity and privacy of the employee, as recognised by the code”</span>.</p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_33">
+	  <num style="font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">33.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in">Finally, the claimant has referred us to <span style="font-style:italic">BT Plc v Meier </span>[2019] NICA 43, a decision of the Northern Ireland Court of Appeal that is not binding on us. In that case, the first-tier tribunal had concluded that BT had failed to comply with its duty to make reasonable adjustments in relation to a job application assessment when it failed to make any enquiries as to a claimant’s declared disabilities of Asperger’s Syndrome and dyslexia. The claimant relies on the case principally because of the reference to the need for ‘proactivity’ by an employer in the Court of Appeal’s summary of the tribunal’s judgment at [16]. We appreciate why the claimant refers to this case as it is favourable on its facts to his, but we do not consider it adds anything to the legal principles that we have to apply. There is no separate duty of ‘proactivity’ beyond the legal principles we have already identified. As the Code of Practice makes clear (especially at paragraphs 16.39 and 16.49), in the context of employment (in contrast to some other areas of life covered by the <ref href="http://www.legislation.gov.uk/id/ukpga/2010/27" uk:canonical="2010 c. 27" uk:origin="TNA" uk:type="legislation">EA 2010</ref>), the duty to make reasonable adjustments only arises once there is a specific disabled person who to the employer’s knowledge requires an adjustment - <span style="font-style:italic">“an employer is not required to make changes in anticipation of applications from disabled people in general – although it would be good practice to do so”.</span></p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading1"><span style="font-family:'Times New Roman';color:#010302">Submissions</span></p>
+	  </content>
+	</level>
+	<paragraph eId="para_34">
+	  <num style="font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">34.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in">We received a skeleton argument and oral submissions from Ms Barsam for the respondent, and an email dated 6 July 2023 and oral submissions from the claimant. We set out the key elements of their submissions in dealing with our conclusions on each of the grounds of appeal.</p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading1"><span style="font-family:'Times New Roman';color:#010302">Conclusions</span></p>
+	    <p class="Heading2">Ground 1: perversity in relation to ‘different team’ conclusion at paragraph 65(5)</p>
+	  </content>
+	</level>
+	<paragraph eId="para_35">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">35.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Ms Barsam for the respondent challenges the Tribunal’s finding at paragraph 65(5) of the judgment as perverse. The finding, which was one of eight reasons that the Tribunal lists for rejecting the respondent’s case that the claimant was not a genuine applicant for the advertised role, was that the claimant </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“was applying to work in a different office, the London office, and therefore in a different team from where he had worked previously when employed by the respondent, namely the Birmingham office” </span><span style="font-family:'Times New Roman';color:#010302">and </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“it was therefore potentially a fresh start, despite the circumstances in which his previous employment with the Respondent ended”</span><span style="font-family:'Times New Roman';color:#010302">.</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302"> </span><span style="font-family:'Times New Roman';color:#010302">She argued that this was a material error, not only because it is, she submits, an important plank in the Tribunal’s reasons for rejecting the respondent’s case that the claimant was not a genuine applicant, but also because it undermines what the Tribunal said at paragraph 65(6) in rejecting the respondent’s submission that the fact that claimant had previously failed his probationary period did not indicate this was not a genuine application. The Tribunal there said, </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“Although other applicants may have chosen not to apply to the </span><span style="font-style:italic;font-weight:bold;font-family:'Times New Roman';color:#010302">same employer</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302"> </span><span style="font-family:'Times New Roman';color:#010302">[n.b., not ‘same team’] </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">where they had previously failed their probationary period, our assessment of the Claimant’s character is that he would not have regarded this as an inevitable impediment to succeeding with his application”</span><span style="font-family:'Times New Roman';color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_36">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">36.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">It is agreed between the parties, but not recorded as a finding of fact in the Tribunal’s liability judgment, that (as set out in Mrs Parker’s witness statement for the liability hearing) both the 2017 and 2018 roles were in the respondent’s R&amp;D team, and that Timothy Jackson (the claimant’s line manager in the 2017 role) was also the hiring manager for the 2018 role. These facts, </span><span style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';color:#010302">do</span><span style="font-family:'Times New Roman';color:#010302"> appear in the Tribunal’s later remedy judgment (along with much more detailed evidence on the nature of the two roles that was provided at the remedy hearing).</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_37">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">37.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">We observe at the outset that the liability and remedy judgments are thus inconsistent on this issue of whether the 2018 role was in the same or different team to the 2017 role; the liability judgment states the 2018 role was in a different team, while the remedy judgment (delivered a year later) states it was the same team.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_38">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">38.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">We remind ourselves that perversity is a high threshold. In </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">Yeboah v Crofton </span><span style="font-family:'Times New Roman';color:#010302"><ref href="#" uk:canonical="[2002] IRLR 634" uk:isNeutral="false" uk:origin="TNA" uk:type="case" uk:year="2002">[2002] IRLR 634</ref>, Mummery LJ observed at [93]: </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“Such an appeal ought only to succeed where an overwhelming case is made out that the employment tribunal reached a decision which no reasonable tribunal, on a proper appreciation of the evidence and law, would have reached.” </span><span style="font-family:'Times New Roman';color:#010302">By way of example of the sort of case that would succeed, Mummery LJ at [94] indicated that it might amount to an error of law if the Tribunal misunderstood the evidence in a way that led it to </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“make a crucial finding of fact unsupported by evidence or contrary to uncontradicted evidence”</span><span style="font-family:'Times New Roman';color:#010302">. He went on to caution: </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“…no appeal on a question of law should be allowed to be turned into a rehearing of parts of the evidence by the Employment Appeal Tribunal”</span><span style="font-family:'Times New Roman';color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_39">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">39.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">We have considered carefully whether this ground of appeal meets the high threshold for perversity, and also whether it is a material error, but have concluded that it does and it is for the following reasons.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_40">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">40.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Although our initial impression was that all the Tribunal had said or meant in paragraph 65(5) was that the 2018 role would involve the claimant working with a ‘different team’ in the sense of ‘different people’ because the 2017 role was in London and the 2018 role was in Birmingham, on a fair consideration of the whole judgment, we are not satisfied that this was what the Tribunal meant in this paragraph, and we are satisfied that it has made an error of fact. This is because the judgment does not anywhere identify the team that the claimant was in for the 2017 role, or identify the line manager for the 2017 role or the hiring manager for the 2018 role (which would have been an alternative ‘clue’ to the fact that the two roles were in the same team). While it may be the case that the claimant (who only had the information about the role that was in the advertisement) perceived the advertised role in the London office as being a ‘fresh start’, that was not the point that the Tribunal was making in paragraph 65(5). Rather, paragraph 65(5) is a finding that the 2018 role would have been not only in a different office geographically, but also in a different team so that it was </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“potentially a fresh start”</span><span style="font-family:'Times New Roman';color:#010302">. In fact, the undisputed evidence before the Tribunal was that the 2018 role was in the same team, with the hiring manager the same as his previous line manager. The Tribunal’s finding of fact was therefore contrary to the undisputed evidence and perverse.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_41">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">41.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">We should add that we do not consider that the fact that the Tribunal ‘got it right’ in its remedy judgment means that we should assume it ‘got it right’ at the liability stage. The Tribunal had much more evidence at the remedy stage so that this factual point became ‘crystal clear’ at this stage. In contrast, at the liability stage although the point was there in Mrs Parker’s witness statement, it was not so obvious and we infer that the Tribunal overlooked it when deliberating on the issue of liability – perhaps because there was a delay of about three months between the Tribunal hearing the parties’ evidence and submissions and meeting to deliberate.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_42">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">42.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">We further find that this error was material because, first, it was a significant ‘plank’ in what was, it appears from the judgment, a relatively finely balanced issue as to whether the claimant was a genuine applicant. Secondly, we are not satisfied that the Tribunal would have gone on in paragraph 65(6) to conclude that the claimant would not have regarded what happened with the 2017 role as an inevitable impediment to succeeding with his application if it had appreciated that this was not (contrary to what the Tribunal said in that paragraph) a case of the claimant returning to work for the same (large) employer where he had previously failed a probationary period, but seeking to return to a similar job in the same team for which applications would be judged by the line manager who dismissed him from a similar role for poor performance eight months’ previously. That is much more unlikely and we are not satisfied that the Tribunal would have come to the same conclusion that it did on the question of whether the claimant was a genuine applicant if it had had those facts firmly in mind – although it might have done.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_43">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">43.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Ground 1 therefore succeeds.</span></p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading2">Ground 2: knowledge of substantial disadvantage</p>
+	  </content>
+	</level>
+	<paragraph eId="para_44">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">44.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Ms Barsam argues that the Tribunal when setting out the issues it had to decide at paragraphs 54(3) and (4) misdirected itself by asking itself whether the respondent knew or ought to have known “the claimant had a disability and was by reason of that disability liable to be at a substantial disadvantage” rather than whether the respondent knew or ought to have known of the particular substantial disadvantage that the claimant was put to by the PCP in question. She argues that the Tribunal should have been considering whether the respondent knew or ought to have known that because of the claimant’s dyspraxia he was too anxious to provide a username and password to begin accessing the online form, which was the disadvantage the Tribunal had identified at paragraph 66. </span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_45">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">45.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">We agree that the questions that the Tribunal posed for itself as issues at paragraphs 54(3) and (4) are incorrectly worded. The proper questions should have been whether the respondent knew or ought to have known that the claimant had a disability and was by reason of that disability likely to be placed at </span><span style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';color:#010302">the</span><span style="font-family:'Times New Roman';color:#010302"> substantial disadvantage to which he was placed by the PCP in question. However, although the Tribunal on the face of the judgment asked itself the wrong questions, we are satisfied that it answered the right questions.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_46">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">46.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">So far as actual knowledge is concerned, at paragraph 69 the Tribunal finds that the respondent’s actual knowledge was limited to the fact of the claimant’s disability and that he had a difficulty filling in the online application form. However, the Tribunal acknowledges in the last sentence of that paragraph (as we read it) that the respondent did not have actual knowledge of the particular substantial disadvantage to which he was placed by the PCP as the claimant had not told the respondent what the specific reasons were why he could not complete an online form. We acknowledge that the decision would have been clearer if the Tribunal had stated explicitly in this paragraph that for this reason the respondent did not have actual knowledge of the requisite disadvantage, but we consider that on a fair reading of the judgment, the reasons are adequate.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_47">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">47.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Further, we are satisfied that in paragraphs 70 to 72 the Tribunal goes on also to answer the correct legal question about whether the respondent had ‘constructive’ knowledge of the substantial disadvantage to which the claimant was subject by the PCP as the Tribunal in those three paragraphs considers whether the respondent ought to have known about his difficulties with even accessing the online form despite the claimant not having told the respondent.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_48">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">48.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">For these reasons, Ground 2 is dismissed.</span></p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading2"><span style="font-family:'Times New Roman';color:#010302">Ground 3: requirement to make enquiries</span></p>
+	  </content>
+	</level>
+	<paragraph eId="para_49">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">49.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Ms Barsam argues that the Tribunal in [70]-[72] has applied the wrong test and has asked itself, in effect, whether it was ‘possible’ for the respondent to seek clarification from the claimant by telephone rather than whether that was reasonable in the circumstances. She points in particular to paragraph [71] where the Tribunal states the law as being that, </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“The case law requires employers to make enquiries as to the extent of the difficulties that a disabled person may face, at least in circumstances where the general difficulty has been raised by the Claimant. The onus is on the employer to seek the information rather than on the employee to provide the information.” </span><span style="font-family:'Times New Roman';color:#010302">She contends that the Tribunal there erred in law in failing to direct itself that only </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">reasonable </span><span style="font-family:'Times New Roman';color:#010302">enquiries need to be made. She also argues that if the Tribunal had properly directed itself, it would have concluded that further enquiries were not reasonable because the claimant had failed to co-operate (</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">Donelien</span><span style="font-family:'Times New Roman';color:#010302">, [36]) and it was unlikely that any further inquiry would have yielded any results (</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">A Ltd v X </span><span style="font-family:'Times New Roman';color:#010302">[23(7)]).</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_50">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">50.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Again, we agree with Ms Barsam that the Tribunal has on the face of the decision not correctly stated the legal test in paragraph 71 as it has omitted to state that the case law only requires employers to make ‘reasonable’ enquiries as to the extent of the difficulties that a disabled person may face. However, we again consider that although the Tribunal has on the face of the decision asked itself the wrong question, the way in which it has answered the question again demonstrates that it has understood the legal principles and applied the correct test. This is because the language used by the Tribunal is language that addresses the question of reasonableness, thus (our emphasis) </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“it was not </span><span style="font-style:italic;font-weight:bold;font-family:'Times New Roman';color:#010302">reasonable</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302"> to expect the Claimant to explain these matters in an email”, </span><span style="font-family:'Times New Roman';color:#010302">Mrs Parker could not </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“</span><span style="font-style:italic;font-weight:bold;font-family:'Times New Roman';color:#010302">fairly</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302"> conclude”</span><span style="font-family:'Times New Roman';color:#010302"> that a telephone conversation with him would have been futile given her lack of knowledge of the claimant, that Mrs Parker </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“accepted … with hindsight she </span><span style="font-style:italic;font-weight:bold;font-family:'Times New Roman';color:#010302">should </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">have telephoned the Claimant…” </span><span style="font-family:'Times New Roman';color:#010302">and </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“There was </span><span style="font-style:italic;font-weight:bold;font-family:'Times New Roman';color:#010302">no</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302"> </span><span style="font-style:italic;font-weight:bold;font-family:'Times New Roman';color:#010302">good reason</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302"> …. Why someone in the HR department … could not have spoken to him”</span><span style="font-family:'Times New Roman';color:#010302">.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_51">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">51.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Given that we are satisfied that the Tribunal has demonstrated through its reasons that it had the correct legal test in mind, then its conclusion that reasonable enquiries had not been made can only be challenged on perversity grounds. That really turns on the Tribunal’s finding that, given the claimant’s difficulties with written communication, it was not reasonable to expect the claimant to explain his specific difficulties with the online application process in an email. This is the point that is the subject of Ground 4 (see below). For the reasons we set out below, we do not find that conclusion to be perverse and, as such, given the Tribunal’s finding of fact at paragraph 48 that if the respondent had phoned him </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“he would have provided the specific details on the phone”</span><span style="font-family:'Times New Roman';color:#010302">,</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302"> </span><span style="font-family:'Times New Roman';color:#010302">it inevitably follows that if the respondent had made reasonable enquiries by telephoning the claimant, it would then have had the requisite knowledge of his particular difficulties with the online application process to place it under a duty to make reasonable adjustments by taking one or other of the steps identified in the judgment.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_52">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">52.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">However, we add this regarding a further submission that Ms Barsam made in relation to Ground 3: she submits that the Tribunal made a perverse observation at paragraph 70 when it stated: </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“On one view of the capitalised and bold section of his CV, the Claimant was volunteering” </span><span style="font-family:'Times New Roman';color:#010302">to have a discussion about his </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“experience”</span><span style="font-family:'Times New Roman';color:#010302"> with online applications with the respondent. Ms Barsam submits that it is obvious that the Claimant was in this email referring to talking about his job experience rather than his difficulties with the application process. We have some sympathy for Ms Barsam’s submission in this regard, but we do not consider the Tribunal’s observation was perverse: it was only saying that this was ‘one view’ of what the claimant was saying, and we agree it was one view. In any event, nothing turns on this point, because the Tribunal does not go on to say (and we do not read it as finding) that the respondent ought to have understood from that very first request that the Claimant was volunteering to explain his specific difficulties with the application process by phone. The Tribunal’s judgment is based on the whole course of the correspondence.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_53">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">53.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">For these reasons, we dismiss Ground 3.</span></p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading2"><span style="font-family:'Times New Roman';color:#010302">Ground 4: perverse finding that it was not reasonable to expect the Claimant to explain himself by email</span></p>
+	  </content>
+	</level>
+	<paragraph eId="para_54">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">54.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Ms Barsam argues that the Tribunal’s conclusion at [71] that, given the Claimant’s disability, it was not reasonable to have expected him to explain himself by email was perverse. Ms Barsam submits that there was, </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“no evidence before the ET that the Claimant had suggested to the Respondent that he could not explain his difficulties by email and/or that he required a telephone call to explain his difficulties”.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_55">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">55.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">Ms Barsam in her skeleton argument pointed to the evidence that: (a) the Claimant in his CV request for an oral application had stated that </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">"this could be arranged by email"</span><span style="font-family:'Times New Roman';color:#010302"> and provided his email address; (b) the Claimant was able to engage in protracted correspondence with the Respondent by email; and (c) the Claimant accepted in cross-examination that he could have explained his particular difficulties by email. (The latter point was not, however, relied on by Ms Barsam in oral submissions, and rightly so as it did not form part of the Tribunal’s findings of fact and the Tribunal’s notes of evidence have not been obtained to make good that point.)</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_56">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">56.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">We have considered Ms Barsam’s submissions carefully, but we are not persuaded by them. Perversity is a high threshold and the Tribunal’s conclusion on this issue is well within the range of judgments open to them on this issue. The Tribunal would at this point have had in mind the totality of the evidence, which was to the effect that the respondent had repeatedly asked the claimant to explain his difficulties by email and not received an answer to that. There could really only be two explanations for the claimant’s failure to answer: </span><span style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';color:#010302">either</span><span style="font-family:'Times New Roman';color:#010302"> he was being deliberately obstructive in order to ‘engineer’ a disability discrimination claim because he was not a genuine applicant </span><span style="text-decoration-line:underline;text-decoration-style:solid;font-family:'Times New Roman';color:#010302">or</span><span style="font-family:'Times New Roman';color:#010302"> he was having difficulty with written communication. The Tribunal had already rejected the former explanation (albeit we have now found it made a separate error of law in reaching that conclusion). For the purposes of this ground 4, however, given the finding that the claimant was a genuine applicant, then the only explanation for his failure to respond to the respondent’s question was that he was having difficulties with written communication.  It was well within the range of judgments open to the Tribunal to conclude on the evidence that an employer acting reasonably, when faced with an individual with a dyspraxia diagnosis asking for an adjustment to avoid filling in an online form, but failing to respond in writing to a reasonable question, would have picked up the phone to speak to that individual in order to understand their situation. </span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_57">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">57.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">In any event, we observe that, given that Mrs Parker accepted in oral evidence that it would have been ‘sensible’ to pick up the phone (paragraph 33) and that she ‘should’ have done so (paragraph 71), and that the respondent did telephone the claimant when requested to in relation to his subsequent application in 2019, assuming for present purposes that the claimant was a genuine applicant, it is hard to see how the Tribunal could reasonably have reached any other conclusion than that the respondent ought to have telephoned the claimant both to ascertain what the nature and extent of his claimed disadvantage was, and in order to make the reasonable adjustment.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_58">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">58.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">As we have already noted above, given the Tribunal’s finding of fact at paragraph 48 that if the respondent had phoned him </span><span style="font-style:italic;font-family:'Times New Roman';color:#010302">“he would have provided the specific details on the phone”</span><span style="font-family:'Times New Roman';color:#010302">,</span><span style="font-style:italic;font-family:'Times New Roman';color:#010302"> </span><span style="font-family:'Times New Roman';color:#010302">it inevitably follows that if the respondent had made reasonable enquiries by telephoning the claimant, it would then have had the requisite knowledge of his particular difficulties with the online application process to place it under a duty to make reasonable adjustments by taking one or other of the statements identified in the judgment.</span></p>
+	  </content>
+	</paragraph>
+	<paragraph eId="para_59">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">59.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman';color:#010302">For these reasons, we dismiss Ground 4.</span></p>
+	  </content>
+	</paragraph>
+	<level>
+	  <content>
+	    <p class="Heading1"><span style="font-family:'Times New Roman';color:#010302">Disposal</span></p>
+	  </content>
+	</level>
+	<paragraph eId="para_60">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">60.</num>
+	  <intro>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman'">We have allowed the appeal on Ground 1, but dismissed it on Grounds 2 to 4. This is not a case where we could substitute our own judgment for that of the Tribunal. The point on which the appeal has succeeded requires further consideration of the evidence and a fresh assessment. The question is whether it should be remitted to the same Tribunal or a different Tribunal. Ms Barsam urges us to remit to a different Tribunal, but we do not agree. Having regard to the guidance in </span><span style="font-style:italic;font-family:'Times New Roman'">Sinclair Roche &amp; Temperley v Heard </span><span style="font-family:'Times New Roman'">[2004] IRLR 763, we consider that it is appropriate to remit the matter to the same Tribunal for the following reasons:</span></p>
+	  </intro>
+	  <subparagraph>
+	    <num style="font-family:'Times New Roman';font-size:12pt;margin-left:1in;text-indent:-0.25in">a.</num>
+	    <content>
+	      <p class="ListParagraph" style="text-align:justify;margin-left:1in"><span style="font-style:italic;font-family:'Times New Roman'">Proportionality </span><span style="font-family:'Times New Roman'">– this was a two-day case (one day for evidence and submissions, one day for deliberation and judgment) and we have only found an error in one part of the judgment. It is disproportionate to require this case to start again from scratch because of that error. It would be inconvenient and potentially distressing to the witnesses, and take up time, money and tribunal resources that should be deployed on other cases.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-family:'Times New Roman';font-size:12pt;margin-left:1in;text-indent:-0.25in">b.</num>
+	    <content>
+	      <p class="ListParagraph" style="text-align:justify;margin-left:1in"><span style="font-style:italic;font-family:'Times New Roman'">Passage of time </span><span style="font-family:'Times New Roman'">– we do not consider there is any real risk that the panel will have forgotten this case. Although the liability hearing took place over 18 months’ ago, the remedy hearing was only 8 months’ ago and we are satisfied that the evidence will be sufficiently fresh in the Tribunal’s minds. It is also not a complicated case and the Tribunal will easily be able to refresh memories.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-family:'Times New Roman';font-size:12pt;margin-left:1in;text-indent:-0.25in">c.</num>
+	    <content>
+	      <p class="ListParagraph" style="text-align:justify;margin-left:1in"><span style="font-family:'Times New Roman'">There is no suggestion here of any </span><span style="font-style:italic;font-family:'Times New Roman'">bias or partiality</span><span style="font-family:'Times New Roman'"> on the part of the Tribunal, nor is the decision </span><span style="font-style:italic;font-family:'Times New Roman'">totally flawed</span><span style="font-family:'Times New Roman'"> to use the language of Burton P in </span><span style="font-style:italic;font-family:'Times New Roman'">Sinclair Roche</span><span style="font-family:'Times New Roman'">. Indeed, we were overall impressed with the decision which appeared to demonstrate, despite the error we found, that both sides had been listened to; the tone of the judgment is measured and the evidence was (save for the error we have identified) carefully considered.</span></p>
+	    </content>
+	  </subparagraph>
+	  <subparagraph>
+	    <num style="font-family:'Times New Roman';font-size:12pt;margin-left:1in;text-indent:-0.25in">d.</num>
+	    <content>
+	      <p class="ListParagraph" style="text-align:justify;margin-left:1in"><span style="font-style:italic;font-family:'Times New Roman'">Second bite / professionalism </span><span style="font-family:'Times New Roman'">– We appreciate that there is the risk that a Tribunal on remittal will be tempted to reach the same decision by a different route, as Burton P observed in </span><span style="font-style:italic;font-family:'Times New Roman'">Sinclair Roche</span><span style="font-family:'Times New Roman'">. However, given the observations we have already made about the decision, we have no reason to think that this Tribunal will not, conscientiously and professionally, properly re-evaluate on remittal the issue of whether or not the claimant was a genuine applicant for the 2018 role in the light of all the evidence that it has now heard. That in principle may include the evidence that it received at the appeal stage as there is no reason for it to turn a ‘blind eye’ to that now that it has it, even though it did not have the benefit of that evidence at the liability stage on the first occasion, albeit that in considering whether or the claimant was a genuine applicant the focus must remain on what the claimant knew about the advertised role, not the what the respondent’s position was.</span></p>
+	    </content>
+	  </subparagraph>
+	</paragraph>
+	<paragraph eId="para_61">
+	  <num style="font-family:'Times New Roman';font-size:12pt;color:#000000;margin-left:0.49in;text-indent:-0.49in">61.</num>
+	  <content>
+	    <p class="ListParagraph" style="text-align:justify;margin-left:0.49in"><span style="font-family:'Times New Roman'">We accordingly remit the case to the same Tribunal panel to reconsider its decision on the question of whether the appellant was a genuine applicant for the 2018 role in the light of our conclusions and observations in this judgment. It will be for Employment Judge Gardiner on remittal to re-list the matter for a further final hearing, but if that does not happen, the parties should contact the Employment Tribunal to request that a hearing be listed.</span></p>
+	  </content>
+	</paragraph>
+      </decision>
+    </judgmentBody>
+  </judgment>
+</akomaNtoso>

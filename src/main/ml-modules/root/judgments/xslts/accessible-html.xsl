@@ -21,6 +21,9 @@
 		<xsl:when test="starts-with($href, 'https://www.legislation.gov.uk/')">
 			<xsl:sequence select="true()" />
 		</xsl:when>
+		<xsl:when test="starts-with($href, 'http://www.legislation.gov.uk/')">
+			<xsl:sequence select="true()" />
+		</xsl:when>
 		<xsl:when test="starts-with($href, 'https://caselaw.nationalarchives.gov.uk/')">
 			<xsl:variable name="components" as="xs:string*" select="tokenize(substring-after($href, 'https://caselaw.nationalarchives.gov.uk/'), '/')" />
 			<xsl:choose>
