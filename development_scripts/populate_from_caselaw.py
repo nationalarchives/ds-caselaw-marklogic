@@ -32,7 +32,8 @@ for url in urls:
     print("got xml")
 
     response = requests.put(
-        f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}", data=xml
+        f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}",
+        data=xml,
     )
     response.raise_for_status()
     print("added to local Marklogic db")

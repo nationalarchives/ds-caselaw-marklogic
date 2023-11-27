@@ -15,7 +15,7 @@ The file layout is explained in the [project layout documentation](https://githu
 1. Install `gradle`. On MacOS, you can use `brew install gradle`.
 
 2. If you're running against anything other than development, copy `gradle-development.properties`
-to `gradle-{environment}.properties` and set the credentials and hostname for your Marklogic server.
+   to `gradle-{environment}.properties` and set the credentials and hostname for your Marklogic server.
 
 ## Deployment
 
@@ -93,10 +93,9 @@ Two gradle tasks are available for bulk management of documents in a database us
 necessary to use, but are provided in order to automate some development tasks and provide
 examples for future data migrations.
 
-
-* `gradle manageAllDocuments`: Enables version management for all documents
-* `gradle publishAllDocuments`: Sets the `published` flag for all documents
-* `gradle addAllDocumentsToJudgmentsCollection`: Adds all documents to the 'judgments' collection.
+- `gradle manageAllDocuments`: Enables version management for all documents
+- `gradle publishAllDocuments`: Sets the `published` flag for all documents
+- `gradle addAllDocumentsToJudgmentsCollection`: Adds all documents to the 'judgments' collection.
 
 ### Loading data from a backup on S3 (deprecated)
 
