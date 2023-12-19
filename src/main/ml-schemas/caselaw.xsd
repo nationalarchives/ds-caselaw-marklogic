@@ -20,6 +20,7 @@
 		<xs:element ref="year" minOccurs="0"/>
 		<xs:element ref="number" minOccurs="0"/>
 		<xs:element ref="cite" minOccurs="0"/>
+		<xs:element ref="jurisdiction" minOccurs="0"/>
 		<xs:element ref="parser"/>
 		<xs:element ref="hash"/>
 		<xs:element ref="tna-enrichment-engine" minOccurs="0"/>
@@ -60,6 +61,14 @@
 	<xs:annotation>
 		<xs:documentation>
 			<p>The neutral citation</p>
+		</xs:documentation>
+	</xs:annotation>
+</xs:element>
+
+<xs:element name="jurisdiction" type="xs:string">
+  <xs:annotation>
+	  <xs:documentation>
+		  <p>The subfield of the court</p>
 		</xs:documentation>
 	</xs:annotation>
 </xs:element>

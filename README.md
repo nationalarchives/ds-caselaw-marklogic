@@ -25,6 +25,8 @@ The `development` environment will be used by default if you don't specify `-Pen
 
 Deployment is idempotent, and will automatically configure databases, roles, triggers and modules.
 
+Please also create a Github Release when you deploy.
+
 ## Local Setup
 
 ### 1. Run a marklogic docker container
