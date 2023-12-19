@@ -72,7 +72,7 @@
           <reindexing>visible</reindexing>
         </column>
         <column>
-          <name>parser_version_string</name>
+          <name>parser_major_version</name>
           <scalar-type>integer</scalar-type>
           <val>xs:int(tokenize(//uk:parser/text(),'\.')[1])</val>
           <nullable>true</nullable>
@@ -80,7 +80,7 @@
           <reindexing>visible</reindexing>
         </column>
         <column>
-          <name>parser_version_string</name>
+          <name>parser_minor_version</name>
           <scalar-type>integer</scalar-type>
           <val>xs:int(tokenize(//uk:parser/text(),'\.')[2])</val>
           <nullable>true</nullable>
