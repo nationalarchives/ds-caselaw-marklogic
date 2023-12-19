@@ -3,8 +3,7 @@
   xmlns="http://marklogic.com/xdmp/tde">
   <context>//akn:FRBRWork</context>
   <collections>
-    <collection>press-summary</collection>
-    <collection>judgment</collection>
+    <collection>http://marklogic.com/collections/dls/latest-version</collection>
   </collections>
   <path-namespaces>
     <path-namespace>
