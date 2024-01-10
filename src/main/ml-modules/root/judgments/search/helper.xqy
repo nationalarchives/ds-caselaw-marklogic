@@ -3,6 +3,9 @@ xquery version "1.0-ml";
 module namespace helper = "https://caselaw.nationalarchives.gov.uk/helper";
 
 import module namespace ml = "http://marklogic.com/appservices/search" at "/MarkLogic/appservices/search/search.xqy";
+import module namespace json = "http://marklogic.com/xdmp/json"
+    at "/MarkLogic/json/json.xqy";
+
 
 declare namespace akn = "http://docs.oasis-open.org/legaldocml/ns/akn/3.0";
 declare namespace uk = "https://caselaw.nationalarchives.gov.uk";
@@ -223,16 +226,63 @@ declare function make-party-query($party as xs:string?) as cts:query? {
             ()
 };
 
-declare variable $transform-results :=
-    <transform-results xmlns="http://marklogic.com/appservices/search" apply="snippet" ns="https://caselaw.nationalarchives.gov.uk/helper" at="/judgments/search/helper.xqy">
+declare function snippet-transform-results($quoted_phrases as json:array?) as element(ml:transform-results)  {
+    <transform-results xmlns="http://marklogic.com/appservices/search" apply="snippet" ns="https://caselaw.nationalarchives.gov.uk/helper" at="/judgments/search/helper.xqy" quotedPhrases="{$quoted_phrases}">
         <preferred-matches>
             <element name="p" ns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0"/>
         </preferred-matches>
-    </transform-results>;
+        <per-match-tokens>10</per-match-tokens>
+        <max-matches>100</max-matches>
+        <max-snippet-chars>1000</max-snippet-chars>
+    </transform-results>
+};
+
+(: This function works to give priority to matching snippets which contain any "quoted phrases" in the search query, which is done in two phases. First we identify any matches which contain  any of the phrase(s) and assign them a new 'priotity' attribute with value=1, then we reorder the matches descending by this 'priority' column. :)
+declare function prioritise-quoted-phrase-matches($results as node(), $quoted-phrases as json:array) as node() {
+    let $scoring-transform := <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:search="http://marklogic.com/appservices/search">
+        <xsl:template match="search:match">
+            <xsl:copy>
+                {
+                    for $phrase in json:transform-from-json($quoted-phrases)/*
+                    return <xsl:if test="contains(lower-case(string()), lower-case(&quot;{$phrase}&quot;))">
+                        <xsl:attribute name="priority">1</xsl:attribute>
+                    </xsl:if>
+                }
+                <xsl:apply-templates select="@* | node()"/>
+            </xsl:copy>
+        </xsl:template>
+        <xsl:template match="@* | node()">
+            <xsl:copy>
+                <xsl:apply-templates select="@* | node()"/>
+            </xsl:copy>
+        </xsl:template>
+    </xsl:stylesheet>
+
+    let $sorting-transform := <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:search="http://marklogic.com/appservices/search">
+        <xsl:template match="search:snippet">
+            <xsl:copy>
+                <xsl:apply-templates select="@*" />
+                <xsl:apply-templates select="search:match">
+                    <xsl:sort select="@priority" data-type="number" order="descending"/>
+                </xsl:apply-templates>
+            </xsl:copy>
+        </xsl:template>
+        <xsl:template match="@* | node()">
+            <xsl:copy>
+                <xsl:apply-templates select="@* | node()"/>
+            </xsl:copy>
+        </xsl:template>
+    </xsl:stylesheet>
+
+    let $scored-results := xdmp:xslt-eval($scoring-transform, $results)/*
+    return xdmp:xslt-eval($sorting-transform, $scored-results)/*
+};
 
 declare function snippet($result as node(), $query as schema-element(cts:query), $options as element(ml:transform-results)?) as element(ml:snippet) {
+    let $quoted_phrases := xdmp:from-json-string($options/@quotedPhrases/data())
     let $unfiltered := ml:snippet($result, $query, $options)
-    return xdmp:xslt-eval($snippet-filter, $unfiltered)/*
+    let $filtered := xdmp:xslt-eval($snippet-filter, $unfiltered)/*
+    return prioritise-quoted-phrase-matches($filtered, $quoted_phrases)
 };
 
 declare private variable $snippet-filter := <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns:search="http://marklogic.com/appservices/search">
