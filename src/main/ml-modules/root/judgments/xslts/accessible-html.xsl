@@ -263,6 +263,19 @@
 	</p>
 </xsl:template>
 
+<!-- quoted structures -->
+
+<xsl:template match="block[@name='embeddedStructure']">
+	<xsl:apply-templates />
+</xsl:template>
+
+<xsl:template match="embeddedStructure">
+	<blockquote>
+		<xsl:apply-templates />
+	</blockquote>
+</xsl:template>
+
+
 <!-- CSS classes -->
 
 <!-- sets the ancestor document element containing the CSS style for its descendants -->
@@ -543,19 +556,6 @@
 	<p>
 		<xsl:call-template name="inline" />
 	</p>
-</xsl:template>
-
-<xsl:template match="level/*/p[@class='Quote']">
-	<div class="judgment-body__section">
-		<span class="judgment-body__number"></span>
-		<div class="judgment-body__text">
-			<blockquote>
-				<p>
-					<xsl:call-template name="inline" />
-				</p>
-			</blockquote>
-		</div>
-	</div>
 </xsl:template>
 
 <xsl:template match="block">
