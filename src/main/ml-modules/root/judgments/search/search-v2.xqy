@@ -31,6 +31,7 @@ declare variable $editor_status as xs:string? external := "";
 declare variable $editor_assigned as xs:string? external := "";
 declare variable $editor_priority as xs:string? external := "";
 declare variable $collections as xs:string? external := "";
+declare variable $quoted_phrases as json:array? external := xdmp:from-json-string("[]");
 
 let $collection-uris := fn:tokenize($collections, ",")
 let $collection-query := if (empty($collection-uris)) then () else cts:collection-query($collection-uris)
@@ -55,6 +56,7 @@ let $params := map:map()
     => map:with('editor_status', $editor_status)
     => map:with('editor_assigned', $editor_assigned)
     => map:with('editor_priority', $editor_priority)
+    => map:with('quoted_phrases', $quoted_phrases)
 
 let $query1 := if ($q and not(helper:is-a-consignment-number($q))) then (helper:make-q-query($q)) else ()
 let $query2 := if ($party) then
@@ -154,7 +156,7 @@ let $sort-word := replace($order, '-', '')
         ()
 
 let $transform-results := if ($show-snippets) then
-    $helper:transform-results
+    helper:snippet-transform-results($quoted_phrases)
 else
     <transform-results xmlns="http://marklogic.com/appservices/search" apply="empty-snippet" />
 
