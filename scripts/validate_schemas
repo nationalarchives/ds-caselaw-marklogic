@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+
+from xmlschema import XMLSchema
+
+import sys
+
+for file in sys.argv[1:]:
+    print(f"Validating {file}")
+    XMLSchema.meta_schema.validate(file)
