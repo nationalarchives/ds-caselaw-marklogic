@@ -8,6 +8,17 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
+      - id: check-xml
+
+  - repo: local
+    hooks:
+      - id: validate-schemas
+        name: validate-schemas
+        language: python
+        additional_dependencies:
+          - xmlschema
+        entry: python scripts/validate_schemas
+        files: .xsd$
 
   - repo: https://github.com/psf/black
     rev: 23.11.0
