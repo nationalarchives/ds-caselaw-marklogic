@@ -46,7 +46,7 @@
 	</xs:annotation>
 </xs:element>
 
-<xs:element name="summaryOf" type="xs:anyURI" minOccurs="0">
+<xs:element name="summaryOf" type="xs:anyURI">
 	<xs:annotation>
 		<xs:documentation>
 			<p>The URI of the document that this document is a summary of</p>
@@ -54,7 +54,7 @@
 	</xs:annotation>
 </xs:element>
 
-<xs:element name="summaryOfCite" type="xs:string" minOccurs="0">
+<xs:element name="summaryOfCite" type="xs:string">
 	<xs:annotation>
 		<xs:documentation>
 			<p>The Neutral Citation of the judgment that this document is a summary of</p>
