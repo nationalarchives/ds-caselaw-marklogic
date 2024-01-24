@@ -33,6 +33,14 @@
           <invalid-values>ignore</invalid-values>
           <reindexing>visible</reindexing>
         </column>
+        <column>
+          <name>last_sent_to_parser</name>
+          <scalar-type>dateTime</scalar-type>
+          <val>last_sent_to_parser</val>
+          <nullable>true</nullable>
+          <invalid-values>ignore</invalid-values>
+          <reindexing>visible</reindexing>
+        </column>
       </columns>
     </row>
   </rows>
