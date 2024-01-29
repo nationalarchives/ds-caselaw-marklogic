@@ -83,7 +83,7 @@
 	</xs:annotation>
 </xs:element>
 
-<xs:element name="jurisdiction" type="xs:string">
+<xs:element name="jurisdiction" type="GRCJurisdictionsType">
   <xs:annotation>
 	  <xs:documentation>
 		  <p>The subfield of the court</p>
@@ -895,6 +895,32 @@
 		<xs:enumeration value="zmsc"/>
 	</xs:restriction>
 </xs:simpleType>
+
+<xs:simpleType name="GRCJurisdictionsType">
+	<xs:annotation>
+		<xs:documentation>
+			<p>The subject matter jurisdicitons of the General Regulatory Chamber</p>
+		</xs:documentation>
+	</xs:annotation>
+	<xs:restriction base="xs:string">
+		<xs:enumeration value="Charity"/>
+		<xs:enumeration value="CommunityRightToBid"/>
+		<xs:enumeration value="NetworkInformationSystems"/>
+		<xs:enumeration value="Environment"/>
+		<xs:enumeration value="EstateAgents"/>
+		<xs:enumeration value="ExamBoards"/>
+		<xs:enumeration value="FoodSafety"/>
+		<xs:enumeration value="Gambling"/>
+		<xs:enumeration value="ImmigrationServices"/>
+		<xs:enumeration value="IndividualElectoralRegulation"/>
+		<xs:enumeration value="InformationRights"/>
+		<xs:enumeration value="Pensions"/>
+		<xs:enumeration value="StandardsAndLicensing"/>
+		<xs:enumeration value="Transport"/>
+		<xs:enumeration value="WelfareOfAnimals"/>
+	</xs:restriction>
+</xs:simpleType>
+
 
 <!-- tables -->
 
