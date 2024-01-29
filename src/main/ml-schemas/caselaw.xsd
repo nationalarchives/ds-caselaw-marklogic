@@ -512,6 +512,14 @@
 				</xs:documentation>
 			</xs:annotation>
 		</xs:enumeration>
+		<xs:enumeration value="UKAIT">
+			<xs:annotation>
+				<xs:documentation>
+					<name>United Kingdom Asylum and Immigration Tribunal</name>
+					<p>The older name of the UKUT-IAC</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
 		<xs:enumeration value="UKUT-LC">
 			<xs:annotation>
 				<xs:documentation>
@@ -636,7 +644,6 @@
 		<xs:enumeration value="SKQB" />
 		<xs:enumeration value="TASSC" />
 		<xs:enumeration value="TCC" />
-		<xs:enumeration value="UKAIT" />
 		<xs:enumeration value="UKEAT" />
 		<xs:enumeration value="UKHL" />
 		<xs:enumeration value="UKIAT" />
