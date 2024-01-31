@@ -174,6 +174,7 @@ let $search-options := <options xmlns="http://marklogic.com/appservices/search">
         <extract-path>//uk:cite</extract-path>
         <extract-path>//akn:neutralCitation</extract-path>
         <extract-path>//uk:court</extract-path>
+        <extract-path>//uk:jurisdiction</extract-path>
         <extract-path>//uk:hash</extract-path>
         <extract-path>//akn:FRBRManifestation/akn:FRBRdate</extract-path>
     </extract-document-data>
