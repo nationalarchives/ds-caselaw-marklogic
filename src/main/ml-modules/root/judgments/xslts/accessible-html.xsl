@@ -18,6 +18,9 @@
 <xsl:function name="uk:link-is-supported" as="xs:boolean">
 	<xsl:param name="href" as="attribute()?" />
 	<xsl:choose>
+		<xsl:when test="starts-with($href, '#')">
+			<xsl:sequence select="true()" />
+		</xsl:when>
 		<xsl:when test="starts-with($href, 'https://www.legislation.gov.uk/')">
 			<xsl:sequence select="true()" />
 		</xsl:when>
@@ -157,6 +160,7 @@
 
 <xsl:template match="level">
 	<section>
+		<xsl:apply-templates select="@eId" />
 		<xsl:if test="num | heading">
 			<p>
 				<xsl:apply-templates select="num | heading" />
@@ -184,7 +188,7 @@
 	</section>
 </xsl:template>
 
-<xsl:template match="paragraph/@eId">
+<xsl:template match="level/@eId | paragraph/@eId">
 	<xsl:attribute name="id">
 		<xsl:sequence select="." />
 	</xsl:attribute>
