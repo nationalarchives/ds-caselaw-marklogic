@@ -167,6 +167,12 @@ let $scope := 'documents'
 let $search-options := <options xmlns="http://marklogic.com/appservices/search">
     <fragment-scope>{ $scope }</fragment-scope>
     <search-option>unfiltered</search-option>
+    <constraint name="court">
+        <range type="xs:string" facet="true">
+            <facet-option>limit=10</facet-option>
+            <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">//akn:proprietary/uk:court</path-index>
+        </range>
+    </constraint>
     { $sort-order }
     <extract-document-data xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">
         <extract-path>//akn:FRBRWork/akn:FRBRdate</extract-path>
