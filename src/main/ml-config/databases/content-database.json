@@ -26,6 +26,11 @@
     "collation" : "http://marklogic.com/collation/",
     "range-value-positions" : false,
     "invalid-values": "ignore"
+  }, {
+    "scalar-type": "gYear",
+    "path-expression" : "//akn:proprietary/uk:year",
+    "range-value-positions" : false,
+    "invalid-values": "ignore"
   } ],
   "range-element-index": [ {
     "scalar-type" : "dateTime",
