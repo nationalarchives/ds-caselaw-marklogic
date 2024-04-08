@@ -5,6 +5,10 @@
   "path-namespace" : [ {
     "prefix": "akn",
     "namespace-uri" : "http://docs.oasis-open.org/legaldocml/ns/akn/3.0"
+  },
+  {
+    "prefix": "uk",
+    "namespace-uri" : "https://caselaw.nationalarchives.gov.uk/akn"
   } ],
   "range-path-index" : [ {
     "scalar-type" : "date",
@@ -14,6 +18,17 @@
   }, {
     "scalar-type": "dateTime",
     "path-expression" : "akn:akomaNtoso/akn:judgment/akn:meta/akn:identification/akn:FRBRManifestation/akn:FRBRdate[@name='transform']/@date",
+    "range-value-positions" : false,
+    "invalid-values": "ignore"
+  }, {
+    "scalar-type": "string",
+    "path-expression" : "//akn:proprietary/uk:court",
+    "collation" : "http://marklogic.com/collation/",
+    "range-value-positions" : false,
+    "invalid-values": "ignore"
+  }, {
+    "scalar-type": "gYear",
+    "path-expression" : "//akn:proprietary/uk:year",
     "range-value-positions" : false,
     "invalid-values": "ignore"
   } ],
