@@ -876,9 +876,12 @@
 <!-- footnotes -->
 
 <xsl:template match="authorialNote">
-	<sup>
-		<xsl:value-of select="@marker" />
-	</sup>
+	<xsl:variable name="marker" as="xs:string" select="@marker" />
+	<a id="{ concat('fnref', $marker) }" class="judgment-body__footnote-reference" href="{ concat('#fn', $marker) }">
+		<sup>
+			<xsl:value-of select="$marker" />
+		</sup>
+	</a>
 </xsl:template>
 
 <xsl:template name="footnotes">
@@ -898,10 +901,13 @@
 </xsl:template>
 
 <xsl:template match="authorialNote/p[1]">
-	<p>
-		<sup>
-			<xsl:value-of select="../@marker" />
-		</sup>
+	<xsl:variable name="marker" as="xs:string" select="../@marker" />
+	<p id="{ concat('fn', $marker) }">
+		<a href="{ concat('#fnref', $marker) }" class="judgment-body__footnote-reference">
+			<sup>
+				<xsl:value-of select="$marker" />
+			</sup>
+		</a>
 		<xsl:text> </xsl:text>
 		<xsl:call-template name="inline" />
 	</p>
