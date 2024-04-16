@@ -877,17 +877,19 @@
 
 <xsl:template match="authorialNote">
 	<xsl:variable name="marker" as="xs:string" select="@marker" />
-	<a id="{ concat('fnref', $marker) }" class="judgment-body__footnote-reference" href="{ concat('#fn', $marker) }">
+	<a id="{ concat('fnref', $marker) }" href="{ concat('#fn', $marker) }" class="judgment-body__footnote-reference">
+		<span class="judgment__hidden"> (Footnote: </span>
 		<sup>
 			<xsl:value-of select="$marker" />
 		</sup>
+		<span class="judgment__hidden">)</span>
 	</a>
 </xsl:template>
 
 <xsl:template name="footnotes">
 	<xsl:param name="footnotes" as="element()*" select="descendant::authorialNote" />
 	<xsl:if test="exists($footnotes)">
-		<footer>
+		<footer class="judgment-footer">
 			<hr />
 			<xsl:apply-templates select="$footnotes" mode="footnote" />
 		</footer>
@@ -902,11 +904,13 @@
 
 <xsl:template match="authorialNote/p[1]">
 	<xsl:variable name="marker" as="xs:string" select="../@marker" />
-	<p id="{ concat('fn', $marker) }">
-		<a href="{ concat('#fnref', $marker) }" class="judgment-body__footnote-reference">
+	<p id="{ concat('fn', $marker) }" class="judgment-footer__footnote">
+		<a href="{ concat('#fnref', $marker) }" class="judgment-footer__footnote-backlink">
+			<span class="judgment__hidden"> (Footnote reference from: </span>
 			<sup>
 				<xsl:value-of select="$marker" />
 			</sup>
+			<span class="judgment__hidden">)</span>
 		</a>
 		<xsl:text> </xsl:text>
 		<xsl:call-template name="inline" />
