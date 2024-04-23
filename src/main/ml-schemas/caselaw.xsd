@@ -496,6 +496,13 @@
 				</xs:documentation>
 			</xs:annotation>
 		</xs:enumeration>
+		<xs:enumeration value="EWFC-B">
+			<xs:annotation>
+				<xs:documentation>
+					<p>A code for Family Court judgments with "B" in their NCN</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
 		<xs:enumeration value="UKUT-AAC">
 			<xs:annotation>
 				<xs:documentation>
