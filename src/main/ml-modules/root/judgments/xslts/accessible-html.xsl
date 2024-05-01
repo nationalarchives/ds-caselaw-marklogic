@@ -469,7 +469,7 @@
 <xsl:template match="header//p[not(parent::blockContainer)][not(ancestor::authorialNote)]">
 	<xsl:param name="class-context" as="element()" tunnel="yes" />
 	<xsl:choose>
-		<xsl:when test="empty(preceding-sibling::*) and exists(child::img)">
+		<xsl:when test="exists(child::img) and (every $block in preceding-sibling::* satisfies $block/@name = 'restriction')">
 			<div class="judgment-header__logo">
 				<xsl:apply-templates>
 					<xsl:with-param name="has-underline" select="()" tunnel="yes" />
