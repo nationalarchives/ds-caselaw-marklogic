@@ -488,6 +488,27 @@
 				</xs:documentation>
 			</xs:annotation>
 		</xs:enumeration>
+		<xs:enumeration value="EWCOP-T1">
+			<xs:annotation>
+				<xs:documentation>
+					<p>Tier 1 cases of the Court of Protection, decided by District Court judges</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="EWCOP-T2">
+			<xs:annotation>
+				<xs:documentation>
+					<p>Tier 2 cases of the Court of Protection, decided by Circuit Court judges</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="EWCOP-T3">
+			<xs:annotation>
+				<xs:documentation>
+					<p>Tier 3 cases of the Court of Protection, decided by High Court judges</p>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
 		<xs:enumeration value="EWFC">
 			<xs:annotation>
 				<xs:documentation>
