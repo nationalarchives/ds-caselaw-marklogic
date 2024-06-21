@@ -1,5 +1,3 @@
-version: "3.1"
-
 services:
   marklogic:
     container_name: marklogic
@@ -21,3 +19,4 @@ services:
 networks:
   default:
     name: caselaw
+    external: true
