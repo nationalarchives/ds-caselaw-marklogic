@@ -15,6 +15,11 @@ services:
     volumes:
       - ./.docker/db/data/:/var/opt/MarkLogic/
       - ./.docker/db/backup:/var/opt/backup
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7997/LATEST/healthcheck"]
+      interval: 2s
+      timeout: 60s
+      retries: 30
 
 networks:
   default:
