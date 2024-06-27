@@ -43,10 +43,13 @@ def save_judgment_xml(url, xml):
     print("Saving judgment: %s" % url)
     ml_url = f"/{url}.xml"
     response = requests.put(
-        f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}",
+        f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}&collection=judgment",
         data=xml,
     )
-    response.raise_for_status()
+    try:
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong saving the judgment: %s" % e)
 
 
 def get_neighbours_for_judgment(xml):

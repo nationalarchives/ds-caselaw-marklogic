@@ -45,7 +45,7 @@ Ensure that `MARKLOGIC_HOST` in `.env` in the editor and public ui is set to `ho
 
 ### 4. (Optional) Populate data in the local database
 
-To get some example documents onto the local database, there is a `development_scripts/populate.py` that copies documents from the live caselaw site (it doesn't import or fake properties) into it. (Check https://caselaw.nationalarchives.gov.uk/terms-of-use and get in touch if you intend to download many more than these.)
+To get some example documents onto the local database, there are `development_scripts/populate_top_judgments_and_neighbours.py` and `development_scripts/populate_from_caselaw.py` which copy documents from the live caselaw site (they don't import or fake properties) into your local database. (Check https://caselaw.nationalarchives.gov.uk/terms-of-use and get in touch if you intend to download many more than these.)
 
 There are also other ways other importing data as detailed further down the readme but haven't been tested for a while.
 
