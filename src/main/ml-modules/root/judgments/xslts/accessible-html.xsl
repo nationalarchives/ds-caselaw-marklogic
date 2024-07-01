@@ -334,7 +334,7 @@
 <!-- returns a sequence of key/value pairs, each divided by a colon -->
 <xsl:function name="uk:get-all-class-properties" as="xs:string*">
 	<xsl:param name="context" as="element()" />
-	<xsl:param name="selector" as="xs:string" /> <!-- constructed with helper function below -->
+	<xsl:param name="selector" as="xs:string" /> <!-- constructed with 'augment-simple-class-selector' function below -->
 	<xsl:variable name="key" select="concat(generate-id($context), '|', $selector)" />
 	<xsl:for-each select="key('classes', $key, $all-classes-parsed)/uk:property">
 		<xsl:sequence select="concat(@key, ':', @value)" />
@@ -344,7 +344,7 @@
 <!-- returns a sequence of key/value pairs, each divided by a colon -->
 <xsl:function name="uk:get-inline-class-properties-1" as="xs:string*">
 	<xsl:param name="context" as="element()" />
-	<xsl:param name="selector" as="xs:string" /> <!-- constructed with helper function below -->
+	<xsl:param name="selector" as="xs:string" /> <!-- constructed with 'make-class-selector' function below -->
 	<xsl:variable name="key" select="concat(generate-id($context), '|', $selector)" />
 	<xsl:for-each select="key('classes', $key, $all-classes-parsed)/uk:property">
 		<xsl:if test="string(@key) = $inline-properties">
