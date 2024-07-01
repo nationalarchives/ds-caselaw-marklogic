@@ -332,9 +332,19 @@
 </xsl:function>
 
 <!-- returns a sequence of key/value pairs, each divided by a colon -->
+<xsl:function name="uk:get-all-class-properties" as="xs:string*">
+	<xsl:param name="context" as="element()" />
+	<xsl:param name="selector" as="xs:string" /> <!-- constructed with helper function below -->
+	<xsl:variable name="key" select="concat(generate-id($context), '|', $selector)" />
+	<xsl:for-each select="key('classes', $key, $all-classes-parsed)/uk:property">
+		<xsl:sequence select="concat(@key, ':', @value)" />
+	</xsl:for-each>
+</xsl:function>
+
+<!-- returns a sequence of key/value pairs, each divided by a colon -->
 <xsl:function name="uk:get-inline-class-properties-1" as="xs:string*">
 	<xsl:param name="context" as="element()" />
-	<xsl:param name="selector" as="xs:string" />
+	<xsl:param name="selector" as="xs:string" /> <!-- constructed with helper function below -->
 	<xsl:variable name="key" select="concat(generate-id($context), '|', $selector)" />
 	<xsl:for-each select="key('classes', $key, $all-classes-parsed)/uk:property">
 		<xsl:if test="string(@key) = $inline-properties">
@@ -345,6 +355,30 @@
 
 <!-- helper functions to make selectors, depending on context -->
 
+<!-- adds a prefix to class selector, e.g., #judgment, #main, etc., depending on context -->
+<xsl:function name="uk:augment-simple-class-selector" as="xs:string">
+	<xsl:param name="context" as="element()" />
+	<xsl:param name="class" as="xs:string" /> <!-- starts with a dot -->
+	<xsl:choose>
+		<!-- the selector for main styles in a judgment is '#judgment .{ClassName}', e.g., '#judgment .ParaLevel1' -->
+		<xsl:when test="$context/self::judgment">
+			<xsl:sequence select="concat('#judgment ', $class)" />
+		</xsl:when>
+		<!-- the selector for main styles in a press summary is '#main .{ClassName}', e.g., '#main .ParaLevel1' -->
+		<xsl:when test="$context/self::doc[@name='pressSummary']">
+			<xsl:sequence select="concat('#main ', $class)" />
+		</xsl:when>
+		<!-- the selector for attachment styles is '#{type}{num} .{ClassName}', e.g., '#order1 .ParaLevel1' -->
+		<xsl:otherwise>
+			<xsl:variable name="work-uri" as="xs:string" select="$context/meta/identification/FRBRWork/FRBRthis/@value" />
+			<xsl:variable name="uri-components" as="xs:string*" select="tokenize($work-uri, '/')" />
+			<xsl:variable name="last-two" as="xs:string*" select="$uri-components[position() >= last()-1]" />
+			<xsl:variable name="last-two-combined" as="xs:string" select="string-join($last-two, '')" />
+			<xsl:sequence select="concat('#', $last-two-combined, ' ', $class)" />
+		</xsl:otherwise>
+	</xsl:choose>
+</xsl:function>
+
 <xsl:function name="uk:make-class-selector" as="xs:string?">
 	<xsl:param name="context" as="element()" />
 	<xsl:param name="e" as="element()" />
@@ -353,21 +387,8 @@
 		<xsl:when test="$doc-id = 'ewhc/ch/2022/1178'">
 			<xsl:sequence select="uk:make-class-selector-for-ewhc-ch-2022-1178($context, $e)" />
 		</xsl:when>
-		<!-- the selector for main styles in a judgment is '#judgment .{ClassName}', e.g., '#judgment .ParaLevel1' -->
-		<xsl:when test="$context/self::judgment">
-			<xsl:sequence select="concat('#judgment .', $e/@class)" />
-		</xsl:when>
-		<!-- the selector for main styles in a press summary is '#main .{ClassName}', e.g., '#main .ParaLevel1' -->
-		<xsl:when test="$context/self::doc[@name='pressSummary']">
-			<xsl:sequence select="concat('#main .', $e/@class)" />
-		</xsl:when>
-		<!-- the selector for attachment styles is '#{type}{num} .{ClassName}', e.g., '#order1 .ParaLevel1' -->
 		<xsl:otherwise>
-			<xsl:variable name="work-uri" as="xs:string" select="$context/meta/identification/FRBRWork/FRBRthis/@value" />
-			<xsl:variable name="uri-components" as="xs:string*" select="tokenize($work-uri, '/')" />
-			<xsl:variable name="last-two" as="xs:string*" select="$uri-components[position() >= last()-1]" />
-			<xsl:variable name="last-two-combined" as="xs:string" select="string-join($last-two, '')" />
-			<xsl:sequence select="concat('#', $last-two-combined, ' .', $e/@class)" />
+			<xsl:sequence select="uk:augment-simple-class-selector($context, concat('.', $e/@class))" />
 		</xsl:otherwise>
 	</xsl:choose>
 </xsl:function>
@@ -743,18 +764,38 @@
 		<xsl:variable name="header-rows" as="element()*" select="*[child::th]" />
 		<xsl:if test="exists($header-rows)">
 			<thead>
-				<xsl:apply-templates select="$header-rows" />
+				<xsl:apply-templates select="$header-rows">
+					<xsl:with-param name="table-class" as="xs:string?" select="@class" tunnel="yes" />
+				</xsl:apply-templates>
 			</thead>
 		</xsl:if>
 		<tbody>
-			<xsl:apply-templates select="* except $header-rows" />
+			<xsl:apply-templates select="* except $header-rows">
+				<xsl:with-param name="table-class" as="xs:string?" select="@class" tunnel="yes" />
+			</xsl:apply-templates>
 		</tbody>
 	</table>
 </xsl:template>
 
 <xsl:template match="tr | th | td">
+	<xsl:param name="class-context" as="element()" tunnel="yes" />
+	<xsl:param name="table-class" as="xs:string?" tunnel="yes" />
 	<xsl:element name="{ local-name() }">
 		<xsl:copy-of select="@*" />
+		<xsl:if test="$table-class">
+			<xsl:variable name="selector" as="xs:string" select="concat('.', $table-class, ' ', local-name(.))" /> <!-- e.g., '.TableClass1 td' -->
+			<xsl:variable name="selector" as="xs:string" select="uk:augment-simple-class-selector($class-context, $selector)" /> <!-- e.g., '#judgment .TableClass1 td' -->
+			<xsl:variable name="table-class-properties" select="uk:get-all-class-properties($class-context, $selector)" />
+			<xsl:if test="exists($table-class-properties)">
+				<xsl:attribute name="style">
+					<xsl:value-of select="string-join($table-class-properties, ';')" />
+					<xsl:if test="exists(@style)">
+						<xsl:value-of select="';'" />
+						<xsl:value-of select="concat(';', @style)" />
+					</xsl:if>
+				</xsl:attribute>
+			</xsl:if>
+		</xsl:if>
 		<xsl:apply-templates />
 	</xsl:element>
 </xsl:template>
