@@ -15,8 +15,10 @@ pytest = "^7.4.3"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-
 [tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
 ignore = ["E501", "G004", "PLR2004", "RUF005", "RUF012", "UP040"] # long lines, fstrings in logs, magic values, consider not concat, mutable classbits, type instead of TypeAlias
 extend-select = ["W", "B", "Q", "C90", "I", "UP", "YTT", "ASYNC", "S", "BLE", "A", "COM", "C4", "DTZ", "T10", "DJ", "EM", "EXE", "FA",
                  "ISC", "ICN", "G", "INP", "PIE", "T20", "PYI", "PT", "Q", "RSE", "RET", "SLF", "SLOT", "SIM", "TID", "TCH", "INT", "PTH",
@@ -24,8 +26,8 @@ extend-select = ["W", "B", "Q", "C90", "I", "UP", "YTT", "ASYNC", "S", "BLE", "A
 unfixable = ["ERA"]
 
 # things skipped:
-# N: naming, possibly good
-# D: docstrings missing throughout
+# N: naming, possibly good
+# D: docstrings missing throughout
 # ANN: annotations missing throughout
 # FBT: not convinced boolean trap worth auto-banning.
 # CPY: copyright at top of each file
@@ -37,19 +39,10 @@ unfixable = ["ERA"]
 # PD, NPY, AIR: ignored, panda / numpy / airflow specific
 # FURB: not yet out of preview
 
-
-
-[tool.ruff.extend-per-file-ignores]
+[tool.ruff.lint.extend-per-file-ignores]
 "*" = ["RET505", # disagree with if X: return Y else: return Z being wrong
        "T201",   # print
        "S113",   # requests no timeout : TODO
       ]
 "tests/*" = ["S101"]  # assert fine in tests
-"development_scripts/populate_top_judgments_and_neighbours.py" = ["S314", "C400"] # TODO
-
-
-
-[tool.ruff.isort]
-known-first-party = ["ds-caselaw-editor-ui", "config"]
-
-[tool.ruff.pycodestyle]
+"development_scripts/populate_top_judgments_and_neighbours.py" = ["S314", "C400"] # TODO
