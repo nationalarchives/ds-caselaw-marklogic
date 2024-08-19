@@ -123,24 +123,26 @@ declare private variable $neutral-citation-patterns as xs:string+ := (
         '(^| )EWHC \d+ \(?(Admin|Admlty|Ch|Comm|Costs|Fam|IPEC|Pat|QB|KB|TCC)\)?( |$)',
         '(^| )EWHC \d+( |$)',
         (: '(^| )\d+ \(?(Admin|Admlty|Ch|Comm|Costs|Fam|IPEC|Pat|QB|KB|TCC)\)?( |$)', :)
-    '(^| )\[?\d{4}\]? (EWFC|EWCOP) \d+( |$)',
-        '(^| )\[?\d{4}\]? (EWFC|EWCOP)( |$)',
-        '(^| )(EWFC|EWCOP) \d+( |$)',
+    '(^| )\[?\d{4}\]? EWCOP \d+ \(?(T1|T2|T3)\)?( |$)',
+        '(^| )\[?\d{4}\]? EWCOP \d+( |$)',
+        '(^| )\[?\d{4}\]? EWCOP( |$)',
+        '(^| )EWCOP \d+ \(?(T1|T2|T3)\)?( |$)',
+        '(^| )EWCOP \d+( |$)',
+    '(^| )\[?\d{4}\]? (EWFC|EAT|UKAIT|UKIPTrib) \d+( |$)',
+        '(^| )\[?\d{4}\]? (EWFC|EAT|UKAIT|UKIPTrib)( |$)',
+        '(^| )(EWFC|EAT|UKAIT|UKIPTrib) \d+( |$)',
     '(^| )\[?\d{4}\]? UKUT \d+ \(?(AAC|IAC|LC|TCC)\)?( |$)',
         '(^| )\[?\d{4}\]? UKUT \d+( |$)',
         '(^| )\[?\d{4}\]? UKUT( |$)',
         '(^| )UKUT \d+ \(?(AAC|IAC|LC|TCC)\)?( |$)',
         '(^| )UKUT \d+( |$)',
         (: '(^| )\d+ \(?(AAC|IAC|LC|TCC)\)?( |$)', :)
-    '(^| )\[?\d{4}\]? EAT \d+( |$)',
-        '(^| )\[?\d{4}\]? EAT( |$)',
-        '(^| )EAT \d+( |$)',
-    '(^| )\[?\d{4}\]? UKFTT \d+ \(?(TC)\)?( |$)',
+    '(^| )\[?\d{4}\]? UKFTT \d+ \(?(TC|GRC)\)?( |$)',
         '(^| )\[?\d{4}\]? UKFTT \d+( |$)',
         '(^| )\[?\d{4}\]? UKFTT( |$)',
-        '(^| )UKFTT \d+ \(?(TC)\)?( |$)',
+        '(^| )UKFTT \d+ \(?(TC|GRC)\)?( |$)',
         '(^| )UKFTT \d+( |$)'
-        (: '(^| )\d+ \(?(TC)\)?( |$)' :)
+        (: '(^| )\d+ \(?(TC|GRC)\)?( |$)' :)
 );
 
 declare private function is-a-neutral-citation($phrase as xs:string) as xs:boolean {
