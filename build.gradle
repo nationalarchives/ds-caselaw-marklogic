@@ -24,7 +24,7 @@ configurations {
 }
 
 dependencies {
-  corb "com.marklogic:marklogic-corb:2.4.0"
+  corb "com.marklogic:marklogic-corb:2.5.6"
   mlcp "com.marklogic:mlcp:11.3.0"
   mlcp files("lib")
   mlBundle "com.marklogic:marklogic-unit-test-modules:1.3.0"
