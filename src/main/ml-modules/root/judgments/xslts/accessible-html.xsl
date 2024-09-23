@@ -18,6 +18,9 @@
 <xsl:function name="uk:link-is-supported" as="xs:boolean">
 	<xsl:param name="href" as="attribute()?" />
 	<xsl:choose>
+		<xsl:when test="$href='#'">
+			<xsl:sequence select="false()" />
+		</xsl:when>
 		<xsl:when test="starts-with($href, '#')">
 			<xsl:sequence select="true()" />
 		</xsl:when>
