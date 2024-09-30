@@ -524,6 +524,22 @@
 				</xs:documentation>
 			</xs:annotation>
 		</xs:enumeration>
+		<xs:enumeration value="EWCC">
+			<xs:annotation>
+				<xs:documentation>
+					<name>The County Court</name>
+					<link>https://www.judiciary.uk/courts-and-tribunals/county-court/</link>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
+		<xs:enumeration value="EWCR">
+			<xs:annotation>
+				<xs:documentation>
+					<name>The Crown Court</name>
+					<link>https://www.judiciary.uk/courts-and-tribunals/crown-court/</link>
+				</xs:documentation>
+			</xs:annotation>
+		</xs:enumeration>
 		<xs:enumeration value="UKUT-AAC">
 			<xs:annotation>
 				<xs:documentation>
