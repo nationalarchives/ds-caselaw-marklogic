@@ -763,6 +763,7 @@
 <!-- tables -->
 
 <xsl:template match="table">
+	<div class="judgment-body__table">
 	<table>
 		<xsl:variable name="header-rows" as="element()*" select="*[child::th]" />
 		<xsl:if test="exists($header-rows)">
@@ -778,6 +779,7 @@
 			</xsl:apply-templates>
 		</tbody>
 	</table>
+	</div>
 </xsl:template>
 
 <xsl:template match="tr | th | td">
