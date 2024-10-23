@@ -1,4 +1,5 @@
 {
   "server-name": "%%NAME%%",
-  "authentication": "basic"
+  "authentication": "basic",
+  "request-timeout": 10
 }
