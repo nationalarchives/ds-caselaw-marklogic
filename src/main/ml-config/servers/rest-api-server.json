@@ -1,5 +1,5 @@
 {
   "server-name": "%%NAME%%",
   "authentication": "basic",
-  "default-time-limit": 10
+  "default-time-limit": 20
 }
