@@ -34,9 +34,10 @@
 	</column>
 	<column>
 	  <name>document_published</name>
-	  <scalar-type>string</scalar-type>
+	  <scalar-type>boolean</scalar-type>
 	  <val>../../published</val>
-	  <nullable>false</nullable>
+	  <nullable>true</nullable>
+	  <default>fn:false()</default>
 	  <invalid-values>reject</invalid-values>
 	  <reindexing>visible</reindexing>
 	</column>
