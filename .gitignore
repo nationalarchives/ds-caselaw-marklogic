@@ -5,3 +5,5 @@ gradle-*.properties
 !gradle-development.properties
 __pycache__
 node_modules/
+corb2/*.jar
+corb2/*.log
