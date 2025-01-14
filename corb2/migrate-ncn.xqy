@@ -8,20 +8,28 @@ import module namespace sem = "http://marklogic.com/semantics"
 
 declare variable $URI external;
 
-let $cite := fn:doc($URI)//uk:cite/text()
+let $doc_cite := fn:doc($URI)//uk:cite/text()
+let $summary_cite := fn:doc($URI)//uk:summaryOfCite/text()
+let $cite := if ($doc_cite) then ($doc_cite) else ($summary_cite)
+
 let $slug := fn:replace(
                 fn:replace($URI, "\.xml$", "")
                 , "^/", "")
 let $log := ("")
 let $uuid := "id-"||sem:uuid-string()
 let $log := ($log, "Processing", $URI, $cite, $uuid)
-let $node :=
+
+let $node := if ($cite) then (
 <identifiers><identifier>
 <namespace>ukncn</namespace>
 <uuid>{$uuid}</uuid>
 <value>{$cite}</value>
 <url_slug>{$slug}</url_slug>
 </identifier></identifiers>
+) else (<identifiers/>)
+
+let $log := ($log, if ($cite) then () else "cite empty at " || $URI)
+
 let $log := ($log, xdmp:quote($node))
 
 let $log := ($log, if
@@ -29,6 +37,6 @@ let $log := ($log, if
           then
             "ignored as failure/collision"
           else
-            "set property" || xdmp:document-set-property($URI, $node))
+            "set property" || xdmp:document-set-property($URI, $node) )
 
 return string-join($log, "&#10;")
