@@ -14,8 +14,7 @@ plugins {
 
 repositories {
   mavenCentral()
-  // jcenter() // Removed in Gradle 8
-  maven {url "https://developer.marklogic.com/maven2/"}
+  maven {url = "https://developer.marklogic.com/maven2/"}
 }
 
 configurations {
