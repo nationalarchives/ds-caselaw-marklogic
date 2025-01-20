@@ -49,6 +49,14 @@
 	  <invalid-values>reject</invalid-values>
 	  <reindexing>visible</reindexing>
 	</column>
+	<column>
+	  <name>identifier_namespace</name>
+	  <scalar-type>string</scalar-type>
+	  <val>namespace</val>
+	  <nullable>false</nullable>
+	  <invalid-values>reject</invalid-values>
+	  <reindexing>visible</reindexing>
+	</column>
       </columns>
     </row>
   </rows>
