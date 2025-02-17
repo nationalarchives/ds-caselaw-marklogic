@@ -198,5 +198,4 @@ let $boosted-query := helper:boost-title-and-ncn($q, $query)
 
 let $results := search:resolve(element x { $boosted-query }/*, $search-options, $start, $page-size)
 
-let $result-uri := $results//search:result/@uri
-return xdmp:document-get-properties($result-uri, xs:QName("identifiers"))
+return helper:add-property-to-search($results, "identifiers")
