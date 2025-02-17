@@ -201,4 +201,5 @@ let $total as xs:integer := xs:integer($results/@total)
 let $pages as xs:integer := if ($total mod $page-size eq 0) then $total idiv $page-size else $total idiv $page-size + 1
 let $params := $params => map:with('pages', $pages)
 
-return $results
+let $result-uri := $results//search:result/@uri
+return xdmp:document-get-properties($result-uri, xs:QName("identifiers"))
