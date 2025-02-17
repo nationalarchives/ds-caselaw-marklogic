@@ -312,13 +312,27 @@ declare function add-property-to-search($search-results, $property-name) {
     let $result-uri := $search-results//search:result/@uri
     let $identifiers := xdmp:document-get-properties($result-uri, xs:QName("identifiers"))
     let $merge-properties :=
-        <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+        <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+            xmlns:search="http://marklogic.com/appservices/search">
             <xsl:template match="/ | @* | node()">
                 <xsl:copy>
                     <xsl:apply-templates select="@* | node()" />
                 </xsl:copy>
             </xsl:template>
+            <xsl:template match="search:extracted">
+                <!-- Copy the element -->
+                <xsl:copy>
+                    <!-- And everything inside it -->
+                    <xsl:apply-templates select="@* | node()"/>
+                </xsl:copy>
+                <!-- Add new node -->
+                <search:extracted kind="property"> <!-- feels kinda cargoculty -->
+                    { $identifiers }
+                </search:extracted>
+
+            </xsl:template>
         </xsl:stylesheet>
+
 
     return xdmp:xslt-eval($merge-properties, $search-results)
 };
