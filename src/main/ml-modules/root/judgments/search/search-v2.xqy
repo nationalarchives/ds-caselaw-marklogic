@@ -62,7 +62,8 @@ let $query1 := if ($q and not(helper:is-a-consignment-number($q))) then (helper:
 let $query2 := if ($party) then
     cts:or-query((
         cts:element-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'party'), $party),
-        cts:element-attribute-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'FRBRname'), fn:QName('', 'value'), $party)
+        cts:element-attribute-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'FRBRname'), fn:QName('', 'value'), $party),
+        cts:element-word-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'party'), $party)
     ))
 else ()
 
