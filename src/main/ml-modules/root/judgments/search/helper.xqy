@@ -334,7 +334,7 @@ declare function add-property-to-search($search-results, $property-name) {
                 </xsl:copy>
                 <!-- Add new node -->
                 <xsl:variable name="uri" select="ancestor::search:result/@uri"/>
-                <search:extracted kind="property"><xsl:copy-of select="map:get($identifier-map, $uri)"/></search:extracted>
+                <search:extracted kind="{{$property-name}}"><xsl:copy-of select="map:get($identifier-map, $uri)"/></search:extracted>
             </xsl:template>
         </xsl:stylesheet>
 
