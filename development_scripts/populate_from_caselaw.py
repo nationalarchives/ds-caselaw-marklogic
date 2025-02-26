@@ -24,11 +24,21 @@ urls = [
     "eat/2023/2",
 ]
 
+
+def test_response(response):
+    try:
+        response.raise_for_status()
+    except Exception:
+        print("Content of server response:")
+        print(response.content)
+        raise
+
+
 for url in urls:
     ml_url = f"/{url}.xml"
     print(url)
     response = requests.get(f"https://caselaw.nationalarchives.gov.uk/{url}/data.xml")
-    response.raise_for_status()
+    test_response(response)
     xml = response.content
     print("got xml")
 
@@ -36,7 +46,7 @@ for url in urls:
         f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}&collection=judgment",
         data=xml,
     )
-    response.raise_for_status()
+    test_response(response)
     print("added to local Marklogic db")
 
 for filename in ["eat-2023-1"]:
@@ -49,11 +59,10 @@ for filename in ["eat-2023-1"]:
         f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}&collection=judgment",
         data=content,
     )
-    response.raise_for_status()
+    test_response(response)
     response = requests.put(
         f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}&category=properties",
         data=properties,
     )
-    print(response.content)
-    response.raise_for_status()
+    test_response(response)
     print(f"added {filename} to local Marklogic db")
