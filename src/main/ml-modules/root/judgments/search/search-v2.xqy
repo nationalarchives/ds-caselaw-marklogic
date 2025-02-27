@@ -199,4 +199,4 @@ let $boosted-query := helper:boost-title-and-ncn($q, $query)
 
 let $results := search:resolve(element x { $boosted-query }/*, $search-options, $start, $page-size)
 
-return helper:add-property-to-search($results, "identifiers")
+return helper:add-properties-to-search($results)
