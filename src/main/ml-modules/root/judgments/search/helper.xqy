@@ -308,11 +308,14 @@ declare private variable $snippet-filter := <xsl:stylesheet xmlns:xsl="http://ww
     </xsl:template>
 </xsl:stylesheet>;
 
-declare function add-property-to-search($search-results, $property-name) {
-    let $result-uri := $search-results//search:result/@uri
-    let $identifiers := xdmp:document-get-properties($result-uri, xs:QName($property-name))
+declare function add-properties-to-search($search-results) {
+    let $result-uris := $search-results//search:result/@uri
+
+    (: get a map of uri: identifiers for insertion later :)
+    let $identifiers := xdmp:document-get-properties($result-uris, xs:QName("identifiers"))
     let $identifier-map := map:map()
-    let $_ := for $uri in $result-uri return map:put($identifier-map, $uri, xdmp:document-get-properties($uri, xs:QName("identifiers")))
+    let $_ := for $uri in $result-uris return map:put($identifier-map, $uri, xdmp:document-get-properties($uri, xs:QName("identifiers")))
+
     let $params := map:new(
         map:entry(xdmp:key-from-QName(fn:QName("", "identifier-map")), $identifier-map)
     )
@@ -334,7 +337,7 @@ declare function add-property-to-search($search-results, $property-name) {
                 </xsl:copy>
                 <!-- Add new node -->
                 <xsl:variable name="uri" select="ancestor::search:result/@uri"/>
-                <search:extracted kind="{{$property-name}}"><xsl:copy-of select="map:get($identifier-map, $uri)"/></search:extracted>
+                <search:extracted kind="identifiers"><xsl:copy-of select="map:get($identifier-map, $uri)"/></search:extracted>
             </xsl:template>
         </xsl:stylesheet>
 
