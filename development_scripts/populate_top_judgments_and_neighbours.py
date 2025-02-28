@@ -1,3 +1,4 @@
+#!python3
 """
 This script retrieves XML data from the live TNA caselaw website and updates a local MarkLogic database.
 
