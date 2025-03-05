@@ -9,6 +9,7 @@ import module namespace json = "http://marklogic.com/xdmp/json"
 
 declare namespace akn = "http://docs.oasis-open.org/legaldocml/ns/akn/3.0";
 declare namespace uk = "https://caselaw.nationalarchives.gov.uk";
+declare namespace search = "http://marklogic.com/appservices/search";
 
 declare variable $default-options as xs:string* := ( 'case-insensitive' );
 
@@ -306,3 +307,40 @@ declare private variable $snippet-filter := <xsl:stylesheet xmlns:xsl="http://ww
         </xsl:copy>
     </xsl:template>
 </xsl:stylesheet>;
+
+declare function add-properties-to-search($search-results) {
+    let $result-uris := $search-results//search:result/@uri
+
+    (: get a map of uri: identifiers for insertion later :)
+    let $identifiers := xdmp:document-get-properties($result-uris, xs:QName("identifiers"))
+    let $identifier-map := map:map()
+    let $_ := for $uri in $result-uris return map:put($identifier-map, $uri, xdmp:document-get-properties($uri, xs:QName("identifiers")))
+
+    let $params := map:new(
+        map:entry(xdmp:key-from-QName(fn:QName("", "identifier-map")), $identifier-map)
+    )
+    let $merge-properties :=
+        <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+            xmlns:search="http://marklogic.com/appservices/search"
+            xmlns:map="http://marklogic.com/xdmp/map">
+            <xsl:param name="identifier-map"/>
+            <xsl:template match="/ | @* | node()">
+                <xsl:copy>
+                    <xsl:apply-templates select="@* | node()" />
+                </xsl:copy>
+            </xsl:template>
+            <xsl:template match="search:extracted">
+                <!-- Copy the element -->
+                <xsl:copy>
+                    <!-- And everything inside it -->
+                    <xsl:apply-templates select="@* | node()"/>
+                </xsl:copy>
+                <!-- Add new node -->
+                <xsl:variable name="uri" select="ancestor::search:result/@uri"/>
+                <search:extracted kind="identifiers"><xsl:copy-of select="map:get($identifier-map, $uri)"/></search:extracted>
+            </xsl:template>
+        </xsl:stylesheet>
+
+
+    return xdmp:xslt-eval($merge-properties, $search-results, $params)
+    };

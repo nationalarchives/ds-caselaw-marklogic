@@ -1,24 +1,6 @@
 <rapi:metadata xmlns:rapi="http://marklogic.com/rest-api"
                xmlns:prop="http://marklogic.com/xdmp/property">
 <prop:properties>
-<dls:version xmlns:dls="http://marklogic.com/xdmp/dls">
-<dls:latest>true
-</dls:latest>
-<dls:created>2025-02-26T17:54:17.834153Z
-</dls:created>
-<dls:author>7071164303237443533
-</dls:author>
-<dls:external-security-id>0
-</dls:external-security-id>
-<dls:external-user-name>
-</dls:external-user-name>
-<dls:annotation>
-</dls:annotation>
-<dls:deleted>false
-</dls:deleted>
-</dls:version>
-<dls:update-permissions xmlns:dls="http://marklogic.com/xdmp/dls">
-</dls:update-permissions>
     <source-organisation>HM Courts and Tribunals Service</source-organisation>
     <source-name>Tess Testerton</source-name>
     <source-email>tess.testerton@justice.gov.uk</source-email>

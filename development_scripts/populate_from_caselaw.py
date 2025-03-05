@@ -65,4 +65,14 @@ for filename in ["eat-2023-1"]:
         data=properties,
     )
     test_response(response)
+
+    xquery = f"""
+    xquery version "1.0-ml";
+    import module namespace dls = "http://marklogic.com/xdmp/dls" at "/MarkLogic/dls.xqy";
+    dls:document-manage("{ml_url}", fn:false())
+    """
+
+    response = requests.post("http://admin:admin@localhost:8011/LATEST/eval", data={"xquery": xquery})
+
+    print(response.content)
     print(f"added {filename} to local Marklogic db")
