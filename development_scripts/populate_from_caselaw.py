@@ -21,11 +21,11 @@ URLS_TO_IMPORT = [
     "ewca/civ/2003/1048",
     "ewca/civ/2003/1489",
     "ewca/civ/2003/48",
-    "eat/2023/2",
 ]
 
 FIXTURE_FILES_TO_IMPORT = [
     "eat-2023-1",
+    "eat-2023-2",
 ]
 
 
