@@ -16,12 +16,16 @@ from pathlib import Path
 
 import requests
 
-urls = [
+URLS_TO_IMPORT = [
     "ewhc/qb/2020/594",
     "ewca/civ/2003/1048",
     "ewca/civ/2003/1489",
     "ewca/civ/2003/48",
     "eat/2023/2",
+]
+
+FIXTURE_FILES_TO_IMPORT = [
+    "eat-2023-1",
 ]
 
 
@@ -34,7 +38,7 @@ def test_response(response):
         raise
 
 
-for url in urls:
+def load_fixture_from_url(url: str) -> None:
     ml_url = f"/{url}.xml"
     print(url)
     response = requests.get(f"https://caselaw.nationalarchives.gov.uk/{url}/data.xml")
@@ -49,7 +53,8 @@ for url in urls:
     test_response(response)
     print("added to local Marklogic db")
 
-for filename in ["eat-2023-1"]:
+
+def load_fixture_from_files(file_prefix: str) -> None:
     ml_url = "/" + filename.replace("-", "/") + ".xml"
     with Path("development_scripts", "fixture_data", f"{filename}-content.xml").open() as f:
         content = f.read()
@@ -76,3 +81,10 @@ for filename in ["eat-2023-1"]:
 
     print(response.content)
     print(f"added {filename} to local Marklogic db")
+
+
+for url in URLS_TO_IMPORT:
+    load_fixture_from_url(url)
+
+for filename in FIXTURE_FILES_TO_IMPORT:
+    load_fixture_from_files(file_prefix=filename)
