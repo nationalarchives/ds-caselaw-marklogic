@@ -51,9 +51,9 @@ for url in urls:
 
 for filename in ["eat-2023-1"]:
     ml_url = "/" + filename.replace("-", "/") + ".xml"
-    with Path(f"development_scripts/fixtures/{filename}-content.xml").open() as f:
+    with Path("development_scripts", "fixture_data", f"{filename}-content.xml").open() as f:
         content = f.read()
-    with Path(f"development_scripts/fixtures/{filename}-properties.xml").open() as f:
+    with Path("development_scripts", "fixture_data", f"{filename}-properties.xml").open() as f:
         properties = f.read()
     response = requests.put(
         f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}&collection=judgment",
