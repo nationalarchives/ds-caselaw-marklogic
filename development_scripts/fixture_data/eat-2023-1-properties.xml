@@ -1,0 +1,22 @@
+<rapi:metadata xmlns:rapi="http://marklogic.com/rest-api"
+    xmlns:prop="http://marklogic.com/xdmp/property">
+    <prop:properties>
+        <source-organisation>HM Courts and Tribunals Service</source-organisation>
+        <source-name>Tess Testerton</source-name>
+        <source-email>tess.testerton@justice.gov.uk</source-email>
+        <transfer-consignment-reference>TDR-1999-ABC</transfer-consignment-reference>
+        <transfer-received-at>2023-03-16T16:09:31Z</transfer-received-at>
+        <published>true</published>
+        <last_sent_to_enrichment>2024-11-20T15:27:31.295578+00:00</last_sent_to_enrichment>
+        <last_sent_to_parser>2024-07-10T16:46:41.191852+00:00</last_sent_to_parser>
+        <identifiers>
+            <identifier>
+                <namespace>ukncn</namespace>
+                <uuid>id-3bd89bc3-6341-46e2-b130-d7ffe8098319</uuid>
+                <value>[2023] EAT 1</value>
+                <url_slug>eat/2023/1</url_slug>
+            </identifier>
+        </identifiers>
+        <prop:last-modified>2025-01-14T11:59:04Z</prop:last-modified>
+    </prop:properties>
+</rapi:metadata>
