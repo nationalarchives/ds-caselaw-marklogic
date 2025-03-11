@@ -45,4 +45,3 @@ unfixable = ["ERA"]
        "S113",   # requests no timeout : TODO
       ]
 "tests/*" = ["S101"]  # assert fine in tests
-"development_scripts/populate_top_judgments_and_neighbours.py" = ["S314", "C400"] # TODO
