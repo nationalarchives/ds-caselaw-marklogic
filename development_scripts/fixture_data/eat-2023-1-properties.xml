@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <rapi:metadata xmlns:rapi="http://marklogic.com/rest-api"
     xmlns:prop="http://marklogic.com/xdmp/property">
     <prop:properties>
