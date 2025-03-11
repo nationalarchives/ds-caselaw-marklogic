@@ -43,9 +43,9 @@ You'll then need to deploy the configuration (see Deployment, above)
 
 Ensure that `MARKLOGIC_HOST` in `.env` in the editor and public ui is set to `host.docker.internal` in `.env` and that the username and password are both `admin` if you want to use them with the local instance.
 
-### 4. (Optional) Populate data in the local database
+### 4. (Optional) Populate test fixtures in the local database
 
-To get some example documents onto the local database, there are `development_scripts/populate_top_judgments_and_neighbours.py` and `development_scripts/populate_from_caselaw.py` which copy documents from the live caselaw site (they don't import or fake properties) into your local database. (Check https://caselaw.nationalarchives.gov.uk/terms-of-use and get in touch if you intend to download many more than these.)
+To load test fixtures, run `development_scripts/populate_from_caselaw.py`. This will load a variety of documents.
 
 There are also other ways other importing data as detailed further down the readme but haven't been tested for a while.
 
