@@ -62,12 +62,12 @@ def load_fixture_from_files(file_prefix: str) -> None:
 
     ml_url = "/" + filename.replace("-", "/") + ".xml"
 
-    with Path("development_scripts", "fixture_data", f"{filename}-content.xml").open() as f:
+    with Path("development_scripts", "fixture_data", f"{filename}-content.xml").open("rb") as f:
         content = f.read()
-    with Path("development_scripts", "fixture_data", f"{filename}-properties.xml").open() as f:
+    with Path("development_scripts", "fixture_data", f"{filename}-properties.xml").open("rb") as f:
         properties = f.read()
 
-    print(">> Source files read to memory…")
+    print(f">> Source files read to memory… ({len(content)}, {len(properties)} bytes)")
 
     response = requests.put(
         f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}&collection=judgment",
