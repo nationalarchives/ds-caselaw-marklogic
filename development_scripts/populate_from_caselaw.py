@@ -1,13 +1,14 @@
 #!python3
 """
-This script retrieves XML data from the live TNA caselaw website and updates a local MarkLogic database.
+This script loads document fixture files into the MarkLogic database.
 
 Assumptions about the local MarkLogic server:
 - is running accessible at 'localhost:8011'
 - uses the default admin username and password ('admin:admin') for authentication.
 
 Usage:
-- Modify the list of URLs to match the desired URLs from the live caselaw website.
+- Get both the document XML and properties XML for documents you wish to load, and **perform necessary anonymisation work** (particularly with things like submission data).
+- Modify the list of fixture files to match those in the `fixture_data` folder you want to load.
 - Ensure the MarkLogic server is running and accessible at 'localhost:8011'.
 - Run the script.
 """
@@ -15,13 +16,6 @@ Usage:
 from pathlib import Path
 
 import requests
-
-URLS_TO_IMPORT = [
-    "ewhc/qb/2020/594",
-    "ewca/civ/2003/1048",
-    "ewca/civ/2003/1489",
-    "ewca/civ/2003/48",
-]
 
 FIXTURE_FILES_TO_IMPORT = [
     "eat-2023-1",
@@ -37,24 +31,6 @@ def test_response(response):
         print("Content of server response:")
         print(response.content)
         raise
-
-
-def load_fixture_from_url(url: str) -> None:
-    print(f"> Loading {url} from URL…")
-
-    ml_url = f"/{url}.xml"
-
-    response = requests.get(f"https://caselaw.nationalarchives.gov.uk/{url}/data.xml")
-    test_response(response)
-    xml = response.content
-    print(">> Downloaded XML…")
-
-    response = requests.put(
-        f"http://admin:admin@localhost:8011/LATEST/documents?uri={ml_url}&collection=judgment",
-        data=xml,
-    )
-    test_response(response)
-    print(">> ✅ Saved to MarkLogic")
 
 
 def load_fixture_from_files(file_prefix: str) -> None:
@@ -98,10 +74,5 @@ def load_fixture_from_files(file_prefix: str) -> None:
 
 print("Beginning fixture import…")
 
-print("Loading fixtures from URLs…")
-for url in URLS_TO_IMPORT:
-    load_fixture_from_url(url)
-
-print("Loading fixtures from files…")
 for filename in FIXTURE_FILES_TO_IMPORT:
     load_fixture_from_files(file_prefix=filename)
