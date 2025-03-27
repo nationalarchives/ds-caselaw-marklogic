@@ -31,6 +31,7 @@ declare variable $editor_status as xs:string? external := "";
 declare variable $editor_assigned as xs:string? external := "";
 declare variable $editor_priority as xs:string? external := "";
 declare variable $collections as xs:string? external := "";
+declare variable $show_contentless_documents as xs:boolean? external;
 declare variable $quoted_phrases as json:array? external := xdmp:from-json-string("[]");
 
 let $collection-uris := fn:tokenize($collections, ",")
@@ -53,6 +54,7 @@ let $params := map:map()
     => map:with('to', $to)
     => map:with('show_unpublished', $show_unpublished)
     => map:with('only_unpublished', $only_unpublished)
+    => map:with('show_contentless_documents', $show_contentless_documents)
     => map:with('editor_status', $editor_status)
     => map:with('editor_assigned', $editor_assigned)
     => map:with('editor_priority', $editor_priority)
