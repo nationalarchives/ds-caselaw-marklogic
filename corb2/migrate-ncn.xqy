@@ -11,17 +11,21 @@ declare variable $URI external;
 let $doc_cite := fn:doc($URI)//uk:cite/text()
 let $summary_cite := fn:doc($URI)//uk:summaryOfCite/text()
 let $cite := if ($doc_cite) then ($doc_cite) else ($summary_cite)
+let $namespace := if ($doc_cite) then "ukncn" else "uksummaryofncn"
 
-let $slug := fn:replace(
+let $truncated-uri := fn:replace(
                 fn:replace($URI, "\.xml$", "")
                 , "^/", "")
+let $slug := fn.replace($truncated-uri, "press-summary/1$", "press-summary")
+
+
 let $log := ("")
 let $uuid := "id-"||sem:uuid-string()
 let $log := ($log, "Processing", $URI, $cite, $uuid)
 
 let $node := if ($cite) then (
 <identifiers><identifier>
-<namespace>ukncn</namespace>
+<namespace>{$namespace}</namespace>
 <uuid>{$uuid}</uuid>
 <value>{$cite}</value>
 <url_slug>{$slug}</url_slug>
