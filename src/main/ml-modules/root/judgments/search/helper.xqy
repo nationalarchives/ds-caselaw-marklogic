@@ -118,10 +118,10 @@ declare private variable $neutral-citation-patterns as xs:string+ := (
         '(^| )EWCA (Civ|Crim) \d+( |$)',
         '(^| )EWCA (Civ|Crim)( |$)',
         '(^| )(Civ|Crim) \d+( |$)',
-    '(^| )\[?\d{4}\]? EWHC \d+ \(?(Admin|Admlty|Ch|Comm|Costs|Fam|IPEC|Pat|QB|KB|TCC)\)?( |$)',
+    '(^| )\[?\d{4}\]? EWHC \d+ \(?(Admin|Admlty|Ch|Comm|Costs|Fam|IPEC|Mercantile|Pat|QB|KB|TCC)\)?( |$)',
         '(^| )\[?\d{4}\]? EWHC \d+( |$)',
         '(^| )\[?\d{4}\]? EWHC( |$)',
-        '(^| )EWHC \d+ \(?(Admin|Admlty|Ch|Comm|Costs|Fam|IPEC|Pat|QB|KB|TCC)\)?( |$)',
+        '(^| )EWHC \d+ \(?(Admin|Admlty|Ch|Comm|Costs|Fam|IPEC|Mercantile|Pat|QB|KB|TCC)\)?( |$)',
         '(^| )EWHC \d+( |$)',
         (: '(^| )\d+ \(?(Admin|Admlty|Ch|Comm|Costs|Fam|IPEC|Pat|QB|KB|TCC)\)?( |$)', :)
     '(^| )\[?\d{4}\]? EWCOP \d+ \(?(T1|T2|T3)\)?( |$)',
