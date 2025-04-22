@@ -16,7 +16,7 @@ let $namespace := if ($doc_cite) then "ukncn" else "uksummaryofncn"
 let $truncated-uri := fn:replace(
                 fn:replace($URI, "\.xml$", "")
                 , "^/", "")
-let $slug := fn.replace($truncated-uri, "press-summary/1$", "press-summary")
+let $slug := fn:replace($truncated-uri, "press-summary/1$", "press-summary")
 
 
 let $log := ("")
