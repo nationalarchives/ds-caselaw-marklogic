@@ -58,8 +58,9 @@ let $params := map:map()
     => map:with('editor_priority', $editor_priority)
     => map:with('quoted_phrases', $quoted_phrases)
 
-let $query1 := if ($q and not(helper:is-a-consignment-number($q))) then (helper:make-q-query($q)) else ()
-let $query2 := if ($party) then
+(: Build the individual queries :)
+let $q-query := if ($q and not(helper:is-a-consignment-number($q))) then (helper:make-q-query($q)) else ()
+let $party-query := if ($party) then
     cts:or-query((
         cts:element-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'party'), $party),
         cts:element-attribute-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'FRBRname'), fn:QName('', 'value'), $party),
@@ -67,7 +68,7 @@ let $query2 := if ($party) then
     ))
 else ()
 
-let $query4 := if ($court) then cts:or-query(
+let $court-query := if ($court) then cts:or-query(
     for $c in json:array-values($court) return (
     cts:element-value-query(fn:QName('https://judgments.gov.uk/', 'court'), $c, ('case-insensitive')),
     cts:element-value-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'court'), $c, ('case-insensitive')),
@@ -83,21 +84,21 @@ let $judge_query := cts:or-query(fn:map(function($j) {
   cts:element-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'judge'), $j, ('case-insensitive', 'punctuation-insensitive'))
 }, $judge_elements))
 
-let $query5 := if ($judge) then $judge_query else ()
+let $judge-query := if ($judge) then $judge_query else ()
 
-let $query6 := if (empty($from_date)) then () else cts:path-range-query('akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date', '>=', $from_date)
-let $query7 := if (empty($to_date)) then () else cts:path-range-query('akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date', '<=', $to_date)
-let $query8 := if ($show_unpublished or $only_unpublished) then () else cts:properties-fragment-query(cts:element-value-query(fn:QName("", "published"), "true"))
-let $query9 := if ($only_unpublished) then cts:properties-fragment-query(cts:not-query(cts:element-value-query(fn:QName("", "published"), "true"))) else ()
-let $query10 := if ($neutral_citation) then
+let $from-date-query := if (empty($from_date)) then () else cts:path-range-query('akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date', '>=', $from_date)
+let $to-date-query := if (empty($to_date)) then () else cts:path-range-query('akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date', '<=', $to_date)
+let $published-query := if ($show_unpublished or $only_unpublished) then () else cts:properties-fragment-query(cts:element-value-query(fn:QName("", "published"), "true"))
+let $unpublished-query := if ($only_unpublished) then cts:properties-fragment-query(cts:not-query(cts:element-value-query(fn:QName("", "published"), "true"))) else ()
+let $neutral-citation-query := if ($neutral_citation) then
     cts:element-value-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'cite'), $neutral_citation, ('case-insensitive'))
 else ()
-let $query11 := if ($specific_keyword) then
+let $specific-keyword-query := if ($specific_keyword) then
     cts:word-query($specific_keyword, ('case-insensitive', 'unstemmed'))
 else ()
-let $query12 := if (helper:is-a-consignment-number($q)) then (helper:make-consignment-number-query($q)) else ()
-let $query13 := if (($show_unpublished or $only_unpublished) and $editor_assigned) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "assigned-to"), $editor_assigned)) else ()
-let $query14 := if (($show_unpublished or $only_unpublished) and $editor_priority) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "editor-priority"), $editor_priority)) else ()
+let $consignment-number-query := if (helper:is-a-consignment-number($q)) then (helper:make-consignment-number-query($q)) else ()
+let $editor-assigned-query := if (($show_unpublished or $only_unpublished) and $editor_assigned) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "assigned-to"), $editor_assigned)) else ()
+let $editor-priority-query := if (($show_unpublished or $only_unpublished) and $editor_priority) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "editor-priority"), $editor_priority)) else ()
 
 let $status_new_query := cts:properties-fragment-query(cts:not-query(
     cts:element-value-query(fn:QName("", "assigned-to"), "*", "wildcarded")
@@ -123,7 +124,7 @@ let $status_progress_query := cts:properties-fragment-query(
 )
 
 
-let $query15 := if (($show_unpublished or $only_unpublished) and $editor_status) then (
+let $editor-status-query := if (($show_unpublished or $only_unpublished) and $editor_status) then (
     if ($editor_status = 'new') then ($status_new_query) else (
         if ($editor_status = 'held') then ($status_held_query) else (
             if ($editor_status = 'inprogress') then ($status_progress_query) else ()
@@ -131,39 +132,56 @@ let $query15 := if (($show_unpublished or $only_unpublished) and $editor_status)
     )
 ) else ()
 
-
-let $queries := ( $collection-query, $query1, $query2, $query4, $query5, $query6, $query7, $query8, $query9, $query10, $query11, $query12, $query13, $query14, $query15, dls:documents-query() )
+(: Build the main query :)
+let $queries := (
+    $collection-query,
+    $q-query,
+    $party-query,
+    $court-query,
+    $judge-query,
+    $from-date-query,
+    $to-date-query,
+    $published-query,
+    $unpublished-query,
+    $neutral-citation-query,
+    $specific-keyword-query,
+    $consignment-number-query,
+    $editor-assigned-query,
+    $editor-priority-query,
+    $editor-status-query,
+    dls:documents-query()
+)
 let $query := cts:and-query($queries)
+let $boosted-query := helper:boost-title-and-ncn($q, $query)
 
-let $show-snippets as xs:boolean := exists(( $query1, $query2, $query5 ))
+(: Build search options :)
 
+let $show-snippets as xs:boolean := exists(( $q-query, $party-query, $judge-query ))
 
 let $sort-direction := if (fn:starts-with($order, '-')) then 'descending' else 'ascending'
 let $sort-word := replace($order, '-', '')
 
-    let $sort-order := if ($sort-word = 'date') then
-        <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
+let $sort-order := if ($sort-word = 'date') then
+    <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
             <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date</path-index>
         </sort-order>
-    else if ($sort-word = 'updated') then
-        <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}" type="xs:dateTime">
-            <element ns="http://marklogic.com/xdmp/property" name="last-modified" />
-        </sort-order>
-    else if ($sort-word = 'transformation') then
-        <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
-            <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:akomaNtoso/akn:judgment/akn:meta/akn:identification/akn:FRBRManifestation/akn:FRBRdate[@name='transform']/@date</path-index>
-        </sort-order>
-    else
-        ()
+else if ($sort-word = 'updated') then
+    <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}" type="xs:dateTime">
+        <element ns="http://marklogic.com/xdmp/property" name="last-modified" />
+    </sort-order>
+else if ($sort-word = 'transformation') then
+    <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
+        <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:akomaNtoso/akn:judgment/akn:meta/akn:identification/akn:FRBRManifestation/akn:FRBRdate[@name='transform']/@date</path-index>
+    </sort-order>
+else
+    ()
 
 let $transform-results := if ($show-snippets) then
     helper:snippet-transform-results($quoted_phrases)
 else
     <transform-results xmlns="http://marklogic.com/appservices/search" apply="empty-snippet" />
 
-
 let $scope := 'documents'
-
 
 let $search-options := <options xmlns="http://marklogic.com/appservices/search">
     <fragment-scope>{ $scope }</fragment-scope>
@@ -194,9 +212,7 @@ let $search-options := <options xmlns="http://marklogic.com/appservices/search">
     { $transform-results }
 </options>
 
-
-let $boosted-query := helper:boost-title-and-ncn($q, $query)
-
+(: Execute the search :)
 let $results := search:resolve(element x { $boosted-query }/*, $search-options, $start, $page-size)
 
 return helper:add-properties-to-search($results)
