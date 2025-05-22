@@ -51,7 +51,11 @@ Ensure that `MARKLOGIC_HOST` in `.env` in the editor and public ui is set to `ho
 
 ### 4. (Optional) Populate test fixtures in the local database
 
-To load test fixtures, run `development_scripts/populate_from_caselaw.py`. This will load a variety of documents.
+To load test fixtures, if you have `python3` installed you can run `development_scripts/populate_from_caselaw.py`. This will load a variety of documents.
+
+You will first need to install the python dependencies for this script manually or by installing the poetry env and and deps via
+
+`poetry install` as long as you have `poetry` installed on your sysren.
 
 There are also other ways other importing data as detailed further down the readme but haven't been tested for a while.
 
