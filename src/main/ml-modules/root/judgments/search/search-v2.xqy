@@ -5,7 +5,7 @@ import module namespace helper = "https://caselaw.nationalarchives.gov.uk/helper
 import module namespace dls = "http://marklogic.com/xdmp/dls" at "/MarkLogic/dls.xqy";
 
 declare namespace akn = "http://docs.oasis-open.org/legaldocml/ns/akn/3.0";
-declare namespace uk = "https://caselaw.nationalarchives.gov.uk";
+declare namespace uk = "https://caselaw.nationalarchives.gov.uk/akn";
 
 declare function uk:get-request-date($name as xs:string) as xs:date? {
     let $raw := $name
@@ -27,6 +27,7 @@ declare variable $from_date as xs:date? := uk:get-request-date($from);
 declare variable $to_date as xs:date? := uk:get-request-date($to);
 declare variable $show_unpublished as xs:boolean? external;
 declare variable $only_unpublished as xs:boolean? external;
+declare variable $only_with_html_representation as xs:boolean? external:= false();
 declare variable $editor_status as xs:string? external := "";
 declare variable $editor_assigned as xs:string? external := "";
 declare variable $editor_priority as xs:string? external := "";
@@ -53,6 +54,7 @@ let $params := map:map()
     => map:with('to', $to)
     => map:with('show_unpublished', $show_unpublished)
     => map:with('only_unpublished', $only_unpublished)
+    => map:with('only_with_html_representation', $only_with_html_representation)
     => map:with('editor_status', $editor_status)
     => map:with('editor_assigned', $editor_assigned)
     => map:with('editor_priority', $editor_priority)
@@ -90,6 +92,7 @@ let $from-date-query := if (empty($from_date)) then () else cts:path-range-query
 let $to-date-query := if (empty($to_date)) then () else cts:path-range-query('akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date', '<=', $to_date)
 let $published-query := if ($show_unpublished or $only_unpublished) then () else cts:properties-fragment-query(cts:element-value-query(fn:QName("", "published"), "true"))
 let $unpublished-query := if ($only_unpublished) then cts:properties-fragment-query(cts:not-query(cts:element-value-query(fn:QName("", "published"), "true"))) else ()
+let $html-representation-query := if ($only_with_html_representation) then cts:not-query(cts:element-value-query(xs:QName('uk:sourceFormat'), 'application/pdf', ('exact'))) else ()
 let $neutral-citation-query := if ($neutral_citation) then
     cts:element-value-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'cite'), $neutral_citation, ('case-insensitive'))
 else ()
@@ -143,6 +146,7 @@ let $queries := (
     $to-date-query,
     $published-query,
     $unpublished-query,
+    $html-representation-query,
     $neutral-citation-query,
     $specific-keyword-query,
     $consignment-number-query,
