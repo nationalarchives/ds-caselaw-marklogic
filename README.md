@@ -31,7 +31,13 @@ Please also create a Github Release when you deploy.
 
 ### 1. Run a marklogic docker container
 
-A `docker-compose.yml` file for running Marklogic locally is included. Run `docker-compose up -d` to start it; it takes a minute or so, and will raise various HTTP errors if you visit `localhost:8000` before that point.
+A `docker-compose.yml` file for running Marklogic locally is included.
+
+It expects a `caselaw` docker network to be created already.
+
+If it does not exist yet, run `docker network create caselaw`
+
+Then run `docker-compose up -d` to start the service; it takes a minute or so, and will raise various HTTP errors if you visit `localhost:8000` before that point.
 
 Note: There is currently a [known issue](https://github.com/marklogic/marklogic-docker/issues/212) with [marklogic-docker](https://github.com/marklogic/marklogic-docker) so instead you might need to run `development_scripts/run_local_docker`
 
@@ -45,7 +51,11 @@ Ensure that `MARKLOGIC_HOST` in `.env` in the editor and public ui is set to `ho
 
 ### 4. (Optional) Populate test fixtures in the local database
 
-To load test fixtures, run `development_scripts/populate_from_caselaw.py`. This will load a variety of documents.
+To load test fixtures, if you have `python3` installed you can run `development_scripts/populate_from_caselaw.py`. This will load a variety of documents.
+
+You will first need to install the python dependencies for this script manually or by installing the poetry env and and deps via
+
+`poetry install` as long as you have `poetry` installed on your sysren.
 
 There are also other ways other importing data as detailed further down the readme but haven't been tested for a while.
 
