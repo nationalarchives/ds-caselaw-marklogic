@@ -59,6 +59,8 @@ You will first need to install the python dependencies for this script manually 
 
 There are also other ways other importing data as detailed further down the readme but haven't been tested for a while.
 
+You will need to run `./corb migrate-ncn` in the `corb2` directory to ensure the files have ids.
+
 ### 5. (Optional) Run unit tests
 
 You can run the unit tests with `gradle mlUnitTest`. This relies on the tests being deployed; use `gradle mlDeploy` in the first instance,
