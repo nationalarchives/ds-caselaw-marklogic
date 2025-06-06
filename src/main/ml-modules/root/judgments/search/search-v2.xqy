@@ -27,7 +27,7 @@ declare variable $from_date as xs:date? := uk:get-request-date($from);
 declare variable $to_date as xs:date? := uk:get-request-date($to);
 declare variable $show_unpublished as xs:boolean? external;
 declare variable $only_unpublished as xs:boolean? external;
-declare variable $only_with_html_representation as xs:boolean? external:= false();
+declare variable $only_with_html_representation as xs:boolean? external;
 declare variable $editor_status as xs:string? external := "";
 declare variable $editor_assigned as xs:string? external := "";
 declare variable $editor_priority as xs:string? external := "";
