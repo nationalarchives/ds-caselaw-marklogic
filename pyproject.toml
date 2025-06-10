@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.11"
 saxonche = "^12.3.0"
 pytest = "^8.0.0"
-requests = "^2.32.3"
+requests = "^2.32.4"
 
 
 [build-system]
