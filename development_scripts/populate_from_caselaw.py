@@ -20,7 +20,6 @@ import requests
 FIXTURE_FILES_TO_IMPORT = [
     "eat-2023-1",
     "eat-2023-2",
-    "pdf-test",
 ]
 
 
