@@ -84,17 +84,6 @@ switch back to the main branch (or any branch) by using `git checkout branchname
 
 TODO: Automatically deploy main to staging, and tags to production using CodeBuild.
 
-## Bulk import
-
-(This hasn't been used in a long time)
-
-Place the XML files you want to import in the `import` folder of this repo, then run
-`gradle importDocuments`. The documents will be imported, and the URI will be set as the
-full file path and name within `import`.
-
-You may want to run `gradle publishAllDocuments` (see below) afterwards. All files
-are automatically put under management on import, so there is no need to run the manage task.
-
 ## Bulk export
 
 To export the latest versions of all documents, for instance for bulk processing, you can use:

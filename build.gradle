@@ -60,15 +60,3 @@ task addAllDocumentsToJudgmentsCollection(type: com.marklogic.gradle.task.CorbTa
   modulePrefix = "add-all-documents-to-judgments-collection"
   threadCount = 16
 }
-
-
-task importDocuments(type: com.marklogic.gradle.task.MlcpTask, dependsOn: ['mlLoadModules']) {
-  classpath = configurations.mlcp
-  command = "IMPORT"
-  database = mlAppName + "-content"
-  fastload = true
-  input_file_path = "import"
-  output_uri_replace = buildscript.sourceFile.getParent() + "/import/" + ",\'/\'"
-  batch_size = 1
-  transaction_size = 1
-}
