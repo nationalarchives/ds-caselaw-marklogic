@@ -4,6 +4,10 @@ from xmlschema import XMLSchema
 
 import sys
 
+xml_schema = XMLSchema.meta_schema
+xml_schema.build()
+
 for file in sys.argv[1:]:
+
     print(f"Validating {file}")
-    XMLSchema.meta_schema.validate(file)
+    xml_schema.is_valid(file)
