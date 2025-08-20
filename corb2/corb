@@ -1,1 +1,12 @@
-java -server -cp .:marklogic-xcc-11.1.0.jar:marklogic-corb-2.5.6.jar -DOPTIONS-FILE=$1.properties com.marklogic.developer.corb.Manager xcc://admin:admin@localhost:8011
+#!/bin/bash
+
+# Set defaults for environment variables if not already set
+ML_HOST="${ML_HOST:-localhost}"
+ML_PORT="${ML_PORT:-8011}"
+ML_USER="${ML_USER:-admin}"
+ML_PASS="${ML_PASS:-admin}"
+
+java -server -cp .:marklogic-xcc-11.1.0.jar:marklogic-corb-2.5.8.jar \
+    -DOPTIONS-FILE="$1.properties" \
+    com.marklogic.developer.corb.Manager \
+    xcc://"$ML_USER":"$ML_PASS"@"$ML_HOST":"$ML_PORT"
