@@ -28,6 +28,14 @@ By default these scripts run against `admin:admin@localhost`. You can adjust thi
 
 Run validation tasks on existing documents. `validate.log` shows output.
 
+### Populate `first_published_datetime` sentinel values
+
+```shell
+./corb populate_first_published_sentinels
+```
+
+As part of [identifying first publication dates for documents](https://github.com/nationalarchives/ds-caselaw-custom-api-client/pull/1172), fill the `first_published_datetime` property of documents with `1970-01-01 00:00:00` where the document is published and where this value is currently empty.
+
 ### Migrate NCNs
 
 > [!WARNING]
