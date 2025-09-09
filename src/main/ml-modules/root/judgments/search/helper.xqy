@@ -138,10 +138,10 @@ declare private variable $neutral-citation-patterns as xs:string+ := (
         '(^| )UKUT \d+ \(?(AAC|IAC|LC|TCC)\)?( |$)',
         '(^| )UKUT \d+( |$)',
         (: '(^| )\d+ \(?(AAC|IAC|LC|TCC)\)?( |$)', :)
-    '(^| )\[?\d{4}\]? UKFTT \d+ \(?(TC|GRC)\)?( |$)',
+    '(^| )\[?\d{4}\]? UKFTT \d+ \(?(TC|GRC|HESC)\)?( |$)',
         '(^| )\[?\d{4}\]? UKFTT \d+( |$)',
         '(^| )\[?\d{4}\]? UKFTT( |$)',
-        '(^| )UKFTT \d+ \(?(TC|GRC)\)?( |$)',
+        '(^| )UKFTT \d+ \(?(TC|GRC|HESC)\)?( |$)',
         '(^| )UKFTT \d+( |$)'
         (: '(^| )\d+ \(?(TC|GRC)\)?( |$)' :)
 );
