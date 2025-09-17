@@ -18,6 +18,8 @@ declare variable $party as xs:string? external;
 declare variable $court as xs:string? external;
 declare variable $judge as xs:string? external;
 declare variable $neutral_citation as xs:string? external;
+declare variable $name as xs:string? external;
+declare variable $consignment_number as xs:string? external;
 declare variable $specific_keyword as xs:string? external;
 declare variable $order as xs:string? external;
 declare variable $page as xs:integer external;
@@ -37,6 +39,8 @@ let $params := map:map()
     => map:with('court', $court)
     => map:with('judge', $judge)
     => map:with('neutral_citation', $neutral_citation)
+    => map:with('name', $name)
+    => map:with('consignment_number', $consignment_number)
     => map:with('specific_keyword', $specific_keyword)
     => map:with('page', $page)
     => map:with('page-size', $page-size)
@@ -72,9 +76,15 @@ let $query11 := if ($specific_keyword) then
     cts:word-query($specific_keyword, ('case-insensitive', 'unstemmed'))
 else ()
 let $query12 := if (helper:is-a-consignment-number($q)) then (helper:make-consignment-number-query($q)) else ()
+let $query13 := if ($name) then
+    cts:element-word-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'name'), $name, ('case-insensitive', 'punctuation-insensitive'))
+else ()
+let $query14 := if ($consignment_number) then
+    cts:element-value-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'transfer-consignment-number'), $consignment_number, ('case-insensitive'))
+else ()
 
 
-let $queries := ( $query1, $query2, $query4, $query5, $query6, $query7, $query8, $query9, $query10, $query11, $query12, dls:documents-query() )
+let $queries := ( $query1, $query2, $query4, $query5, $query6, $query7, $query8, $query9, $query10, $query11, $query12, $query13, $query14, dls:documents-query() )
 let $query := cts:and-query($queries)
 
 let $show-snippets as xs:boolean := exists(( $query1, $query2, $query5 ))
@@ -132,6 +142,8 @@ let $search-options := <options xmlns="http://marklogic.com/appservices/search">
         <extract-path>//uk:court</extract-path>
         <extract-path>//uk:hash</extract-path>
         <extract-path>//akn:FRBRManifestation/akn:FRBRdate</extract-path>
+        <extract-path>//uk:name</extract-path>
+        <extract-path>//uk:transfer-consignment-number</extract-path>
     </extract-document-data>
     { $transform-results }
 </options>
