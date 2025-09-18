@@ -17,7 +17,7 @@ declare variable $party as xs:string? external;
 declare variable $court as json:array? external;
 declare variable $judge as xs:string? external;
 declare variable $neutral_citation as xs:string? external;
-declare variable $name as xs:string? external;
+declare variable $document_name as xs:string? external;
 declare variable $consignment_number as xs:string? external;
 declare variable $specific_keyword as xs:string? external;
 declare variable $order as xs:string? external;
@@ -48,7 +48,7 @@ let $params := map:map()
     => map:with('court', $court)
     => map:with('judge', $judge)
     => map:with('neutral_citation', $neutral_citation)
-    => map:with('name', $name)
+    => map:with('document_name', $document_name)
     => map:with('consignment_number', $consignment_number)
     => map:with('specific_keyword', $specific_keyword)
     => map:with('page', $page)
@@ -106,8 +106,8 @@ else ()
 let $consignment-number-query := if (helper:is-a-consignment-number($q)) then (helper:make-consignment-number-query($q)) else ()
 let $editor-assigned-query := if (($show_unpublished or $only_unpublished) and $editor_assigned) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "assigned-to"), $editor_assigned)) else ()
 let $editor-priority-query := if (($show_unpublished or $only_unpublished) and $editor_priority) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "editor-priority"), $editor_priority)) else ()
-let $name-query := if ($name) then
-    cts:element-word-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'name'), $name, ('case-insensitive', 'punctuation-insensitive'))
+let $name-query := if ($document_name) then
+    cts:element-word-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'name'), $document_name, ('case-insensitive', 'punctuation-insensitive'))
 else ()
 let $exact-consignment-number-query := if ($consignment_number) then
     cts:element-value-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'transfer-consignment-number'), $consignment_number, ('case-insensitive'))
