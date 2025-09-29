@@ -97,21 +97,45 @@ let $to-date-query := if (empty($to_date)) then () else cts:path-range-query('ak
 let $published-query := if ($show_unpublished or $only_unpublished) then () else cts:properties-fragment-query(cts:element-value-query(fn:QName("", "published"), "true"))
 let $unpublished-query := if ($only_unpublished) then cts:properties-fragment-query(cts:not-query(cts:element-value-query(fn:QName("", "published"), "true"))) else ()
 let $html-representation-query := if ($only_with_html_representation) then cts:not-query(cts:element-value-query(xs:QName('uk:sourceFormat'), 'application/pdf', ('exact'))) else ()
-let $neutral-citation-query := if ($neutral_citation) then
-    cts:element-value-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'cite'), $neutral_citation, ('case-insensitive'))
-else ()
+let $neutral-citation-query :=
+  if ($neutral_citation) then
+    cts:or-query((
+      cts:element-word-query(
+        fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'cite'),
+        $neutral_citation,
+        ('case-insensitive', 'punctuation-insensitive', 'unstemmed', 'fuzzy')
+      ),
+      cts:element-word-query(
+        fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'neutralCitation'),
+        $neutral_citation,
+        ('case-insensitive', 'punctuation-insensitive', 'unstemmed', 'fuzzy')
+      )
+    ))
+  else ()
 let $specific-keyword-query := if ($specific_keyword) then
     cts:word-query($specific_keyword, ('case-insensitive', 'unstemmed'))
 else ()
 let $consignment-number-query := if (helper:is-a-consignment-number($q)) then (helper:make-consignment-number-query($q)) else ()
 let $editor-assigned-query := if (($show_unpublished or $only_unpublished) and $editor_assigned) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "assigned-to"), $editor_assigned)) else ()
 let $editor-priority-query := if (($show_unpublished or $only_unpublished) and $editor_priority) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "editor-priority"), $editor_priority)) else ()
-let $name-query := if ($document_name) then
-    cts:element-word-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'name'), $document_name, ('case-insensitive', 'punctuation-insensitive'))
-else ()
-let $exact-consignment-number-query := if ($consignment_number) then
-    cts:element-value-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'transfer-consignment-number'), $consignment_number, ('case-insensitive'))
-else ()
+let $name-query :=
+  if ($document_name) then
+    cts:element-word-query(
+      fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'name'),
+      $document_name,
+      ('case-insensitive', 'punctuation-insensitive', 'diacritic-insensitive', 'unstemmed', 'fuzzy')
+    )
+  else ()
+
+let $exact-consignment-number-query :=
+  if ($consignment_number) then
+    cts:element-word-query(
+      fn:QName('https://caselaw.nationalarchives.gov.uk/akn',
+               'transfer-consignment-number'),
+      $consignment_number,
+      ('case-insensitive', 'punctuation-insensitive', 'unstemmed', 'fuzzy')
+    )
+  else ()
 
 let $status_new_query := cts:properties-fragment-query(cts:not-query(
     cts:element-value-query(fn:QName("", "assigned-to"), "*", "wildcarded")
