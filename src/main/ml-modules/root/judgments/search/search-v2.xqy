@@ -122,7 +122,7 @@ let $name-query := if ($document_name) then
     cts:element-word-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'name'), $document_name, ('case-insensitive', 'punctuation-insensitive'))
 else ()
 
-let $exact-consignment-number-query :=
+let $fuzzy-consignment-number-query :=
   if ($consignment_number) then
     cts:element-word-query(
       fn:QName('https://caselaw.nationalarchives.gov.uk/akn',
@@ -183,7 +183,7 @@ let $queries := (
     $editor-priority-query,
     $editor-status-query,
     $name-query,
-    $exact-consignment-number-query,
+    $fuzzy-consignment-number-query,
     dls:documents-query()
 )
 let $query := cts:and-query($queries)
