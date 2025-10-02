@@ -118,14 +118,9 @@ else ()
 let $consignment-number-query := if (helper:is-a-consignment-number($q)) then (helper:make-consignment-number-query($q)) else ()
 let $editor-assigned-query := if (($show_unpublished or $only_unpublished) and $editor_assigned) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "assigned-to"), $editor_assigned)) else ()
 let $editor-priority-query := if (($show_unpublished or $only_unpublished) and $editor_priority) then cts:properties-fragment-query(cts:element-value-query(fn:QName("", "editor-priority"), $editor_priority)) else ()
-let $name-query :=
-  if ($document_name) then
-    cts:element-word-query(
-      fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'name'),
-      $document_name,
-      ('case-insensitive', 'punctuation-insensitive', 'diacritic-insensitive', 'unstemmed', 'fuzzy')
-    )
-  else ()
+let $name-query := if ($document_name) then
+    cts:element-word-query(fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'name'), $document_name, ('case-insensitive', 'punctuation-insensitive'))
+else ()
 
 let $exact-consignment-number-query :=
   if ($consignment_number) then
