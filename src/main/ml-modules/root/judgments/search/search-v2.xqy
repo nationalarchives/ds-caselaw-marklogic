@@ -103,12 +103,12 @@ let $neutral-citation-query :=
       cts:element-word-query(
         fn:QName('https://caselaw.nationalarchives.gov.uk/akn', 'cite'),
         $neutral_citation,
-        ('case-insensitive', 'punctuation-insensitive', 'unstemmed', 'fuzzy')
+        ('case-insensitive', 'punctuation-insensitive', 'unstemmed')
       ),
       cts:element-word-query(
         fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'neutralCitation'),
         $neutral_citation,
-        ('case-insensitive', 'punctuation-insensitive', 'unstemmed', 'fuzzy')
+        ('case-insensitive', 'punctuation-insensitive', 'unstemmed')
       )
     ))
   else ()
@@ -128,7 +128,7 @@ let $fuzzy-consignment-number-query :=
       fn:QName('https://caselaw.nationalarchives.gov.uk/akn',
                'transfer-consignment-number'),
       $consignment_number,
-      ('case-insensitive', 'punctuation-insensitive', 'unstemmed', 'fuzzy')
+      ('case-insensitive', 'punctuation-insensitive', 'unstemmed')
     )
   else ()
 
