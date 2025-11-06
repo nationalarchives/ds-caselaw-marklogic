@@ -981,6 +981,7 @@
 		<xs:enumeration value="StandardsAndLicensing"/>
 		<xs:enumeration value="Transport"/>
 		<xs:enumeration value="WelfareOfAnimals"/>
+		<xs:enumeration value="NitrateVulnerableZones"/>
 	</xs:restriction>
 </xs:simpleType>
 
