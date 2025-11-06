@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 from xmlschema import XMLSchema
 
 import sys
@@ -10,4 +8,6 @@ xml_schema.build()
 for file in sys.argv[1:]:
 
     print(f"Validating {file}")
-    xml_schema.is_valid(file)
+    for errors in xml_schema.iter_errors(file):
+        print(errors)
+    print(xml_schema.is_valid(file))
