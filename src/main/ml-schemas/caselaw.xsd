@@ -612,6 +612,14 @@
 				</xs:documentation>
 			</xs:annotation>
 		</xs:enumeration>
+		<xs:enumeration value="UKIST" />
+		<xs:enumeration value="UKFTT-HESC" />
+		<xs:enumeration value="UKFTT-Credit" />
+		<xs:enumeration value="UKFTT-Estate" />
+		<xs:enumeration value="FTT-PHL" />
+		<xs:enumeration value="FTT-PC" />
+		<xs:enumeration value="FTT-Claims" />
+		<xs:enumeration value="EWHC-Mercantile" />
 	</xs:restriction>
 </xs:simpleType>
 
