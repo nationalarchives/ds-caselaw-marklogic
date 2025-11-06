@@ -955,6 +955,7 @@
 		</xs:documentation>
 	</xs:annotation>
 	<xs:restriction base="xs:string">
+		<xs:enumeration value=""/>
 		<xs:enumeration value="Charity"/>
 		<xs:enumeration value="CommunityRightToBid"/>
 		<xs:enumeration value="NetworkInformationSystems"/>
