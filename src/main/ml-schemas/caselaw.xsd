@@ -22,6 +22,7 @@
 		<xs:element ref="summaryOfCite" minOccurs="0"/>
 		<xs:element ref="number" minOccurs="0"/>
 		<xs:element ref="cite" minOccurs="0"/>
+		<xs:element ref="caseNumber" minOccurs="0"/>
 		<xs:element ref="jurisdiction" minOccurs="0"/>
 		<xs:element ref="parser"/>
 		<xs:element ref="hash"/>
@@ -82,6 +83,15 @@
 		</xs:documentation>
 	</xs:annotation>
 </xs:element>
+
+<xs:element name="caseNumber" type="xs:string">
+	<xs:annotation>
+		<xs:documentation>
+			<p>A non-standardised reference number referring one of the cases under consideration</p>
+		</xs:documentation>
+	</xs:annotation>
+</xs:element>
+
 
 <xs:element name="jurisdiction" type="GRCJurisdictionsType">
   <xs:annotation>
