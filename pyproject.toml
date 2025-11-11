@@ -10,6 +10,8 @@ python = "^3.11"
 saxonche = "^12.3.0"
 pytest = "^8.0.0"
 requests = "^2.32.3"
+lxml = "^6.0.2"
+xmlschema = "^4.2.0"
 
 
 [build-system]

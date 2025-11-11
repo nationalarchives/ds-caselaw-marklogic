@@ -22,6 +22,7 @@
 		<xs:element ref="summaryOfCite" minOccurs="0"/>
 		<xs:element ref="number" minOccurs="0"/>
 		<xs:element ref="cite" minOccurs="0"/>
+		<xs:element ref="caseNumber" minOccurs="0"/>
 		<xs:element ref="jurisdiction" minOccurs="0"/>
 		<xs:element ref="parser"/>
 		<xs:element ref="hash"/>
@@ -82,6 +83,15 @@
 		</xs:documentation>
 	</xs:annotation>
 </xs:element>
+
+<xs:element name="caseNumber" type="xs:string">
+	<xs:annotation>
+		<xs:documentation>
+			<p>A non-standardised reference number referring one of the cases under consideration</p>
+		</xs:documentation>
+	</xs:annotation>
+</xs:element>
+
 
 <xs:element name="jurisdiction" type="GRCJurisdictionsType">
   <xs:annotation>
@@ -612,6 +622,14 @@
 				</xs:documentation>
 			</xs:annotation>
 		</xs:enumeration>
+		<xs:enumeration value="UKIST" />
+		<xs:enumeration value="UKFTT-HESC" />
+		<xs:enumeration value="UKFTT-Credit" />
+		<xs:enumeration value="UKFTT-Estate" />
+		<xs:enumeration value="FTT-PHL" />
+		<xs:enumeration value="FTT-PC" />
+		<xs:enumeration value="FTT-Claims" />
+		<xs:enumeration value="EWHC-Mercantile" />
 	</xs:restriction>
 </xs:simpleType>
 
@@ -947,6 +965,7 @@
 		</xs:documentation>
 	</xs:annotation>
 	<xs:restriction base="xs:string">
+		<xs:enumeration value=""/>
 		<xs:enumeration value="Charity"/>
 		<xs:enumeration value="CommunityRightToBid"/>
 		<xs:enumeration value="NetworkInformationSystems"/>
@@ -962,6 +981,7 @@
 		<xs:enumeration value="StandardsAndLicensing"/>
 		<xs:enumeration value="Transport"/>
 		<xs:enumeration value="WelfareOfAnimals"/>
+		<xs:enumeration value="NitrateVulnerableZones"/>
 	</xs:restriction>
 </xs:simpleType>
 
