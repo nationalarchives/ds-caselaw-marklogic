@@ -24,7 +24,7 @@
 		<xs:element ref="cite" minOccurs="0"/>
 		<xs:element ref="caseNumber" minOccurs="0"/>
 		<xs:element ref="jurisdiction" minOccurs="0"/>
-		<xs:element ref="parser"/>
+		<xs:element ref="parser" minOccurs="0"/>
 		<xs:element ref="hash"/>
 		<xs:element ref="tna-enrichment-engine" minOccurs="0"/>
 	</xs:all>
