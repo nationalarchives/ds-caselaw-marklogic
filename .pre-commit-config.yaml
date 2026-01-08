@@ -29,7 +29,7 @@ repos:
         name: validate-schemas
         language: python
         additional_dependencies:
-          - xmlschema~=4.2.0
+          - xmlschema~=4.3.0
         entry: python scripts/validate_schemas
         files: .xsd$
 
