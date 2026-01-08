@@ -494,23 +494,24 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
 [[package]]
 name = "xmlschema"
-version = "4.2.0"
+version = "4.3.0"
 description = "An XML Schema validator and decoder"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "xmlschema-4.2.0-py3-none-any.whl", hash = "sha256:82d24a50eea5e7f2d603312813848cd66fddf8fa2b6730839c6aa3d66312e3b6"},
-    {file = "xmlschema-4.2.0.tar.gz", hash = "sha256:b1f88c53493b2e75471977cbf218d939b872d0c7046bb63d48cc219fa7e241b9"},
+    {file = "xmlschema-4.3.0-py3-none-any.whl", hash = "sha256:2b97df551039519eed0eaf015f2ea523b958f64917a6ea4303d7025169fa423e"},
+    {file = "xmlschema-4.3.0.tar.gz", hash = "sha256:174c531dd869cd29bf2d1203603d9e619bddf168d6289725738914c96c80936e"},
 ]
 
 [package.dependencies]
-elementpath = ">=5.0.1,<6.0.0"
+elementpath = ">=5.1.0,<6.0.0"
 
 [package.extras]
 codegen = ["jinja2"]
 dev = ["coverage", "flake8", "lxml", "lxml-stubs", "mypy", "psutil", "tox", "xmlschema[docs]"]
 docs = ["jinja2", "sphinx", "sphinx_rtd_theme"]
+pydantic = ["pydantic"]
 
 [metadata]
 lock-version = "2.1"
