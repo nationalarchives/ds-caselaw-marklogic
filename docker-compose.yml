@@ -1,7 +1,7 @@
 services:
   marklogic:
     container_name: marklogic
-    image: marklogicdb/marklogic-db:11.0.3-centos-1.0.2@sha256:446394499c88d191666f5dbf2171c2cfead142c79b20e4b4528db624a87a8653
+    image: progressofficial/marklogic-db:12.0.1-ubi-rootless-2.2.3@sha256:1f277e42e1b5be0686269b2f9fd664f4b06ecb7264ccaa8111ff0f79452798b0
     ports:
       - "8000:8000"
       - "8001:8001"
