@@ -72,8 +72,8 @@ tests and then later delete them.
 ## Release versioning
 
 The releases are currently manually tagged. Please do not deploy to production without tagging a release.
-Currently there is no auto-deployment of releases, but we are using releases & tags to keep track of what has been deployed to
-production.
+Currently there is no auto-deployment of releases, but we are using releases & tags to keep track of what
+has been deployed to production.
 
 To create a versioned release, use Github's [release process](https://github.com/nationalarchives/ds-caselaw-marklogic/releases)
 to create a tag and generate release notes.
@@ -88,36 +88,6 @@ TODO: Automatically deploy main to staging, and tags to production using CodeBui
 
 To export the latest versions of all documents, for instance for bulk processing, you can use:
 ` gradle mlExportToZip -PwhereUrisQuery="const dls = require('/MarkLogic/dls'); cts.uris('', [], dls.documentsQuery())" -PenvironmentName=<env> -PexportPath=export.zip`
-
-## Document processing
-
-Two gradle tasks are available for bulk management of documents in a database using
-[CoRB](https://github.com/marklogic-community/corb2). In production these should not be
-necessary to use, but are provided in order to automate some development tasks and provide
-examples for future data migrations.
-
-- `gradle manageAllDocuments`: Enables version management for all documents
-- `gradle publishAllDocuments`: Sets the `published` flag for all documents
-- `gradle addAllDocumentsToJudgmentsCollection`: Adds all documents to the 'judgments' collection.
-
-### Loading data from a backup on S3 (deprecated)
-
-Rather than running an import of a set of files, you can restore from a shared backup. Note that this
-bucket is currently only available to dxw developers.
-
-1. First, navigate to http://localhost:8001/, which will ask for basic auth. Username and password are both `admin`.
-2. Then add AWS credentials to MarkLogic (under Security > Credentials), so it can pull the backup from a shared S3 bucket.
-   The credentials (AWS access ID & secret key) should be for your `dxwbilling` account. You will need to create them in AWS
-   if you haven't already.
-3. In the Backup/Restore tab in Marklogic for your the `caselaw-content` Judgments database, initiate a restore, using the following as the
-   `"directory": s3://tna-judgments-marklogic-backup/`. Set `Forest topology changed` to `true`.
-4. Uncheck the `security` database when restoring or your passwords will be wiped.
-
-Assuming you have entered the S3 credentials correctly, this will kick off a restore from s3. Once you have the data locally,
-you can then back it up locally using the path `/var/opt/backup` in the management console. It will be backed up to your local
-machine in `docker/db/backup`
-
-Depending on the backup state, you may need to run `gradle manageAllDocuments` and `gradle publishAllDocuments` after the restore has finished.
 
 ### Marklogic URL Guide
 
