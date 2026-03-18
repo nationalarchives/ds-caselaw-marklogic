@@ -35,28 +35,3 @@ ext {
   }
   contentXccUrl = "xcc://${mlUsername}:${mlPassword}@${mlHost}:${mlRestPort}"
 }
-
-task manageAllDocuments(type: com.marklogic.gradle.task.CorbTask, dependsOn: ['mlLoadModules']) {
-  xccConnectionUri = contentXccUrl
-  xccHttpcompliant = true
-  moduleRoot = "/judgments/corb/"
-  modulePrefix = "manage-all-documents"
-  threadCount = 16
-}
-
-task publishAllDocuments(type: com.marklogic.gradle.task.CorbTask, dependsOn: ['mlLoadModules']) {
-  xccConnectionUri = contentXccUrl
-  xccHttpcompliant = true
-  moduleRoot = "/judgments/corb/"
-  modulePrefix = "publish-all-documents"
-  threadCount = 16
-}
-
-
-task addAllDocumentsToJudgmentsCollection(type: com.marklogic.gradle.task.CorbTask, dependsOn: ['mlLoadModules']) {
-  xccConnectionUri = contentXccUrl
-  xccHttpcompliant = true
-  moduleRoot = "/judgments/corb/"
-  modulePrefix = "add-all-documents-to-judgments-collection"
-  threadCount = 16
-}
