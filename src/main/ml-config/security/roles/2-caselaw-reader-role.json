@@ -1,7 +1,7 @@
 {
   "role-name" : "caselaw-reader",
   "description" : "Can view documents, not including unpublished documents, but not edit",
-  "role" : [ "rest-reader", "caselaw-nobody", "security", "dls-user", "dls-internal" ],
+  "role" : [ "rest-reader", "caselaw-nobody", "dls-user", "caselaw-execute-sql" ],
   "privilege" : [ {
     "privilege-name" : "xdbc:eval",
     "action" : "http://marklogic.com/xdmp/privileges/xdbc-eval",
