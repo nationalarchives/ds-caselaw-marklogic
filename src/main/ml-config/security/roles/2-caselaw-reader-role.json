@@ -14,5 +14,13 @@
     "privilege-name": "xdmp:user-roles",
     "kind": "execute",
     "action": "http://marklogic.com/xdmp/privileges/xdmp-user-roles"
+  }, {
+    "privilege-name": "xdmp:user-privileges",
+    "kind": "execute",
+    "action": "http://marklogic.com/xdmp/privileges/xdmp-user-privileges"
+  }, {
+    "privilege-name": "xslt:eval",
+    "kind": "execute",
+    "action": "http://marklogic.com/xdmp/privileges/xslt-eval"
   } ]
 }
