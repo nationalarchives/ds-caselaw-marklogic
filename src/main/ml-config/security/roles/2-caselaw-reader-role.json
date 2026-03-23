@@ -10,5 +10,9 @@
     "privilege-name" : "xdbc:invoke",
     "action" : "http://marklogic.com/xdmp/privileges/xdbc-invoke",
     "kind" : "execute"
+  }, {
+    "privilege-name": "xdmp:user-roles",
+    "kind": "execute",
+    "action": "http://marklogic.com/xdmp/privileges/xdmp-user-roles"
   } ]
 }
