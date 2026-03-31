@@ -12,7 +12,7 @@
     "kind" : "execute"
   }, {
     "privilege-name" : "dls-admin",
-    "action" : " http://marklogic.com/xdmp/privileges/dls-admin",
+    "action" : "http://marklogic.com/xdmp/privileges/dls-admin",
     "kind" : "execute"
   }]
 }
