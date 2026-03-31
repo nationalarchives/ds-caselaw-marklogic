@@ -1,18 +1,27 @@
 {
-  "role-name" : "caselaw-writer",
-  "description" : "Can read and write all documents, including unpublished",
-  "role" : [ "rest-writer", "caselaw-reader", "caselaw-unpublished-reader", "dls-internal" ],
-  "privilege" : [ {
-    "privilege-name" : "any-uri",
-    "action" : "http://marklogic.com/xdmp/privileges/any-uri",
-    "kind" : "execute"
-  }, {
-    "privilege-name" : "unprotected-collections",
-    "action" : "http://marklogic.com/xdmp/privileges/unprotected-collections",
-    "kind" : "execute"
-  }, {
-    "privilege-name" : "dls-admin",
-    "action" : "http://marklogic.com/xdmp/privileges/dls-admin",
-    "kind" : "execute"
-  }]
+  "role-name": "caselaw-writer",
+  "description": "Can read and write all documents, including unpublished",
+  "role": [
+    "rest-writer",
+    "caselaw-reader",
+    "caselaw-unpublished-reader",
+    "dls-internal"
+  ],
+  "privilege": [
+    {
+      "privilege-name": "any-uri",
+      "action": "http://marklogic.com/xdmp/privileges/any-uri",
+      "kind": "execute"
+    },
+    {
+      "privilege-name": "unprotected-collections",
+      "action": "http://marklogic.com/xdmp/privileges/unprotected-collections",
+      "kind": "execute"
+    },
+    {
+      "privilege-name": "dls-admin",
+      "action": "http://marklogic.com/xdmp/privileges/dls-admin",
+      "kind": "execute"
+    }
+  ]
 }

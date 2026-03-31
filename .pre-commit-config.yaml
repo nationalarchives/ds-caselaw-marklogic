@@ -1,4 +1,4 @@
-exclude: src/main/.*\.json # These are templates, not real JSON. They won't parse cleanly.
+exclude: src/main/rest-api.json # It's a template, not valid JSON
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks

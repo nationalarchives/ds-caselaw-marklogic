@@ -1,26 +1,32 @@
 {
-  "role-name" : "caselaw-reader",
-  "description" : "Can view documents, not including unpublished documents, but not edit",
-  "role" : [ "rest-reader", "caselaw-nobody", "dls-user", "caselaw-execute-sql" ],
-  "privilege" : [ {
-    "privilege-name" : "xdbc:eval",
-    "action" : "http://marklogic.com/xdmp/privileges/xdbc-eval",
-    "kind" : "execute"
-  }, {
-    "privilege-name" : "xdbc:invoke",
-    "action" : "http://marklogic.com/xdmp/privileges/xdbc-invoke",
-    "kind" : "execute"
-  }, {
-    "privilege-name": "xdmp:user-roles",
-    "kind": "execute",
-    "action": "http://marklogic.com/xdmp/privileges/xdmp-user-roles"
-  }, {
-    "privilege-name": "xdmp:user-privileges",
-    "kind": "execute",
-    "action": "http://marklogic.com/xdmp/privileges/xdmp-user-privileges"
-  }, {
-    "privilege-name": "xslt:eval",
-    "kind": "execute",
-    "action": "http://marklogic.com/xdmp/privileges/xslt-eval"
-  } ]
+  "role-name": "caselaw-reader",
+  "description": "Can view documents, not including unpublished documents, but not edit",
+  "role": ["rest-reader", "caselaw-nobody", "dls-user", "caselaw-execute-sql"],
+  "privilege": [
+    {
+      "privilege-name": "xdbc:eval",
+      "action": "http://marklogic.com/xdmp/privileges/xdbc-eval",
+      "kind": "execute"
+    },
+    {
+      "privilege-name": "xdbc:invoke",
+      "action": "http://marklogic.com/xdmp/privileges/xdbc-invoke",
+      "kind": "execute"
+    },
+    {
+      "privilege-name": "xdmp:user-roles",
+      "kind": "execute",
+      "action": "http://marklogic.com/xdmp/privileges/xdmp-user-roles"
+    },
+    {
+      "privilege-name": "xdmp:user-privileges",
+      "kind": "execute",
+      "action": "http://marklogic.com/xdmp/privileges/xdmp-user-privileges"
+    },
+    {
+      "privilege-name": "xslt:eval",
+      "kind": "execute",
+      "action": "http://marklogic.com/xdmp/privileges/xslt-eval"
+    }
+  ]
 }
