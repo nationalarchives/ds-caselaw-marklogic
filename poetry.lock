@@ -531,4 +531,4 @@ docs = ["jinja2", "sphinx", "sphinx_rtd_theme"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "e3b987013e293236a3df6bff01ce2666bdbde28b77e13fc9550efb42240cfa2b"
+content-hash = "91070c6aca60749e15c4b5c8f47509353bbb7b0c387f0aa41955935368d37ff7"
