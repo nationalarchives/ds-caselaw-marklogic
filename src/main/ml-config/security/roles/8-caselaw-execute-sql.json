@@ -1,7 +1,7 @@
 {
-  "role-name" : "caselaw-execute-sql",
-  "description" : "Can execute SQL queries against the database over XDMP",
-  "role" : [ ],
+  "role-name": "caselaw-execute-sql",
+  "description": "Can execute SQL queries against the database over XDMP",
+  "role": [],
   "privilege": [
     {
       "privilege-name": "can-execute-sql",

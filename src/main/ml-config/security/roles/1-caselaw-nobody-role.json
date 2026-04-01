@@ -1,5 +1,5 @@
 {
-  "role-name" : "caselaw-nobody",
-  "description" : "Unauthenticated user",
-  "role" : [ ]
+  "role-name": "caselaw-nobody",
+  "description": "Unauthenticated user",
+  "role": []
 }

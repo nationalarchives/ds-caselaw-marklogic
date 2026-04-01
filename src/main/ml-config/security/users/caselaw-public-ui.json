@@ -1,5 +1,5 @@
 {
-  "user-name" : "caselaw-public-ui",
-  "description" : "The Public UI reader",
-  "role" : [ "rest-extension-user", "caselaw-reader" ]
+  "user-name": "caselaw-public-ui",
+  "description": "The Public UI reader",
+  "role": ["rest-extension-user", "caselaw-reader"]
 }
