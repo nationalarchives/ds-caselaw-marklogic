@@ -1,0 +1,5 @@
+{
+  "role-name": "caselaw-legacy",
+  "description": "Allow existing service users to modify dls-handled documents. Remove when ready.",
+  "role": ["dls-internal"]
+}
