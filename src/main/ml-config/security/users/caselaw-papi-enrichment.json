@@ -1,0 +1,5 @@
+{
+  "user-name": "caselaw-papi-enrichment",
+  "description": "The Enrichment service PAPI user",
+  "role": ["caselaw-papi-user", "caselaw-legacy"]
+}
