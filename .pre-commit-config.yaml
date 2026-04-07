@@ -29,7 +29,7 @@ repos:
         name: validate-schemas
         language: python
         additional_dependencies:
-          - xmlschema~=4.3.0
+          - xmlschema==4.3.0
         entry: python scripts/validate_schemas
         files: .xsd$
 
@@ -43,6 +43,13 @@ repos:
     hooks:
       - id: prettier
         types_or: [yaml, json, xml, markdown, scss, javascript]
+
+  - repo: https://github.com/renovatebot/pre-commit-hooks
+    rev: 43.104.4
+    hooks:
+      - id: renovate-config-validator
+        args: [--strict]
+        files: renovate.json
 
   - repo: https://github.com/woodruffw/zizmor-pre-commit
     rev: v1.23.1
