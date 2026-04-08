@@ -19,13 +19,17 @@ The file layout is explained in the [project layout documentation](https://githu
 
 ## Deployment
 
-To deploy a marklogic configuration, run `gradle mlDeploy -PenvironmentName={environment}`.
+<!-- last_review: 2026-04-08 -->
 
-The `development` environment will be used by default if you don't specify `-PenvironmentName`.
+1. Create a [new release](https://github.com/nationalarchives/ds-caselaw-marklogic/releases).
+1. Set the tag and release name to `vX.Y.Z`, following semantic versioning.
+1. Publish the release.
+1. Run `gradle mlDeploy -PenvironmentName={environment}`, with the appropriate environment name.
 
-Deployment is idempotent, and will automatically configure databases, roles, triggers and modules.
+### Notes
 
-Please also create a Github Release when you deploy.
+- The `development` environment will be used by default if you don't specify `-PenvironmentName`.
+- Deployment is idempotent, and will automatically configure databases, roles, triggers and modules.
 
 ## Local Setup
 
@@ -43,7 +47,7 @@ Note: There is currently a [known issue](https://github.com/marklogic/marklogic-
 
 ### 2. Deploy the marklogic configuration
 
-You'll then need to deploy the configuration (see Deployment, above)
+Run `gradle mlDeploy`. `-Penvironmentname` will default to `development`.
 
 ### 3. Make clients point to the local docker container
 
