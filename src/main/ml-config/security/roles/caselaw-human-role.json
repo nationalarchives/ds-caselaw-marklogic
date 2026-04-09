@@ -1,0 +1,5 @@
+{
+  "role-name": "caselaw-human",
+  "description": "A role to provide humans with read-level privileges to access MarkLogic.",
+  "role": ["caselaw-console", "caselaw-reader", "caselaw-unpublished-reader"]
+}
