@@ -1,9 +1,11 @@
 {
   "role-name": "caselaw-developer",
-  "description": "A role to provide developers with consistent privileges to access MarkLogic.",
+  "description": "A role to provide developers with privileges to access MarkLogic.",
   "role": [
+    "admin",
+    "caselaw-human",
     "caselaw-admin",
-    "caselaw-console",
+    "caselaw-writer",
     "admin-ui-user",
     "caselaw-legacy"
   ]
