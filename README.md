@@ -17,13 +17,21 @@ The file layout is explained in the [project layout documentation](https://githu
 2. If you're running against anything other than development, copy `gradle-development.properties`
    to `gradle-{environment}.properties` and set the credentials and hostname for your Marklogic server.
 
-## Deployment
+## Release process
 
-<!-- last_review: 2026-04-08 -->
+<!-- last_review: 2026-04-14 -->
 
 1. Create a [new release](https://github.com/nationalarchives/ds-caselaw-marklogic/releases).
 1. Set the tag and release name to `vX.Y.Z`, following semantic versioning.
 1. Publish the release.
+
+## Deployment
+
+<!-- last_review: 2026-04-14 -->
+
+MarkLogic changes are deployed manually to both staging and production.
+
+1. Make sure you've created a [release](#release-process) and your local code is up to date.
 1. Run `gradle mlDeploy -PenvironmentName={environment}`, with the appropriate environment name.
 
 ### Notes
