@@ -6,11 +6,11 @@ authors = ["David McKee <david.mckee@dxw.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-saxonche = "^12.3.0"
-requests = "^2.32.3"
-lxml = "^6.0.2"
-xmlschema = "^4.2.0"
+python = "3.14.4"
+saxonche = "12.9.0"
+requests = "2.33.1"
+lxml = "6.1.0"
+xmlschema = "4.3.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "9.0.3"
