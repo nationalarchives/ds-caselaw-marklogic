@@ -1,11 +1,10 @@
 # There is a bug meaning docker-compose may fail: here is an alternative
 docker run -d \
    --name marklogic \
-   -p 8000:8000 \
-   -p 8001:8001 \
-   -p 8002:8002 \
-   -p 8011:8011 \
-   -p 8012:8012 \
+   -p 127.0.0.1:8000-8002:8000-8002 \
+   -p [::1]:8000-8002:8000-8002 \
+   -p 127.0.0.1:8011-8012:8011-8012 \
+   -p [::1]:8011-8012:8011-8012 \
    -e MARKLOGIC_ADMIN_USERNAME=admin \
    -e MARKLOGIC_ADMIN_PASSWORD=admin \
    -e MARKLOGIC_INIT=true \

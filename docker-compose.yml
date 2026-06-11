@@ -3,11 +3,10 @@ services:
     container_name: marklogic
     image: marklogicdb/marklogic-db:11.0.3-centos-1.0.2@sha256:446394499c88d191666f5dbf2171c2cfead142c79b20e4b4528db624a87a8653
     ports:
-      - "8000:8000"
-      - "8001:8001"
-      - "8002:8002"
-      - "8011:8011"
-      - "8012:8012"
+      - "127.0.0.1:8000-8002:8000-8002"
+      - "[::1]:8000-8002:8000-8002"
+      - "127.0.0.1:8011-8012:8011-8012"
+      - "[::1]:8011-8012:8011-8012"
     environment:
       MARKLOGIC_ADMIN_USERNAME: admin
       MARKLOGIC_ADMIN_PASSWORD: admin
