@@ -166,14 +166,14 @@ files = [
 
 [[package]]
 name = "elementpath"
-version = "5.1.1"
+version = "5.1.2"
 description = "XPath 1.0/2.0/3.0/3.1 parsers and selectors for ElementTree and lxml"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "elementpath-5.1.1-py3-none-any.whl", hash = "sha256:57637359065e60654422d8474c1749b09bb21348012b7197f868027e3c09c9b9"},
-    {file = "elementpath-5.1.1.tar.gz", hash = "sha256:c4d1bd6aed987258354d0ea004d965eb0a6818213326bd4fd9bde5dacdb20277"},
+    {file = "elementpath-5.1.2-py3-none-any.whl", hash = "sha256:dd35750b3f0d2b4df553d5ef2101011cde6a0e8080c51110765b5853e02aac8e"},
+    {file = "elementpath-5.1.2.tar.gz", hash = "sha256:43d67a38700153eb45349c6e14a4d4b3a06e390c31df06539f730a96baf9a7fc"},
 ]
 
 [package.extras]
@@ -456,30 +456,37 @@ files = [
     {file = "saxonche-13.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:5a95d9dafca85ddaf6b13d659eb247da6e7e52eb5642cccb2841dda04ffc2470"},
     {file = "saxonche-13.0.0-cp310-cp310-manylinux_2_24_aarch64.whl", hash = "sha256:d10447fdd03980744c0853a191416fb1e8ce0d63fa53e6a4a1a466c0f13b8ecf"},
     {file = "saxonche-13.0.0-cp310-cp310-manylinux_2_24_x86_64.whl", hash = "sha256:baa0db73ddbcaa7350c016d194d4563cce59bcbaaddbe0150b42c3a49b8bfc73"},
+    {file = "saxonche-13.0.0-cp310-cp310-win_amd64.whl", hash = "sha256:da9e499b2b8b1e5439c2fceb296964061dd35087a76769c68500024bd48f0d6c"},
     {file = "saxonche-13.0.0-cp311-cp311-macosx_10_11_x86_64.whl", hash = "sha256:224ffa2dcbea735ea205cf588882ad74542fa7f74ca872ed038edf495fb43ff3"},
     {file = "saxonche-13.0.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:e6ae3f24f80f299c9f0e24dbc6bc1f43571f8496a7f87cdbf4d66933ef838ea7"},
     {file = "saxonche-13.0.0-cp311-cp311-manylinux_2_24_aarch64.whl", hash = "sha256:46d831f083f70c00a09013898ff58469430082be08f891d0ca93fe2ee2467d3d"},
     {file = "saxonche-13.0.0-cp311-cp311-manylinux_2_24_x86_64.whl", hash = "sha256:92cb29bf2139dd014b30e6be5313e2770a86d8b7d9c71df9c2ad70b4d4849791"},
+    {file = "saxonche-13.0.0-cp311-cp311-win_amd64.whl", hash = "sha256:c2caba1726e3d09089cf892bb10d23d9a2cee3afc90c3d64217f9035dbb1956a"},
     {file = "saxonche-13.0.0-cp312-cp312-macosx_10_11_x86_64.whl", hash = "sha256:256e03c865b04dacbdb5385f86c0e71759671ff7ad59ef39c56f8862b4fc5a46"},
     {file = "saxonche-13.0.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:c5189518d3a25588147a667a8c2e605fcc879a69a7f7d7567a3940ffffa9a05e"},
     {file = "saxonche-13.0.0-cp312-cp312-manylinux_2_24_aarch64.whl", hash = "sha256:b3cc0862a67ebb863eebdcc2ed4b75e97d48114b798eca9149213758942ee122"},
     {file = "saxonche-13.0.0-cp312-cp312-manylinux_2_24_x86_64.whl", hash = "sha256:d190a1021636c11a85a410cf62cc7f8fd78cb1a756dabaa12d5a1e03bc236a3d"},
+    {file = "saxonche-13.0.0-cp312-cp312-win_amd64.whl", hash = "sha256:d05ca490ca090613c9d9fd1b3364c1c07e969825bfaf9ea26472329e7806c745"},
     {file = "saxonche-13.0.0-cp313-cp313-macosx_10_11_x86_64.whl", hash = "sha256:0dfeaedd747a159a1026c011936e45d3faa4c671ac7f48709b9279070830616b"},
     {file = "saxonche-13.0.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:a09e9646c63e470bc83e51293e91ac69eb7dd4876a87e5faae5aa6c56811d348"},
     {file = "saxonche-13.0.0-cp313-cp313-manylinux_2_24_aarch64.whl", hash = "sha256:04388b0625617df696e26f6c04b06479111a55e6cd86a7e00fbf5e2a38446523"},
     {file = "saxonche-13.0.0-cp313-cp313-manylinux_2_24_x86_64.whl", hash = "sha256:db7333b004b811e2e0860f3e63de8abddb78ea77da8b385e8a478adaf6c98a8f"},
+    {file = "saxonche-13.0.0-cp313-cp313-win_amd64.whl", hash = "sha256:c166aa28e6833d1cf66e5a9938002fe1d66db6b0d6df6e4e97ce8851af8113b7"},
     {file = "saxonche-13.0.0-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:22d2f3315258d3bfe53bee1a0b50e231aba9d17d8fa3f49f2b58074523d2cfe3"},
     {file = "saxonche-13.0.0-cp314-cp314-macosx_11_0_x86_64.whl", hash = "sha256:ea9ffe40e8a47997b7b522bb202af2e73eca7f609f9ac07980f8ab944c5b8eaa"},
     {file = "saxonche-13.0.0-cp314-cp314-manylinux_2_24_aarch64.whl", hash = "sha256:557df07f5c7280da4cf066c1d16a0bc57281e33c3042fe9e881222f3ffd0c2b2"},
     {file = "saxonche-13.0.0-cp314-cp314-manylinux_2_24_x86_64.whl", hash = "sha256:5642a59a3eab771e9a5dfb39638b1b20c61da5467e6d441b79250eb3beadfb66"},
+    {file = "saxonche-13.0.0-cp314-cp314-win_amd64.whl", hash = "sha256:090c98bade417c6441a706efb1945a5f03f5155d8405f42d05ab5d794b8c97e4"},
     {file = "saxonche-13.0.0-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:e66becf854635f65aa74e3647766be81034c94e80e7e6efe70bcb2c4eee48dc0"},
     {file = "saxonche-13.0.0-cp314-cp314t-macosx_11_0_x86_64.whl", hash = "sha256:cf793d03d15582bfcfd9065b20476a2932b9af5612e7703eac1d257782934718"},
     {file = "saxonche-13.0.0-cp314-cp314t-manylinux_2_24_aarch64.whl", hash = "sha256:8e2c2e120ca927ebac84430283f5b7cda28f73372a4b8c5f5a3e8dfdbea3702c"},
     {file = "saxonche-13.0.0-cp314-cp314t-manylinux_2_24_x86_64.whl", hash = "sha256:904616e139498429c1cd9a791f602526bc80cae47e44a76c00c7eaae7e286045"},
+    {file = "saxonche-13.0.0-cp314-cp314t-win_amd64.whl", hash = "sha256:0535808aefa75cd2a80a6a000cf5772e9ece699f715adeb38db1600ebd3a25fb"},
     {file = "saxonche-13.0.0-cp39-cp39-macosx_10_11_x86_64.whl", hash = "sha256:7ce71dc2bc157d6957a247deeccd5ac28ec5767ddb410a3b90409e4058a31f51"},
     {file = "saxonche-13.0.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:4b0fbb69f6ef358febddb61b65b64aa0b7b868aa50a5e52dec16f37bf3e38447"},
     {file = "saxonche-13.0.0-cp39-cp39-manylinux_2_24_aarch64.whl", hash = "sha256:f29e4496a317a159efe77e3188afaba0f99a6a10557f02f40ccc26cff2e66205"},
     {file = "saxonche-13.0.0-cp39-cp39-manylinux_2_24_x86_64.whl", hash = "sha256:f0a94273cb43cb8d4c5eb434222c64198e6608777b9bd771fc2578f080b3c277"},
+    {file = "saxonche-13.0.0-cp39-cp39-win_amd64.whl", hash = "sha256:f7b38af17d50fe26e8e41886ed46fb682c573cb6e0696ecbac19a900250ab833"},
 ]
 
 [[package]]
