@@ -509,18 +509,18 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
 [[package]]
 name = "xmlschema"
-version = "4.3.1"
+version = "4.3.2"
 description = "An XML Schema validator and decoder"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "xmlschema-4.3.1-py3-none-any.whl", hash = "sha256:9560314d70ae87be0aecb8712cfebed636f867707ccf9758d4b0645d607f64b9"},
-    {file = "xmlschema-4.3.1.tar.gz", hash = "sha256:853effdfaf127849d4724368c17bd669e7f1486e15a0376404ad7954ec31a338"},
+    {file = "xmlschema-4.3.2-py3-none-any.whl", hash = "sha256:cf5c970a30f6ebcb3da35260e694704cc0b6794d8ace46125bb2a95e38ed9307"},
+    {file = "xmlschema-4.3.2.tar.gz", hash = "sha256:f3b33a21a2b2cdc404ddc3fb599d8bc1dee90b155d547370672e6e684746b8d6"},
 ]
 
 [package.dependencies]
-elementpath = ">=5.1.0,<6.0.0"
+elementpath = ">=5.1.3,<6.0.0"
 
 [package.extras]
 codegen = ["jinja2"]
@@ -530,4 +530,4 @@ docs = ["jinja2", "sphinx", "sphinx_rtd_theme"]
 [metadata]
 lock-version = "2.1"
 python-versions = "3.14.6"
-content-hash = "e8079799a04cbe25764620688268ca6572d65bcc1853818f3a2ef5cfd340ee08"
+content-hash = "b27c37b69b05c4c2262f9271267817c9d018ed51e81a78d7e3eda7d0e3b88d63"
