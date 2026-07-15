@@ -1,0 +1,5 @@
+{
+  "user-name": "caselaw-public-ui-test",
+  "description": "Unit-test surrogate for caselaw-public-ui (development/CI only — not deployed to staging or prod)",
+  "role": ["rest-extension-user", "caselaw-reader", "caselaw-module-invoke"]
+}
