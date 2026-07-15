@@ -14,12 +14,15 @@ let $map :=
     map:entry("party", ()),
     map:entry("judge", ()),
     map:entry("neutral_citation", ()),
+    map:entry("document_name", ()),
+    map:entry("consignment_number", ()),
     map:entry("specific_keyword", ()),
     map:entry("order", ()),
     map:entry("from", ()),
     map:entry("to", ()),
     map:entry("show_unpublished", fn:true()),
     map:entry("only_unpublished", fn:false()),
+    map:entry("only_with_html_representation", ()),
     map:entry("court", ())
     (: map:entry("court", xdmp:from-json-string('["ewhc/ch", "EWHC-Chancery"]')) :)
   ))
