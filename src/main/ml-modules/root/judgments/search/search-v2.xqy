@@ -164,6 +164,21 @@ let $editor-status-query := if (($show_unpublished or $only_unpublished) and $ed
     )
 ) else ()
 
+(: Resolve sort before building the main query — date order omits undated docs. :)
+let $sort-direction := if (fn:starts-with($order, '-')) then 'descending' else 'ascending'
+let $sort-word := replace($order, '-', '')
+
+(: When ordering by decision date, only include judgments that have a Work date
+   in the range index. Docs without that path otherwise surface at one end of
+   the sorted result set. :)
+let $has-decision-date-query := if ($sort-word = 'date') then
+    cts:path-range-query(
+        'akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date',
+        '>=',
+        xs:date('0001-01-01')
+    )
+else ()
+
 (: Build the main query :)
 let $queries := (
     $collection-query,
@@ -173,6 +188,7 @@ let $queries := (
     $judge-query,
     $from-date-query,
     $to-date-query,
+    $has-decision-date-query,
     $published-query,
     $unpublished-query,
     $html-representation-query,
@@ -193,11 +209,8 @@ let $boosted-query := helper:boost-title-and-ncn($q, $query)
 
 let $show-snippets as xs:boolean := exists(( $q-query, $party-query, $judge-query ))
 
-let $sort-direction := if (fn:starts-with($order, '-')) then 'descending' else 'ascending'
-let $sort-word := replace($order, '-', '')
-
 let $sort-order := if ($sort-word = 'date') then
-    <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
+    <sort-order xmlns="http://marklogic.com/appservices/search" type="xs:date" direction="{$sort-direction}">
             <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date</path-index>
         </sort-order>
 else if ($sort-word = 'updated') then
@@ -205,7 +218,7 @@ else if ($sort-word = 'updated') then
         <element ns="http://marklogic.com/xdmp/property" name="last-modified" />
     </sort-order>
 else if ($sort-word = 'transformation') then
-    <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}">
+    <sort-order xmlns="http://marklogic.com/appservices/search" type="xs:dateTime" direction="{$sort-direction}">
         <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:akomaNtoso/akn:judgment/akn:meta/akn:identification/akn:FRBRManifestation/akn:FRBRdate[@name='transform']/@date</path-index>
     </sort-order>
 else
@@ -216,7 +229,9 @@ let $transform-results := if ($show-snippets) then
 else
     <transform-results xmlns="http://marklogic.com/appservices/search" apply="empty-snippet" />
 
-let $scope := 'documents'
+(: last-modified lives on the properties fragment; sorting by it requires
+   properties scope. Document extracts are still filled via URI after resolve. :)
+let $scope := if ($sort-word = 'updated') then 'properties' else 'documents'
 
 let $search-options := <options xmlns="http://marklogic.com/appservices/search">
     <fragment-scope>{ $scope }</fragment-scope>
@@ -249,7 +264,14 @@ let $search-options := <options xmlns="http://marklogic.com/appservices/search">
     { $transform-results }
 </options>
 
+(: With properties fragment-scope, constrain on document content via
+   document-fragment-query so text/filters still apply to the judgment XML. :)
+let $resolve-query := if ($sort-word = 'updated') then
+    cts:document-fragment-query($boosted-query)
+else
+    $boosted-query
+
 (: Execute the search :)
-let $results := search:resolve(element x { $boosted-query }/*, $search-options, $start, $page-size)
+let $results := search:resolve(element x { $resolve-query }/*, $search-options, $start, $page-size)
 
 return helper:add-properties-to-search($results)
