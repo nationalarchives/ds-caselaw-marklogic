@@ -1,0 +1,11 @@
+{
+  "role-name": "caselaw-module-invoke",
+  "description": "Allows invoking application modules in-process for unit tests (REST clients use xdbc:invoke instead)",
+  "privilege": [
+    {
+      "privilege-name": "xdmp:invoke",
+      "action": "http://marklogic.com/xdmp/privileges/xdmp-invoke",
+      "kind": "execute"
+    }
+  ]
+}

@@ -40,3 +40,42 @@ declare function search-test:search() {
 declare function search-test:search($overrides as map:map) {
   xdmp:invoke("/judgments/search/search-v2.xqy", search-test:params($overrides))
 };
+
+(: Test surrogate for caselaw-public-ui — same reader roles, plus caselaw-module-invoke
+   so tests can impersonate via xdmp:invoke-function without widening production privileges.
+   See src/test/ml-config/security/users/caselaw-public-ui-test.json :)
+declare variable $PUBLIC_UI_TEST_USER as xs:string := "caselaw-public-ui-test";
+
+declare function search-test:public-ui-test-user() as xs:string {
+  $PUBLIC_UI_TEST_USER
+};
+
+(: Params matching the atom feed / search_judgments_and_parse_response path. :)
+declare function search-test:public-ui-params($overrides as map:map) as map:map {
+  map:new((
+    map:entry("show_unpublished", fn:false()),
+    map:entry("only_unpublished", fn:false()),
+    map:entry("collections", "judgment"),
+    map:entry("only_with_html_representation", fn:false()),
+    $overrides
+  ))
+};
+
+declare function search-test:search-as-user($user-name as xs:string, $overrides as map:map) {
+  let $run := function() {
+    xdmp:invoke("/judgments/search/search-v2.xqy", search-test:params($overrides))
+  }
+  return xdmp:invoke-function(
+    $run,
+    <options xmlns="xdmp:eval">
+      <user-id>{xdmp:user($user-name)}</user-id>
+    </options>
+  )
+};
+
+declare function search-test:search-as-public-ui($overrides as map:map) {
+  search-test:search-as-user(
+    $PUBLIC_UI_TEST_USER,
+    search-test:public-ui-params($overrides)
+  )
+};
