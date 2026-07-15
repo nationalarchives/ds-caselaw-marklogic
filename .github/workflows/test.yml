@@ -20,7 +20,7 @@ jobs:
           SKIP: no-commit-to-branch
 
   test:
-    name: Unit tests
+    name: XSLT unit tests
     runs-on: ubuntu-latest
 
     steps:
@@ -41,3 +41,37 @@ jobs:
 
       - name: Run tests with coverage
         run: poetry run pytest
+
+  marklogic-unit-test:
+    name: MarkLogic unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Set up Java
+        uses: actions/setup-java@0f481fcb613427c0f801b606911222b5b6f3083a # v5.5.0
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@0723195856401067f7a2779048b490ace7a47d7c # v5.0.2
+        with:
+          gradle-version: "8.10.2"
+
+      - name: Create docker network
+        run: docker network create caselaw
+
+      - name: Start MarkLogic
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --wait
+
+      - name: Deploy MarkLogic configuration
+        # No forest replicas on a single-node CI container.
+        run: gradle mlWaitTillReady mlDeploy -PmlDatabaseNamesAndReplicaCounts=
+
+      - name: Run MarkLogic unit tests
+        run: gradle mlUnitTest

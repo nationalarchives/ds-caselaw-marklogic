@@ -1,0 +1,5 @@
+# CI override: drop host bind mounts so MarkLogic does not create root-owned
+# files under .docker/ (breaks workspace scans, e.g. setup-gradle).
+services:
+  marklogic:
+    volumes: !reset []
