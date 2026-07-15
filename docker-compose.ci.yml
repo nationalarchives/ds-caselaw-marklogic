@@ -1,28 +1,5 @@
-# CI-only MarkLogic service: same as docker-compose.yml but without host bind
-# mounts. Bind mounts create root-owned files under .docker/, which breaks
-# tools that scan the workspace (e.g. gradle/actions/setup-gradle).
-# Kept as a full file rather than a !reset override because check-yaml
-# cannot parse Compose's custom YAML tags.
+# CI override: drop host bind mounts so MarkLogic does not create root-owned
+# files under .docker/ (breaks workspace scans, e.g. setup-gradle).
 services:
   marklogic:
-    container_name: marklogic
-    image: marklogicdb/marklogic-db:11.0.3-centos-1.0.2@sha256:446394499c88d191666f5dbf2171c2cfead142c79b20e4b4528db624a87a8653
-    ports:
-      - "127.0.0.1:8000-8002:8000-8002"
-      - "[::1]:8000-8002:8000-8002"
-      - "127.0.0.1:8011-8012:8011-8012"
-      - "[::1]:8011-8012:8011-8012"
-    environment:
-      MARKLOGIC_ADMIN_USERNAME: admin
-      MARKLOGIC_ADMIN_PASSWORD: admin
-      MARKLOGIC_INIT: "true"
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7997/LATEST/healthcheck"]
-      interval: 2s
-      timeout: 60s
-      retries: 30
-
-networks:
-  default:
-    name: caselaw
-    external: true
+    volumes: !reset []

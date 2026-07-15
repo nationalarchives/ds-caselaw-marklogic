@@ -67,7 +67,7 @@ jobs:
         run: docker network create caselaw
 
       - name: Start MarkLogic
-        run: docker compose -f docker-compose.ci.yml up -d --wait
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml up -d --wait
 
       - name: Deploy MarkLogic configuration
         # No forest replicas on a single-node CI container.
