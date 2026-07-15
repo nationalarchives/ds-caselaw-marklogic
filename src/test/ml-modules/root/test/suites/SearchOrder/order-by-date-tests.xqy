@@ -17,11 +17,14 @@ let $ascending-uris := for $r in $ascending//search:result return string($r/@uri
 let $descending-uris := for $r in $descending//search:result return string($r/@uri)
 
 return (
+  (: Judgments with no FRBRWork decision date must be omitted from date-ordered results. :)
   test:assert-equal("3", string($ascending//@total)),
+  test:assert-equal(0, count($ascending//search:result[@uri = "/order/undated.xml"])),
   test:assert-equal("/order/oldest.xml", $ascending-uris[1]),
   test:assert-equal("/order/middle.xml", $ascending-uris[2]),
   test:assert-equal("/order/newest.xml", $ascending-uris[3]),
   test:assert-equal("3", string($descending//@total)),
+  test:assert-equal(0, count($descending//search:result[@uri = "/order/undated.xml"])),
   test:assert-equal("/order/newest.xml", $descending-uris[1]),
   test:assert-equal("/order/middle.xml", $descending-uris[2]),
   test:assert-equal("/order/oldest.xml", $descending-uris[3])
