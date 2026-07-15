@@ -5,6 +5,7 @@ import module namespace helper = "https://caselaw.nationalarchives.gov.uk/helper
 
 
 
+test:assert-true(fn:empty(helper:add-properties-to-search(()))),
 test:assert-equal("Adams v Brown", helper:normalise-vs("Adams -v- Brown")),
 test:assert-equal("Charles v Daniels", helper:normalise-vs("Charles - v - Daniels")),
 test:assert-equal("Edwards v Finlay", helper:normalise-vs("Edwards V Finlay")),

@@ -313,6 +313,9 @@ declare private variable $snippet-filter := <xsl:stylesheet xmlns:xsl="http://ww
 </xsl:stylesheet>;
 
 declare function add-properties-to-search($search-results) {
+    if (fn:empty($search-results)) then
+        $search-results
+    else
     let $result-uris := $search-results//search:result/@uri
 
     (: get a map of uri: identifiers for insertion later :)
@@ -347,4 +350,4 @@ declare function add-properties-to-search($search-results) {
 
 
     return xdmp:xslt-eval($merge-properties, $search-results, $params)
-    };
+};
