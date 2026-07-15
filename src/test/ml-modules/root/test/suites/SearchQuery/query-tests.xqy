@@ -2,41 +2,14 @@ xquery version '1.0-ml';
 
 import module namespace test = 'http://marklogic.com/test' at '/test/test-helper.xqy';
 import module namespace search = "http://marklogic.com/appservices/search" at "/MarkLogic/appservices/search/search.xqy";
+import module namespace search-test = "https://caselaw.nationalarchives.gov.uk/test/search" at "/test/lib/search-test-helper.xqy";
 
 declare namespace akn = "http://docs.oasis-open.org/legaldocml/ns/akn/3.0";
 declare namespace ukakn = "https://caselaw.nationalarchives.gov.uk/akn";
 
-let $map :=
-  map:new((
-    map:entry("page", 1),
-    map:entry("page-size", 100),
-    map:entry("q", "capybara"),
-    map:entry("party", ()),
-    map:entry("judge", ()),
-    map:entry("neutral_citation", ()),
-    map:entry("document_name", ()),
-    map:entry("consignment_number", ()),
-    map:entry("specific_keyword", ()),
-    map:entry("order", ()),
-    map:entry("from", ()),
-    map:entry("to", ()),
-    map:entry("show_unpublished", fn:true()),
-    map:entry("only_unpublished", fn:false()),
-    map:entry("only_with_html_representation", ()),
-    map:entry("court", ())
-    (: map:entry("court", xdmp:from-json-string('["ewhc/ch", "EWHC-Chancery"]')) :)
-  ))
-
-let $response := xdmp:invoke("/judgments/search/search-v2.xqy", $map)
-let $y := xdmp:log("=============")
-let $y := xdmp:log($response) (: logged in /var/opt/MarkLogic/Logs/8012_ErrorLog.txt in docker container :)
-
-
-(: assert-true -false -equal -not-equal -exists -all-exist -at-least-one-equal -same-values
-         -throws-error -http-get-status -meets-minimum/maximum-threshold :)
+let $response := search-test:search(map:entry("q", "capybara"))
 
 return (
-  (: test:assert-equal("empty-snippet", string($response//@snippet-format)), :)
   test:assert-equal("1", string($response//@total)),
   test:assert-equal("2023-06-05", string($response//akn:FRBRdate[@name="decision"]/@date)),
   test:assert-equal("2023-06-05T13:07:36", string($response//akn:FRBRdate[@name="transform"]/@date)),
