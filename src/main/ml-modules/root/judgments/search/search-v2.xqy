@@ -166,7 +166,7 @@ let $editor-status-query := if (($show_unpublished or $only_unpublished) and $ed
 
 (: Resolve sort before building the main query — date order omits undated docs. :)
 let $sort-direction := if (fn:starts-with($order, '-')) then 'descending' else 'ascending'
-let $sort-word := replace($order, '-', '')
+let $sort-word := lower-case(replace($order, '-', ''))
 
 (: When ordering by decision date, only include judgments that have a Work date
    in the range index. Docs without that path otherwise surface at one end of
