@@ -4,36 +4,34 @@
     <meta>
       <identification source="#tna">
         <FRBRWork>
-          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/ewhc/ch/2021/1002"/>
-          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/ewhc/ch/2021/1002"/>
-          <FRBRdate date="2021-06-15" name="decision"/>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/ewhc/ch/2019/1000"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/ewhc/ch/2019/1000"/>
           <FRBRauthor href="#"/>
           <FRBRcountry value="GB-UKM"/>
           <FRBRnumber value=""/>
-          <FRBRname value="Middle Order Fixture"/>
+          <FRBRname value="Undated Order Fixture"/>
         </FRBRWork>
         <FRBRExpression>
-          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2021/1002"/>
-          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2021/1002"/>
-          <FRBRdate date="2021-06-15" name="decision"/>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2019/1000"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2019/1000"/>
           <FRBRauthor href="#"/>
           <FRBRlanguage language="eng"/>
         </FRBRExpression>
         <FRBRManifestation>
-          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2021/1002/data.xml"/>
-          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2021/1002/data.xml"/>
-          <FRBRdate date="2020-03-01T10:00:00" name="transform"/>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2019/1000/data.xml"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/ewhc/ch/2019/1000/data.xml"/>
+          <FRBRdate date="2023-03-01T10:00:00" name="transform"/>
           <FRBRauthor href="#tna"/>
           <FRBRformat value="application/xml"/>
         </FRBRManifestation>
       </identification>
       <proprietary source="#">
-        <uk:cite>[2021] EWHC 1002 (Ch)</uk:cite>
+        <uk:cite>[2019] EWHC 1000 (Ch)</uk:cite>
         <uk:court>EWHC-Chancery</uk:court>
       </proprietary>
     </meta>
     <header>
-      <p>middle order fixture</p>
+      <p>undated order fixture</p>
     </header>
     <judgmentBody>
       <decision>
