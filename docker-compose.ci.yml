@@ -1,6 +1,8 @@
-# CI variant: no host bind mounts. MarkLogic otherwise writes root-owned
-# files under .docker/, which breaks tools that scan the workspace
-# (e.g. gradle/actions/setup-gradle).
+# CI-only MarkLogic service: same as docker-compose.yml but without host bind
+# mounts. Bind mounts create root-owned files under .docker/, which breaks
+# tools that scan the workspace (e.g. gradle/actions/setup-gradle).
+# Kept as a full file rather than a !reset override because check-yaml
+# cannot parse Compose's custom YAML tags.
 services:
   marklogic:
     container_name: marklogic
