@@ -1,7 +1,7 @@
 {
   "role-name": "caselaw-reader",
   "description": "Can view documents, not including unpublished documents, but not edit",
-  "role": ["rest-reader", "caselaw-nobody", "dls-user", "caselaw-execute-sql"],
+  "role": ["rest-reader", "dls-user", "caselaw-execute-sql"],
   "privilege": [
     {
       "privilege-name": "xdbc:eval",
