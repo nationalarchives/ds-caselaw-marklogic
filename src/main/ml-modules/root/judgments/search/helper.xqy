@@ -209,12 +209,16 @@ declare function make-q-query($q as xs:string) {
     ))
 };
 
-declare function boost-title-and-ncn($title-or-ncn as xs:string, $query as cts:query) as cts:query  {
-    let $title-or-ncn := normalise-vs($title-or-ncn)
-    let $name-query := helper:make-simple-name-query($title-or-ncn, 1024.0)
-    let $ncn-query := helper:make-simple-cite-query($title-or-ncn, 1024.0)
-    let $boosting-query := cts:or-query(($name-query, $ncn-query))
-    return cts:boost-query($query, $boosting-query)
+declare function boost-title-and-ncn($title-or-ncn as xs:string?, $query as cts:query) as cts:query  {
+    let $title-or-ncn := if (fn:empty($title-or-ncn)) then "" else normalise-vs($title-or-ncn)
+    return
+        if ($title-or-ncn = "") then
+            $query
+        else
+            let $name-query := helper:make-simple-name-query($title-or-ncn, 1024.0)
+            let $ncn-query := helper:make-simple-cite-query($title-or-ncn, 1024.0)
+            let $boosting-query := cts:or-query(($name-query, $ncn-query))
+            return cts:boost-query($query, $boosting-query)
 };
 
 declare function make-party-query($party as xs:string?) as cts:query? {
@@ -309,6 +313,9 @@ declare private variable $snippet-filter := <xsl:stylesheet xmlns:xsl="http://ww
 </xsl:stylesheet>;
 
 declare function add-properties-to-search($search-results) {
+    if (fn:empty($search-results)) then
+        $search-results
+    else
     let $result-uris := $search-results//search:result/@uri
 
     (: get a map of uri: identifiers for insertion later :)
@@ -343,4 +350,4 @@ declare function add-properties-to-search($search-results) {
 
 
     return xdmp:xslt-eval($merge-properties, $search-results, $params)
-    };
+};
