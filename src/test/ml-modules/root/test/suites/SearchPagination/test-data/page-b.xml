@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">
+  <judgment name="decision">
+    <meta>
+      <identification source="#tna">
+        <FRBRWork>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/pagination/b"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/pagination/b"/>
+          <FRBRdate date="2020-01-01" name="decision"/>
+          <FRBRauthor href="#"/>
+          <FRBRcountry value="GB-UKM"/>
+          <FRBRnumber value=""/>
+          <FRBRname value="Pagination b"/>
+        </FRBRWork>
+        <FRBRExpression>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/pagination/b"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/pagination/b"/>
+          <FRBRdate date="2020-01-01" name="decision"/>
+          <FRBRauthor href="#"/>
+          <FRBRlanguage language="eng"/>
+        </FRBRExpression>
+        <FRBRManifestation>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/pagination/b/data.xml"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/pagination/b/data.xml"/>
+          <FRBRdate date="2020-01-01T12:00:00" name="transform"/>
+          <FRBRauthor href="#tna"/>
+          <FRBRformat value="application/xml"/>
+        </FRBRManifestation>
+      </identification>
+      <proprietary source="#">
+        <uk:cite>[2020] EWHC 101 (Ch)</uk:cite>
+        <uk:court>EWHC-Chancery</uk:court>
+      </proprietary>
+    </meta>
+    <header>
+      <p>pagination b</p>
+    </header>
+    <judgmentBody>
+      <decision>
+        <p>unique keyword for pagination tests: paginationfixture</p>
+      </decision>
+    </judgmentBody>
+  </judgment>
+</akomaNtoso>
