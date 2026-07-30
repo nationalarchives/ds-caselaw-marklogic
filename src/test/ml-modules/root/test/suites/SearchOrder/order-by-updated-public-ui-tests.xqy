@@ -14,8 +14,8 @@ declare function local:search-as-public-ui($order as xs:string) {
 let $date-ascending := local:search-as-public-ui("date")
 let $date-ascending-uris := for $r in $date-ascending//search:result return string($r/@uri)
 
-(: Updated sort uses properties fragment-scope and prop:last-modified — the path
-   the Public UI reader account uses in production (tested via caselaw-public-ui-test). :)
+(: Updated sort uses the last-modified range index under documents scope.
+   Exercises the Public UI reader surrogate (caselaw-public-ui-test). :)
 let $ascending := local:search-as-public-ui("updated")
 let $descending := local:search-as-public-ui("-updated")
 

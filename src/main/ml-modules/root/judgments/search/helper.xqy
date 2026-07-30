@@ -312,42 +312,158 @@ declare private variable $snippet-filter := <xsl:stylesheet xmlns:xsl="http://ww
     </xsl:template>
 </xsl:stylesheet>;
 
-declare function add-properties-to-search($search-results) {
+(: ---------------------------------------------------------------------------
+   Paged search: build query/options once in search-v2, then:
+     1. Branch only on how the page is ordered
+     2. Body extracts come from documents-scoped resolve (native or URI hydrate)
+     3. Identifiers: one batched property read for the page, then amalgamate
+   --------------------------------------------------------------------------- :)
+
+(: Public entry: order branch, then shared identifier hydrate + amalgamate. :)
+declare function resolve-paged-search(
+    $query as cts:query,
+    $sort-word as xs:string,
+    $direction as xs:string,
+    $start as xs:integer,
+    $page-size as xs:integer,
+    $document-options as element()
+) {
+    let $body-response :=
+        if ($sort-word = "updated") then
+            resolve-body-by-last-modified($query, $document-options, $start, $page-size, $direction)
+        else
+            ml:resolve(element x { $query }/*, $document-options, $start, $page-size)
+    let $uris as xs:string* :=
+        for $uri in $body-response//search:result/@uri
+        return xs:string($uri)
+    return amalgamate-identifiers($body-response, hydrate-identifiers($uris))
+};
+
+(: order=updated cannot use documents-scoped sort-order: cts:index-order on
+   prop:last-modified is ignored for document searches. Order the page from
+   properties fragments, then hydrate body extracts with one documents resolve. :)
+declare private function resolve-body-by-last-modified(
+    $query as cts:query,
+    $document-options as element(),
+    $start as xs:integer,
+    $page-size as xs:integer,
+    $direction as xs:string
+) {
+    let $index-order := cts:index-order(
+        cts:element-reference(
+            fn:QName("http://marklogic.com/xdmp/property", "last-modified"),
+            ("type=dateTime")
+        ),
+        $direction
+    )
+    let $page-props := fn:subsequence(
+        cts:search(
+            xdmp:document-properties(),
+            cts:document-fragment-query($query),
+            ("unfiltered", $index-order)
+        ),
+        $start,
+        $page-size
+    )
+    let $uris as xs:string* :=
+        for $props in $page-props
+        return xdmp:node-uri($props)
+    let $total := xdmp:estimate(
+        cts:search(
+            xdmp:document-properties(),
+            cts:document-fragment-query($query),
+            "unfiltered"
+        )
+    )
+    (: Facets need the full query on documents; page-length 0 skips result rows. :)
+    let $facets-response := ml:resolve(element x { $query }/*, $document-options, 1, 0)
+
+    let $page-response :=
+        if (fn:empty($uris)) then
+            <search:response total="{$total}" start="{$start}" page-length="0"/>
+        else
+            ml:resolve(
+                element x { cts:document-query($uris) }/*,
+                $document-options,
+                1,
+                fn:count($uris)
+            )
+
+    let $results-by-uri := map:map()
+    let $_ :=
+        for $result in $page-response/search:result
+        return map:put($results-by-uri, xs:string($result/@uri), $result)
+
+    let $ordered-results :=
+        for $uri at $i in $uris
+        let $result := map:get($results-by-uri, $uri)
+        return
+            if (fn:empty($result)) then
+                ()
+            else
+                element { fn:node-name($result) } {
+                    $result/@*[fn:local-name(.) ne "index"],
+                    attribute index { $start + $i - 1 },
+                    $result/node()
+                }
+
+    return
+        element { fn:QName("http://marklogic.com/appservices/search", "response") } {
+            attribute total { $total },
+            attribute start { $start },
+            attribute page-length { fn:count($ordered-results) },
+            $page-response/@snippet-format,
+            $facets-response/search:facet,
+            $ordered-results,
+            $page-response/search:metrics
+        }
+};
+
+(: One property-index read for the page (not per-URI round trips in XQuery). :)
+declare function hydrate-identifiers($uris as xs:string*) as map:map {
+    let $identifier-map := map:map()
+    let $existing as xs:string* :=
+        for $uri in $uris
+        where fn:doc-available($uri)
+        return $uri
+    return
+        if (fn:empty($existing)) then
+            $identifier-map
+        else
+            let $props := xdmp:document-get-properties($existing, xs:QName("identifiers"))
+            let $_ :=
+                for $prop in $props
+                return map:put($identifier-map, xdmp:node-uri($prop), $prop)
+            return $identifier-map
+};
+
+(: Attach search:extracted kind="identifiers" on every result; preserve body extracts. :)
+declare function amalgamate-identifiers($search-results, $identifier-map as map:map) {
     if (fn:empty($search-results)) then
         $search-results
     else
-    let $result-uris := $search-results//search:result/@uri
-
-    (: get a map of uri: identifiers for insertion later :)
-    let $identifiers := xdmp:document-get-properties($result-uris, xs:QName("identifiers"))
-    let $identifier-map := map:map()
-    let $_ := for $uri in $result-uris return map:put($identifier-map, $uri, xdmp:document-get-properties($uri, xs:QName("identifiers")))
-
-    let $params := map:new(
-        map:entry(xdmp:key-from-QName(fn:QName("", "identifier-map")), $identifier-map)
-    )
-    let $merge-properties :=
-        <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-            xmlns:search="http://marklogic.com/appservices/search"
-            xmlns:map="http://marklogic.com/xdmp/map">
-            <xsl:param name="identifier-map"/>
-            <xsl:template match="/ | @* | node()">
-                <xsl:copy>
-                    <xsl:apply-templates select="@* | node()" />
-                </xsl:copy>
-            </xsl:template>
-            <xsl:template match="search:extracted">
-                <!-- Copy the element -->
-                <xsl:copy>
-                    <!-- And everything inside it -->
-                    <xsl:apply-templates select="@* | node()"/>
-                </xsl:copy>
-                <!-- Add new node -->
-                <xsl:variable name="uri" select="ancestor::search:result/@uri"/>
-                <search:extracted kind="identifiers"><xsl:copy-of select="map:get($identifier-map, $uri)"/></search:extracted>
-            </xsl:template>
-        </xsl:stylesheet>
-
-
-    return xdmp:xslt-eval($merge-properties, $search-results, $params)
+        let $params := map:new(
+            map:entry(xdmp:key-from-QName(fn:QName("", "identifier-map")), $identifier-map)
+        )
+        let $merge :=
+            <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:search="http://marklogic.com/appservices/search"
+                xmlns:map="http://marklogic.com/xdmp/map">
+                <xsl:param name="identifier-map"/>
+                <xsl:template match="/ | @* | node()">
+                    <xsl:copy>
+                        <xsl:apply-templates select="@* | node()" />
+                    </xsl:copy>
+                </xsl:template>
+                <xsl:template match="search:result">
+                    <xsl:copy>
+                        <xsl:apply-templates select="@* | node()"/>
+                        <xsl:variable name="uri" select="string(@uri)"/>
+                        <search:extracted kind="identifiers">
+                            <xsl:copy-of select="map:get($identifier-map, $uri)"/>
+                        </search:extracted>
+                    </xsl:copy>
+                </xsl:template>
+            </xsl:stylesheet>
+        return xdmp:xslt-eval($merge, $search-results, $params)
 };
