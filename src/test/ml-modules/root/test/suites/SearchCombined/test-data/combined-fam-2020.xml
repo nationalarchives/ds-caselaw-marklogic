@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">
+  <judgment name="decision">
+    <meta>
+      <identification source="#tna">
+        <FRBRWork>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/combined/fam-2020"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/combined/fam-2020"/>
+          <FRBRdate date="2020-06-01" name="decision"/>
+          <FRBRauthor href="#"/>
+          <FRBRcountry value="GB-UKM"/>
+          <FRBRnumber value=""/>
+          <FRBRname value="Combined Family 2020"/>
+        </FRBRWork>
+        <FRBRExpression>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/combined/fam-2020"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/combined/fam-2020"/>
+          <FRBRdate date="2020-06-01" name="decision"/>
+          <FRBRauthor href="#"/>
+          <FRBRlanguage language="eng"/>
+        </FRBRExpression>
+        <FRBRManifestation>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/combined/fam-2020/data.xml"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/combined/fam-2020/data.xml"/>
+          <FRBRdate date="2020-06-01T10:00:00" name="transform"/>
+          <FRBRauthor href="#tna"/>
+          <FRBRformat value="application/xml"/>
+        </FRBRManifestation>
+      </identification>
+      <proprietary source="#">
+        <uk:cite>[2020] EWHC 200 (Fam)</uk:cite>
+        <uk:court>EWHC-Family</uk:court>
+      </proprietary>
+    </meta>
+    <header>
+      <p>combined family 2020</p>
+    </header>
+    <judgmentBody>
+      <decision>
+        <p>unique keyword for combined tests: combinedfixture</p>
+      </decision>
+    </judgmentBody>
+  </judgment>
+</akomaNtoso>

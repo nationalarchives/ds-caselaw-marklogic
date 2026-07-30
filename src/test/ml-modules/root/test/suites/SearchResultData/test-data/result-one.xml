@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<akomaNtoso xmlns="http://docs.oasis-open.org/legaldocml/ns/akn/3.0" xmlns:uk="https://caselaw.nationalarchives.gov.uk/akn">
+  <judgment name="decision">
+    <meta>
+      <identification source="#tna">
+        <FRBRWork>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/id/result-data/one"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/id/result-data/one"/>
+          <FRBRdate date="2021-05-01" name="decision"/>
+          <FRBRauthor href="#"/>
+          <FRBRcountry value="GB-UKM"/>
+          <FRBRnumber value=""/>
+          <FRBRname value="Result Data One"/>
+        </FRBRWork>
+        <FRBRExpression>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/result-data/one"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/result-data/one"/>
+          <FRBRdate date="2021-05-01" name="decision"/>
+          <FRBRauthor href="#"/>
+          <FRBRlanguage language="eng"/>
+        </FRBRExpression>
+        <FRBRManifestation>
+          <FRBRthis value="https://caselaw.nationalarchives.gov.uk/result-data/one/data.xml"/>
+          <FRBRuri value="https://caselaw.nationalarchives.gov.uk/result-data/one/data.xml"/>
+          <FRBRdate date="2021-05-01T12:00:00" name="transform"/>
+          <FRBRauthor href="#tna"/>
+          <FRBRformat value="application/xml"/>
+        </FRBRManifestation>
+      </identification>
+      <proprietary source="#">
+        <uk:hash>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</uk:hash>
+        <uk:cite>[2021] EWHC 101 (Ch)</uk:cite>
+        <uk:court>EWHC-Chancery</uk:court>
+      </proprietary>
+    </meta>
+    <header>
+      <p>result data one</p>
+    </header>
+    <judgmentBody>
+      <decision>
+        <p>unique keyword for result data tests: resultdatafixture</p>
+      </decision>
+    </judgmentBody>
+  </judgment>
+</akomaNtoso>

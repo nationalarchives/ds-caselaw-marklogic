@@ -12,6 +12,11 @@ declare function local:uris($order as xs:string) as xs:string* {
   return string($r/@uri)
 };
 
+(: Four updated-order searches after SearchOrder's per-test touch/sleep setup
+   can exceed the 20s REST default on a slow CI host. Raise only this request
+   — do not bump the app-server default (that would apply in production). :)
+let $_ := xdmp:set-request-time-limit(60)
+
 let $updated := local:uris("updated")
 let $Updated := local:uris("Updated")
 let $desc := local:uris("-updated")

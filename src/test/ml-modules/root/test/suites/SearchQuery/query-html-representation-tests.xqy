@@ -15,7 +15,8 @@ let $with_and_without_html_response := search-test:search(
     => map:with("only_with_html_representation", fn:false())
 )
 
+(: Suite fixtures: sample judgment, PDF, query-alpha, query-beta. :)
 return (
-  test:assert-equal("1", string($only_with_html_response//@total)),
-  test:assert-equal("2", string($with_and_without_html_response//@total))
+  test:assert-equal("3", string($only_with_html_response//@total)),
+  test:assert-equal("4", string($with_and_without_html_response//@total))
 )

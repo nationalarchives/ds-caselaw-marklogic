@@ -1,6 +1,5 @@
 xquery version "1.0-ml";
 
-import module namespace search = "http://marklogic.com/appservices/search" at "/MarkLogic/appservices/search/search.xqy";
 import module namespace helper = "https://caselaw.nationalarchives.gov.uk/helper" at "/judgments/search/helper.xqy";
 import module namespace dls = "http://marklogic.com/xdmp/dls" at "/MarkLogic/dls.xqy";
 
@@ -209,14 +208,12 @@ let $boosted-query := helper:boost-title-and-ncn($q, $query)
 
 let $show-snippets as xs:boolean := exists(( $q-query, $party-query, $judge-query ))
 
+(: Build document options once. date/transformation sort-order live here;
+   order=updated branches inside resolve-paged-search (properties index-order). :)
 let $sort-order := if ($sort-word = 'date') then
     <sort-order xmlns="http://marklogic.com/appservices/search" type="xs:date" direction="{$sort-direction}">
             <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:judgment/akn:meta/akn:identification/akn:FRBRWork/akn:FRBRdate/@date</path-index>
         </sort-order>
-else if ($sort-word = 'updated') then
-    <sort-order xmlns="http://marklogic.com/appservices/search" direction="{$sort-direction}" type="xs:dateTime">
-        <element ns="http://marklogic.com/xdmp/property" name="last-modified" />
-    </sort-order>
 else if ($sort-word = 'transformation') then
     <sort-order xmlns="http://marklogic.com/appservices/search" type="xs:dateTime" direction="{$sort-direction}">
         <path-index xmlns:akn="http://docs.oasis-open.org/legaldocml/ns/akn/3.0">akn:akomaNtoso/akn:judgment/akn:meta/akn:identification/akn:FRBRManifestation/akn:FRBRdate[@name='transform']/@date</path-index>
@@ -229,12 +226,8 @@ let $transform-results := if ($show-snippets) then
 else
     <transform-results xmlns="http://marklogic.com/appservices/search" apply="empty-snippet" />
 
-(: last-modified lives on the properties fragment; sorting by it requires
-   properties scope. Document extracts are still filled via URI after resolve. :)
-let $scope := if ($sort-word = 'updated') then 'properties' else 'documents'
-
-let $search-options := <options xmlns="http://marklogic.com/appservices/search">
-    <fragment-scope>{ $scope }</fragment-scope>
+let $document-options := <options xmlns="http://marklogic.com/appservices/search">
+    <fragment-scope>documents</fragment-scope>
     <search-option>unfiltered</search-option>
     <constraint name="court">
         <range type="xs:string" facet="true">
@@ -264,14 +257,11 @@ let $search-options := <options xmlns="http://marklogic.com/appservices/search">
     { $transform-results }
 </options>
 
-(: With properties fragment-scope, constrain on document content via
-   document-fragment-query so text/filters still apply to the judgment XML. :)
-let $resolve-query := if ($sort-word = 'updated') then
-    cts:document-fragment-query($boosted-query)
-else
-    $boosted-query
-
-(: Execute the search :)
-let $results := search:resolve(element x { $resolve-query }/*, $search-options, $start, $page-size)
-
-return helper:add-properties-to-search($results)
+return helper:resolve-paged-search(
+    $boosted-query,
+    $sort-word,
+    $sort-direction,
+    $start,
+    $page-size,
+    $document-options
+)
