@@ -53,6 +53,14 @@
       "localname": "transfer-received-at",
       "range-value-positions": false,
       "invalid-values": "ignore"
+    },
+    {
+      "scalar-type": "string",
+      "namespace-uri": "",
+      "localname": "latest_metadata_materialisation_version",
+      "collation": "http://marklogic.com/collation/",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
     }
   ],
   "word-positions": true,
