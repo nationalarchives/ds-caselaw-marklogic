@@ -77,6 +77,13 @@
           "attribute-namespace-uri": "",
           "attribute-localname": "",
           "attribute-value": ""
+        },
+        {
+          "namespace-uri": "https://caselaw.nationalarchives.gov.uk/akn",
+          "localname": "webarchiving",
+          "attribute-namespace-uri": "",
+          "attribute-localname": "",
+          "attribute-value": ""
         }
       ]
     }
