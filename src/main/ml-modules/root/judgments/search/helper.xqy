@@ -210,7 +210,8 @@ declare function make-q-query($q as xs:string) {
 };
 
 declare function make-highlight-query($q as xs:string) as cts:query {
-    cts:word-query(fn:normalize-space($q), $default-options)
+    let $q := normalise-vs($q)
+    return if ($q) then cts:word-query($q, $default-options) else cts:and-query(())
 };
 
 declare function boost-title-and-ncn($title-or-ncn as xs:string?, $query as cts:query) as cts:query  {
