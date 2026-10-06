@@ -38,6 +38,9 @@ MarkLogic changes are deployed manually to both staging and production.
 
 - The `development` environment will be used by default if you don't specify `-PenvironmentName`.
 - Deployment is idempotent, and will automatically configure databases, roles, triggers and modules.
+- The DLS retention rule is applied by the `applyRetentionPolicy` task at the end of `mlDeploy`. (The
+  `set-retention-policy` trigger only fires when the database comes online, which a deployment to a
+  running server doesn't cause.) Without the rule, earlier versions of documents are not readable.
 
 ## Local Setup
 

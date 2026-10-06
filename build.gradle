@@ -35,3 +35,21 @@ ext {
   }
   contentXccUrl = "xcc://${mlUsername}:${mlPassword}@${mlHost}:${mlRestPort}"
 }
+
+// DLS retention rules are stored as a document in the content database, so they
+// are not part of the ml-config that mlDeploy creates. The `set-retention-policy`
+// trigger only fires on `database-online-event`, which a plain `mlDeploy` against
+// a running server never raises, leaving a freshly deployed database with no rule
+// (and so with the content of superseded versions discarded). Run the same module
+// at the end of every deployment so the rule is always in place.
+task applyRetentionPolicy(type: com.marklogic.gradle.task.ServerEvalTask) {
+  description = "Apply the DLS retention policy by running the set-retention-policy module"
+  xquery = '''
+    xdmp:invoke(
+      "/judgments/triggers/set-retention-policy.xqy",
+      (),
+      <options xmlns="xdmp:eval"><isolation>different-transaction</isolation></options>
+    )
+  '''
+}
+mlPostDeploy.dependsOn applyRetentionPolicy
