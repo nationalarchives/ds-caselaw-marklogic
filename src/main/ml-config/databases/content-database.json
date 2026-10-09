@@ -62,6 +62,41 @@
       "collation": "http://marklogic.com/collation/",
       "range-value-positions": false,
       "invalid-values": "ignore"
+    },
+    {
+      "scalar-type": "long",
+      "namespace-uri": "",
+      "localname": "tdr_to_first_publish",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
+    },
+    {
+      "scalar-type": "long",
+      "namespace-uri": "",
+      "localname": "tdr_to_latest_publish",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
+    },
+    {
+      "scalar-type": "long",
+      "namespace-uri": "",
+      "localname": "submissions_before_first_publish",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
+    },
+    {
+      "scalar-type": "dateTime",
+      "namespace-uri": "",
+      "localname": "first_published_datetime",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
+    },
+    {
+      "scalar-type": "dateTime",
+      "namespace-uri": "",
+      "localname": "latest_published_datetime",
+      "range-value-positions": false,
+      "invalid-values": "ignore"
     }
   ],
   "word-positions": true,
