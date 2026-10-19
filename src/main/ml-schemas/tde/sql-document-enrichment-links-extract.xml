@@ -1,7 +1,10 @@
 <template xmlns="http://marklogic.com/xdmp/tde">
   <context>//akn:ref</context>
   <collections>
-    <collection>judgment</collection>
+    <collections-and>
+      <collection>judgment</collection>
+      <collection>http://marklogic.com/collections/dls/latest-version</collection>
+    </collections-and>
   </collections>
 
   <path-namespaces>
