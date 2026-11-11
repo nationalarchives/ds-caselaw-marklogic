@@ -76,7 +76,16 @@ There are also other ways other importing data as detailed further down the read
 
 You will need to run `./corb migrate-ncn` in the `corb2` directory to ensure the files have ids.
 
-### 5. (Optional) Run unit tests
+### 5. (Optional) Populate publication metrics
+
+To create a small set of published documents with randomized publication metrics covering the last three months, run:
+
+`python3 development_scripts/populate_metrics.py`
+
+The script replaces only its own `metrics-seed` collection when rerun. It prints the random seed used; pass that value
+back with `--seed` to reproduce the same metric values.
+
+### 6. (Optional) Run unit tests
 
 You can run the unit tests with `gradle mlUnitTest`. This relies on the tests being deployed; use `gradle mlDeploy` in the first instance,
 and make sure that you have `gradle mlWatch -i` running to automatically deploy changes as you make them.
