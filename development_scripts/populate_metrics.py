@@ -35,9 +35,15 @@ class SeedDocument:
     transfer_received_at: datetime
     first_published_at: datetime
     latest_published_at: datetime
-    tdr_to_first_publish: int
-    tdr_to_latest_publish: int
     submissions_before_first_publish: int
+
+    @property
+    def tdr_to_first_publish(self) -> int:
+        return int((self.first_published_at - self.transfer_received_at).total_seconds())
+
+    @property
+    def tdr_to_latest_publish(self) -> int:
+        return int((self.latest_published_at - self.transfer_received_at).total_seconds())
 
     @property
     def uri(self) -> str:
@@ -84,9 +90,6 @@ def build_seed_documents(*, count: int, rng: random.Random, now: datetime) -> li
         first_duration = (
             rng.randint(25, 72) * SECONDS_PER_HOUR if offset % 4 == 0 else rng.randint(2, 23) * SECONDS_PER_HOUR
         )
-        latest_duration = (
-            rng.randint(25, 60) * SECONDS_PER_HOUR if offset % 5 == 0 else rng.randint(1, 18) * SECONDS_PER_HOUR
-        )
         latest_published_at = min(
             first_published_at + timedelta(days=rng.randint(0, 10), hours=rng.randint(0, 23)),
             now,
@@ -101,8 +104,6 @@ def build_seed_documents(*, count: int, rng: random.Random, now: datetime) -> li
                 transfer_received_at=first_published_at - timedelta(seconds=first_duration),
                 first_published_at=first_published_at,
                 latest_published_at=latest_published_at,
-                tdr_to_first_publish=first_duration,
-                tdr_to_latest_publish=latest_duration,
                 submissions_before_first_publish=rng.randint(1, 4),
             ),
         )
