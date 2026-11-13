@@ -188,7 +188,8 @@ def raise_for_status(response: requests.Response) -> None:
 def clear_existing_documents(session: requests.Session, base_url: str) -> None:
     xquery = f"""xquery version "1.0-ml";
 import module namespace dls = "http://marklogic.com/xdmp/dls" at "/MarkLogic/dls.xqy";
-for $uri in cts:uris("", (), cts:collection-query("{METRICS_COLLECTION}"))
+for $document in cts:search(fn:collection(), cts:collection-query("{METRICS_COLLECTION}"), "unfiltered")
+let $uri := xdmp:node-uri($document)
 where fn:not(fn:contains($uri, "_xml_versions/"))
 return
   if (dls:document-is-managed($uri)) then
