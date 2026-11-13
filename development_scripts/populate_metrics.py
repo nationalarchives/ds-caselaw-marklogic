@@ -19,6 +19,7 @@ SECONDS_PER_HOUR = 60 * 60
 RAPI_NAMESPACE = "http://marklogic.com/rest-api"
 PROPERTY_NAMESPACE = "http://marklogic.com/xdmp/property"
 POSITIVE_INTEGER_ERROR = "must be at least 1"
+REFERENCE_TIME_ERROR = "must be an ISO 8601 timestamp with a timezone offset"
 COURTS = (
     ("uksc", "Supreme Court"),
     ("ewca/civ", "Court of Appeal (Civil Division)"),
@@ -236,6 +237,16 @@ def positive_integer(value: str) -> int:
     return parsed
 
 
+def reference_time(value: str) -> datetime:
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError(REFERENCE_TIME_ERROR) from error
+    if parsed.tzinfo is None:
+        raise argparse.ArgumentTypeError(REFERENCE_TIME_ERROR)
+    return parsed.astimezone(UTC)
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--host", default="localhost")
@@ -243,7 +254,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--username", default=os.getenv("MARKLOGIC_USER", "admin"))
     parser.add_argument("--password", default=os.getenv("MARKLOGIC_PASSWORD", "admin"))
     parser.add_argument("--count", default=DOCUMENT_COUNT, type=positive_integer)
-    parser.add_argument("--seed", type=int, help="Reuse a printed seed to reproduce the same values")
+    parser.add_argument("--seed", type=int)
+    parser.add_argument(
+        "--reference-time",
+        type=reference_time,
+        help="ISO 8601 timestamp used with --seed to reproduce the same values",
+    )
     return parser.parse_args()
 
 
@@ -251,14 +267,19 @@ def main() -> None:
     args = parse_args()
     seed = args.seed if args.seed is not None else random.SystemRandom().randrange(2**32)
     rng = random.Random(seed)
-    now = datetime.now(UTC)
-    documents = build_seed_documents(count=args.count, rng=rng, now=now)
+    replay_reference_time = args.reference_time or datetime.now(UTC).replace(microsecond=0)
+    documents = build_seed_documents(count=args.count, rng=rng, now=replay_reference_time)
     base_url = f"http://{args.host}:{args.port}"
     session = requests.Session()
     session.auth = (args.username, args.password)
 
     print(f"Replacing the '{METRICS_COLLECTION}' collection at {base_url}")
     print(f"Random seed: {seed}")
+    print(f"Reference time: {replay_reference_time.isoformat()}")
+    print(
+        "Replay with: python3 development_scripts/populate_metrics.py "
+        f"--count {args.count} --seed {seed} --reference-time {replay_reference_time.isoformat()}",
+    )
     clear_existing_documents(session, base_url)
     for document in documents:
         insert_document(session, base_url, document)

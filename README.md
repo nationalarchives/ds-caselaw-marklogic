@@ -82,8 +82,8 @@ To create a small set of published documents with randomized publication metrics
 
 `python3 development_scripts/populate_metrics.py`
 
-The script replaces only its own `metrics-seed` collection when rerun. It prints the random seed used; pass that value
-back with `--seed` to reproduce the same metric values.
+The script replaces only its own `metrics-seed` collection when rerun. It prints a replay command containing the
+document count, random seed, and reference time; run that command to reproduce the same timestamps and metric values.
 
 ### 6. (Optional) Run unit tests
 
