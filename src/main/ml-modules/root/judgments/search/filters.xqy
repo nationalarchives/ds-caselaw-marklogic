@@ -53,10 +53,28 @@ let $court-query := if ($court) then cts:or-query(
 
 
 let $judge_elements := fn:tokenize($judge, ",")
+let $judge-word-options := ('case-insensitive', 'punctuation-insensitive')
 
-let $judge_query := cts:or-query(fn:map(function($j) {
-  cts:element-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'judge'), $j, ('case-insensitive', 'punctuation-insensitive'))
+let $body_judge_query := cts:or-query(fn:map(function($j) {
+  cts:element-word-query(fn:QName('http://docs.oasis-open.org/legaldocml/ns/akn/3.0', 'judge'), $j, $judge-word-options)
 }, $judge_elements))
+
+(: The API client writes the resolved judges (including editor changes) to the searchable-metadata property. :)
+let $searchable_judge_query := cts:properties-fragment-query(
+  cts:element-query(fn:QName('', 'searchable-metadata'), cts:or-query(fn:map(function($j) {
+    cts:element-word-query(fn:QName('', 'judge'), $j, $judge-word-options)
+  }, $judge_elements)))
+)
+
+let $has_searchable_metadata_query := cts:properties-fragment-query(
+  cts:element-query(fn:QName('', 'searchable-metadata'), cts:and-query(()))
+)
+
+(: Documents saved before the property existed are still searched by their body judges. :)
+let $judge_query := cts:or-query((
+  $searchable_judge_query,
+  cts:and-query((cts:not-query($has_searchable_metadata_query), $body_judge_query))
+))
 
 let $judge-query := if ($judge) then $judge_query else ()
 
